@@ -1,0 +1,11 @@
+*-backup*.html
+*-backup-old.html
+*.zip
+*.sql.gz
+Thumbs.db
+.DS_Store
+.htaccess
+about.html
+all-pages.html
+central-operations.html
+DEPLOYMENT_TODO.md

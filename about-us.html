@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>About ProMED Solutions - Our Story & Leadership</title>
+<link rel="stylesheet" href="assets/responsive.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#031428;--blue:#19569B;--cyan:#0c1720;--slate:#B0BDCD;--white:#fff;--dark:#0B1B2E}
+html{scroll-behavior:smooth}
+section[id]{scroll-margin-top:100px}
+body{font-family:'Urbanist',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden}
+.site-hero{background:#031428!important}
+
+/* scroll bar */
+.scroll-bar{position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  width:0%;z-index:9999;transition:width .1s}
+
+/* â”€â”€ NAVBAR â”€â”€ */
+nav{position:sticky;top:0;z-index:5000;isolation:isolate;overflow:visible;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(3,20,40,.10)}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 40px;height:70px;
+  position:relative;overflow:visible;
+  display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:56px;width:auto;object-fit:contain}
+.nav-logo-fb{display:none;width:40px;height:40px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  border-radius:8px;align-items:center;justify-content:center;
+  color:#fff;font-weight:900;font-size:14px}
+.nav-brand{line-height:1.2}
+.nav-brand-name{font-size:17px;font-weight:800;color:var(--navy);letter-spacing:-.4px}
+.nav-brand-tag{font-size:9.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:#7a8a9a}
+.nav-links{display:flex;gap:0;list-style:none;overflow-x:auto;overflow-y:visible;
+  align-items:center;flex-wrap:nowrap;white-space:nowrap;scrollbar-width:none;min-width:0}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-item{position:relative;z-index:2;isolation:isolate}
+.nav-link{color:var(--navy);font-weight:600;font-size:13px;text-decoration:none;
+  padding:24px 18px;display:block;transition:color .25s;position:relative;white-space:nowrap}
+.nav-link::after{content:'';position:absolute;bottom:8px;left:18px;right:18px;
+  height:2px;background:var(--cyan);transform:scaleX(0);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.nav-link:hover{color:var(--blue)}
+.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
+.nav-link.active{color:var(--blue)}
+/* dropdown */
+.drop{display:none;position:absolute;top:calc(100% + 1px);left:0;z-index:5001;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(20px);
+  border:1px solid rgba(3,20,40,.12);border-radius:12px;
+  min-width:280px;padding:16px 0;
+  opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px);
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 20px 60px rgba(3,20,40,.15)}
+.nav-item:hover .drop,.nav-item:focus-within .drop,.nav-item.open .drop{display:block;opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+.drop-item{padding:14px 22px;color:#5a6b7f;text-decoration:none;display:block;
+  transition:all .25s;border-left:3px solid transparent;font-size:13px;font-weight:500}
+.drop-item:hover{color:var(--navy);border-left-color:var(--blue);
+  background:rgba(25,86,155,.06)}
+.drop-label{font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--navy);margin-bottom:2px}
+.drop-title{font-size:.9rem;font-weight:700;color:var(--navy)}
+.drop-desc{font-size:.75rem;color:#7a8a9a;margin-top:1px}
+.nav-cta{background:linear-gradient(135deg,var(--blue),#2a74c9);color:#fff;
+  padding:9px 22px;border-radius:6px;font-weight:700;font-size:13px;
+  text-decoration:none;transition:all .3s;border:none;cursor:pointer}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(25,86,155,.3)}
+
+/* â”€â”€ SECTION SHARED â”€â”€ */
+section{padding:100px 40px;position:relative}
+nav + section{z-index:0}
+.container{max-width:1300px;margin:0 auto}
+.sec-hdr{text-align:center;margin-bottom:70px}
+.sec-eyebrow{display:inline-block;font-size:10px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--blue);
+  border:1px solid rgba(25,86,155,.3);border-radius:50px;
+  padding:5px 16px;margin-bottom:14px}
+.sec-title{font-size:clamp(2rem,3.2vw,2.6rem);font-weight:800;color:var(--navy);
+  letter-spacing:-.04em;margin-bottom:14px;line-height:1.1}
+.sec-sub{font-size:.95rem;color:#5a6b7f;max-width:640px;margin:0 auto;line-height:1.75}
+.timeline-caption{font-size:.72rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--blue);margin-top:12px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(36px);
+  transition:opacity .75s ease,transform .75s ease}
+.reveal.left{transform:translateX(-40px)}
+.reveal.right{transform:translateX(40px)}
+.reveal.vis{opacity:1;transform:translate(0)}
+.who-text.reveal{transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.who-img-wrap.reveal.right{transform:perspective(900px) rotateY(-4deg) rotateX(2deg) translateX(40px)}
+.who-img-wrap.reveal.vis{transform:perspective(900px) rotateY(-4deg) rotateX(2deg) translateX(0)}
+
+/* â”€â”€ SECTION 1: WHO WE ARE â”€â”€ */
+.who{background:linear-gradient(135deg,#f5f9fe,#fff)}
+.who-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:42px;align-items:center;max-width:1260px;margin:0 auto}
+.who-text{display:flex;flex-direction:column;justify-content:center;min-height:440px}
+.who-text h3{font-size:1.25rem;font-weight:700;color:var(--blue);
+  margin-bottom:18px;letter-spacing:-.3px}
+
+/* Info cards - white to navy animation */
+.info-cards{display:flex;flex-direction:column;gap:20px;justify-content:center}
+.info-card{
+  background:linear-gradient(135deg,#f7f9fb 0%, #eaf1f6 100%);
+  border:2px solid rgba(25,86,155,.2);
+  border-radius:14px;
+  padding:24px 28px;
+  transition:all .4s ease;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  min-height:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 8px 18px rgba(25,86,155,.06);
+}
+/* Top accent bar */
+.info-card::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:0;
+  right:0;
+  height:4px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  transform:scaleX(1);
+  transform-origin:left;
+  transition:transform .4s ease;
+  z-index:10;
+}
+.info-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(25,86,155,.04),transparent 55%);
+  pointer-events:none;
+}
+.info-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 60px rgba(3,20,40,.25);
+  border-color:var(--navy);
+  background:var(--navy);
+}
+.info-card:hover::before{transform:scaleX(1)}
+.info-card p{
+  font-size:.96rem;
+  color:#4a5d74;
+  line-height:1.85;
+  margin:0;
+  transition:color .4s ease;
+}
+.info-card:hover p{color:rgba(255,255,255,.85)}
+.info-card strong{
+  color:var(--navy);
+  font-weight:700;
+  transition:color .4s ease;
+}
+.info-card:hover strong{color:#fff}
+
+.who-text .highlight{font-size:.9rem;color:var(--blue);font-weight:700;
+  background:rgba(25,86,155,.07);padding:12px 16px;
+  border-radius:8px;border-left:3px solid var(--blue);margin-top:6px;
+  transition:all .4s ease}
+.who-text .highlight:hover{
+  background:var(--navy);
+  color:#fff;
+  border-left-color:#fff;
+}
+.who-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.who-proof-item{padding:16px 14px;border:1px solid rgba(25,86,155,.14);border-radius:12px;background:rgba(255,255,255,.72);box-shadow:0 8px 18px rgba(25,86,155,.05);opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease}
+.who-text.vis .who-proof-item{opacity:1;transform:translateY(0)}
+.who-text.vis .who-proof-item:nth-child(1){transition-delay:.28s}
+.who-text.vis .who-proof-item:nth-child(2){transition-delay:.42s}
+.who-text.vis .who-proof-item:nth-child(3){transition-delay:.56s}
+.who-proof-item:hover{transform:translateY(-5px);border-color:rgba(25,86,155,.35);box-shadow:0 16px 28px rgba(25,86,155,.12)}
+.who-proof-item strong{display:block;color:var(--navy);font-size:1.05rem;line-height:1.15;margin-bottom:6px}
+.who-proof-item span{display:block;color:#61748a;font-size:.7rem;line-height:1.4;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+@media(prefers-reduced-motion:reduce){
+  .who-text.reveal,.who-img-wrap.reveal.right,.who-proof-item{transition:none;transform:none;opacity:1}
+}
+/* Image/Video with 3D perspective tilt */
+.who-img-wrap{
+  position:relative;height:440px;border-radius:20px;overflow:hidden;
+  box-shadow:0 24px 70px rgba(3,20,40,.22);
+  transform:perspective(900px) rotateY(-4deg) rotateX(2deg);
+  transition:transform .6s ease,box-shadow .6s ease;justify-self:center;align-self:center;width:min(100%, 720px);
+}
+.who-img-wrap:hover{
+  transform:perspective(900px) rotateY(0deg) rotateX(0deg) scale(1.02);
+  box-shadow:0 36px 90px rgba(25,86,155,.28);
+}
+.who-img-wrap img,
+.who-img-wrap video{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.who-img-wrap:hover img,
+.who-img-wrap:hover video{transform:scale(1.06)}
+.who-img-wrap::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(25,86,155,.12),transparent);pointer-events:none}
+.who-img-wrap::before{
+  content:'';position:absolute;inset:-2px;border-radius:22px;
+  background:linear-gradient(135deg,var(--cyan),var(--blue),var(--cyan));
+  background-size:200% 200%;
+  animation:borderGlow 4s linear infinite;
+  z-index:-1;
+}
+@keyframes borderGlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* â”€â”€ SECTION 2: MISSION & VISION â”€â”€ */
+.mv{background:#fff;padding:100px 0}
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:42px;max-width:1280px;margin:0 auto}
+.mv-card{
+  position:relative;overflow:hidden;
+  border-radius:26px;padding:32px 36px 30px;
+  background:#f4f6f8;
+  border:1.5px solid #dfe5eb;
+  box-shadow:0 2px 0 rgba(15,23,42,0.02);
+  transition:all .3s ease;
+  min-height:290px;
+}
+.mv-icon-wrap{
+  width:64px;height:64px;border-radius:16px;margin-bottom:26px;
+  background:linear-gradient(145deg,#dfeef9,#d8ebfa);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;text-shadow:1px 2px 0 rgba(25,86,155,.2),2px 4px 5px rgba(3,20,40,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 8px 18px rgba(25,86,155,.12);
+}
+.mv-card h3{font-size:2.2rem;font-weight:800;color:var(--navy);
+  margin-bottom:18px;letter-spacing:-.04em;line-height:1.1;transition:color .3s ease}
+.mv-card p{font-size:1.05rem;color:#4a5d74;line-height:1.7;font-weight:400;transition:color .3s ease;max-width:560px}
+.mv-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(3,20,40,.08);border-color:#d1dbe7}
+.review-heading{max-width:1180px;margin:44px auto 18px;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-.04em;color:var(--navy)}
+.review-list{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+.review-message{position:relative;min-width:0;min-height:0;height:100%;align-self:stretch;aspect-ratio:1.25 / 1;padding:24px 22px 18px;border:1px solid rgba(3,20,40,.08);background:linear-gradient(135deg,#fff,#f8fbff);border-radius:16px;box-shadow:0 12px 30px rgba(3,20,40,.06);display:flex;flex-direction:column;justify-content:center;overflow:hidden;transition:transform .35s ease, box-shadow .35s ease, opacity .35s ease, filter .35s ease;opacity:0;transform:translateY(18px) scale(.98);animation:reviewFadeIn .7s ease forwards}
+.review-message:nth-child(2){animation-delay:.08s}.review-message:nth-child(3){animation-delay:.16s}
+.review-message:nth-child(even){background:linear-gradient(135deg,#f2f7ff,#fff)}
+.review-message:hover{transform:translateY(-4px);box-shadow:0 18px 34px rgba(25,86,155,.15)}
+.review-message.reveal{opacity:1;transform:none;transition:none}
+.review-label{display:inline-block;margin:0 0 12px;padding:7px 12px;border-radius:999px;background:rgba(25,86,155,.08);color:var(--blue);font-size:.65rem;font-weight:800;line-height:1.2;letter-spacing:.12em;text-transform:uppercase}
+.review-message p{margin:0;color:#40556f;font-size:1.02rem;line-height:1.7;font-weight:400}
+.review-quote{font-size:1.35em;color:var(--blue);font-weight:800;line-height:0;vertical-align:-.12em}
+.review-author{display:block;margin-top:16px;color:#183b62;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.review-message::before{display:none}
+.review-message.facility-review{display:grid;grid-template-columns:1fr 1.15fr;gap:22px;align-items:center;aspect-ratio:auto;min-height:300px;padding:18px 18px 20px}
+.review-message:first-child{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:16px;min-height:420px;padding:18px 18px 20px}
+.review-message:first-child .review-photo-wrap{aspect-ratio:4/3;height:auto;flex:none;border-radius:18px;overflow:hidden;background:#eef5fb;border:1px solid rgba(25,86,155,.12)}
+.review-message:first-child .review-body{display:flex;flex-direction:column;justify-content:flex-start}
+.review-message:nth-child(2){display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:16px;min-height:420px;padding:18px 18px 20px}
+.review-message:nth-child(2) .review-photo-wrap{aspect-ratio:4/3;height:auto;flex:none;border-radius:18px;overflow:hidden;background:#eef5fb;border:1px solid rgba(25,86,155,.12)}
+.review-message:nth-child(2) .review-body{display:flex;flex-direction:column;justify-content:flex-start}
+.review-message:nth-child(3){display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:16px;min-height:420px;padding:18px 18px 20px}
+.review-message:nth-child(3) .review-photo-wrap{aspect-ratio:4/3;height:auto;flex:none;border-radius:18px;overflow:hidden;background:#eef5fb;border:1px solid rgba(25,86,155,.12)}
+.review-message:nth-child(3) .review-body{display:flex;flex-direction:column;justify-content:flex-start}
+.review-photo-wrap{width:100%;height:100%;aspect-ratio:1/1;max-height:340px;border-radius:18px;overflow:hidden;background:#eef5fb;border:1px solid rgba(25,86,155,.12);display:flex;align-items:center;justify-content:center}
+.review-photo-wrap img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 20%;background:#f4f4f4}
+.review-body{flex:1}
+.review-meta{margin-top:auto;padding-top:16px}
+.review-meta .review-author{margin-top:0;line-height:1.35}
+.review-meta .review-author+.review-author{margin-top:4px}
+.review-meta .review-role,.review-meta .review-org{font-weight:600;color:#4a5d74}
+.review-body{display:flex;flex-direction:column;justify-content:center}
+.review-message.facility-review .review-label{margin-bottom:18px}
+.review-message.facility-review p{font-size:1.18rem;line-height:1.6}
+.review-message.facility-review .review-author{margin-top:18px}
+@keyframes reviewFadeIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.mv-card:hover p{color:rgba(255,255,255,.75)}
+
+/* â”€â”€ SECTION 3: VALUES â”€â”€ */
+.vals{background:linear-gradient(135deg,#f5f9fe,#fff)}
+.vals-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  max-width:1300px;margin:0 auto}
+.val-card{background:#fff;padding:36px 28px;border-radius:14px;
+  border:2px solid rgba(3,20,40,.08);text-align:left;
+  transition:all .4s ease;
+  position:relative;overflow:hidden;cursor:pointer;
+  box-shadow:0 2px 12px rgba(3,20,40,.05)}
+/* Top accent bar */
+.val-card::before{content:'';position:absolute;left:0;top:0;right:0;
+  height:4px;background:var(--navy);transform:scaleX(0);
+  transform-origin:left;transition:transform .4s ease;z-index:10}
+.val-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 60px rgba(3,20,40,.25);
+  border-color:var(--navy);
+  background:var(--navy)}
+.val-card:hover::before{transform:scaleX(1)}
+.val-icon{font-size:1.8rem;margin-bottom:14px;display:block;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,#edf5ff,#dfeefe);border-radius:10px;
+  text-shadow:1px 2px 0 rgba(25,86,155,.2),2px 4px 5px rgba(3,20,40,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 8px 16px rgba(25,86,155,.14);
+  transform:perspective(240px) rotateX(8deg) rotateY(-8deg);
+  transition:all .4s ease}
+.val-card:hover .val-icon{background:rgba(255,255,255,.15);transform:perspective(240px) rotateX(0) rotateY(0) translateY(-3px)}
+@keyframes valueEmojiFloat{0%,100%{transform:perspective(240px) rotateX(8deg) rotateY(-8deg) translateY(0)}50%{transform:perspective(240px) rotateX(-6deg) rotateY(8deg) translateY(-4px)}}
+.val-card h4{font-size:1.15rem;font-weight:800;color:var(--navy);margin-bottom:8px;letter-spacing:-.02em;transition:color .4s ease}
+.val-card:hover h4{color:#fff}
+.val-card p{font-size:.9rem;color:#4a5d74;line-height:1.75;transition:color .4s ease}
+.val-card:hover p{color:rgba(255,255,255,.75)}
+
+/* â”€â”€ SECTION 4: LEADERSHIP â”€â”€ */
+.leadership{background:#fff}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);
+  gap:48px;max-width:880px;margin:0 auto}
+.team-card{
+  background:#fff;border-radius:20px;overflow:hidden;
+  box-shadow:0 10px 36px rgba(3,20,40,.10);
+  transition:all .55s ease;
+  border:1.5px solid #e0eaf6;
+}
+.team-card:hover{
+  transform:translateY(-12px) perspective(700px) rotateY(-4deg);
+  box-shadow:0 28px 70px rgba(25,86,155,.20);
+  border-color:rgba(0,229,255,.3);
+}
+/* photo */
+.team-photo{position:relative;height:340px;overflow:hidden;
+  background:#f4f8fc;
+  display:flex;align-items:center;justify-content:center}
+.team-photo img{width:100%;height:100%;object-fit:cover;
+  object-position:center center;
+  transition:transform .7s ease,filter .5s}
+.team-card:hover .team-photo img{transform:scale(1.05);filter:brightness(1.05)}
+.team-card.zaafar-card .team-photo{background:#fff}
+.team-card.zaafar-card .team-photo img{content:url("assets/images/gallery/Zaafar_Mirza_final.webp");object-fit:contain;object-position:center center;transform:none;filter:none}
+.team-card.emad-card .team-photo{background:#fff}
+.team-card.emad-card .team-photo img{content:url("assets/images/gallery/Emad_Jadoon_final.webp");object-fit:contain;object-position:center center;transform:none;filter:none}
+.team-card.zaafar-card:hover .team-photo img{transform:none;filter:none}
+.team-card.emad-card:hover .team-photo img{transform:none;filter:none}
+.team-info{padding:32px 28px;text-align:center}
+.team-info h4{font-size:1.15rem;font-weight:800;color:var(--navy);margin-bottom:6px}
+.team-role{font-size:.95rem;color:var(--blue);font-weight:700;margin-bottom:12px;
+  letter-spacing:.01em}
+.team-info p{font-size:.9rem;color:#5a6b7f;line-height:1.7}
+/* expertise pills */
+.team-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.team-pill{background:rgba(25,86,155,.08);border:1px solid rgba(25,86,155,.2);
+  color:var(--blue);font-size:11px;font-weight:600;
+  padding:4px 12px;border-radius:50px}
+
+/* â”€â”€ SECTION 5: MILESTONES â”€â”€ */
+.milestones{background:linear-gradient(135deg,#f5f9fe,#fff);padding:100px 40px}
+.milestones-grid{position:relative;max-width:1300px;margin:0 auto;overflow:hidden;padding:4px 0 24px;cursor:ew-resize}
+.milestones-track{display:flex;gap:24px;width:max-content;animation:none;will-change:transform;transition:transform .18s ease-out}
+@keyframes milestoneScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.milestone-card{
+  flex:0 0 286px;
+  width:286px;
+  max-width:286px;
+  height:520px;
+  min-height:520px;
+  max-height:520px;
+  box-sizing:border-box;
+  background-color:#fff;
+  border:2px solid rgba(25,86,155,.2);
+  border-radius:16px;
+  padding:32px 24px;
+  transition:all .4s ease;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  text-align:center;
+}
+.milestone-card:nth-child(1),.milestone-card:nth-child(2){
+  padding-top:150px;
+  background-repeat:no-repeat;
+  background-position:center top;
+  background-size:100% 126px;
+}
+.milestone-card:nth-child(1),.milestone-card:nth-child(2){background-image:none}
+.milestone-card.reveal{transform:translateX(-42px);animation:milestoneSlideIn .7s ease-out forwards}
+.milestone-card.reveal.vis{transform:translateX(0)}
+.milestone-card:nth-child(1){animation-delay:.05s}
+.milestone-card:nth-child(2){animation-delay:.14s}
+.milestone-card:nth-child(3){animation-delay:.23s}
+.milestone-card:nth-child(4){animation-delay:.32s}
+.milestone-card:nth-child(5){animation-delay:.41s}
+.milestone-card:nth-child(6){animation-delay:.50s}
+.milestone-card:nth-child(7){animation-delay:.59s}
+@keyframes milestoneSlideIn{
+  from{opacity:0;transform:translateX(-42px)}
+  to{opacity:1;transform:translateX(0)}
+}
+.milestone-card::before{
+  content:'';position:absolute;left:0;top:0;right:0;height:4px;
+  background:var(--navy);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease;z-index:10;
+}
+.milestone-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 60px rgba(3,20,40,.25);
+  border-color:var(--navy);
+  background-color:var(--navy);
+}
+.milestone-card:hover::before{transform:scaleX(1)}
+.milestone-year{
+  font-size:2.6rem;font-weight:900;color:var(--navy);
+  letter-spacing:-.04em;margin-bottom:10px;transition:color .4s ease;
+}
+.milestone-card:hover .milestone-year{color:rgba(255,255,255,.2)}
+.milestone-type{
+  display:inline-block;font-size:.72rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--navy);
+  background:rgba(3,20,40,.08);padding:5px 12px;border-radius:50px;
+  margin-bottom:14px;transition:all .4s ease;
+}
+.milestone-card:hover .milestone-type{
+  background:rgba(255,255,255,.2);color:#fff;
+}
+.milestone-card h4{
+  font-size:1rem;font-weight:800;color:var(--navy);
+  margin-bottom:10px;letter-spacing:-.02em;transition:color .4s ease;
+}
+.milestone-card:hover h4{color:#fff}
+.milestone-caption{font-size:.9rem;font-weight:400;color:#4a5d74;
+  line-height:1.65;margin:0;transition:color .4s ease}
+.milestone-card:hover .milestone-caption{color:rgba(255,255,255,.8)}
+.milestone-card p{
+  font-size:.9rem;color:#4a5d74;line-height:1.7;
+  margin:0;transition:color .4s ease;
+}
+.milestone-card:hover p{color:rgba(255,255,255,.8)}
+.milestone-card.media-milestone{padding:0 18px 24px;display:flex;flex-direction:column;align-items:center}
+.milestone-media{width:100%;height:180px;object-fit:cover;display:block;margin-bottom:20px;border-radius:14px 14px 0 0;filter:saturate(.92);transition:transform .7s cubic-bezier(.22,1,.36,1),filter .5s ease}
+.milestone-card:hover .milestone-media{transform:scale(1.02);filter:saturate(1.08)}
+.milestone-card.milestone-current{border:2px solid var(--blue);background:linear-gradient(145deg,#f5faff,#fff);box-shadow:0 10px 30px rgba(25,86,155,.16)}
+.milestone-card.milestone-current::after{content:'CURRENT';position:absolute;top:12px;right:12px;padding:4px 8px;border-radius:4px;background:var(--blue);color:#fff;font-size:.58rem;font-weight:800;letter-spacing:.12em;z-index:11}
+.milestone-card.milestone-current .milestone-year{color:var(--blue);font-size:2.9rem}
+.milestone-card.milestone-current .milestone-type{background:rgba(25,86,155,.12);color:var(--blue)}
+.milestone-card.milestone-current:hover{background:var(--navy);border-color:var(--blue);box-shadow:0 18px 48px rgba(25,86,155,.28)}
+.milestone-card.milestone-current:hover .milestone-year{color:#fff}
+.milestone-card.milestone-current:hover .milestone-type{background:rgba(255,255,255,.2);color:#fff}
+.milestone-card.milestone-origin{border:2px solid #00a6a6;background:linear-gradient(145deg,#f1ffff,#fff);box-shadow:0 10px 30px rgba(0,166,166,.16)}
+.milestone-card.milestone-origin::after{content:'START';position:absolute;top:12px;right:12px;padding:4px 8px;border-radius:4px;background:#00a6a6;color:#fff;font-size:.58rem;font-weight:800;letter-spacing:.12em;z-index:11}
+.milestone-card.milestone-origin .milestone-year{color:#008b8b;font-size:2.9rem}
+.milestone-card.milestone-origin .milestone-type{background:rgba(0,166,166,.12);color:#008b8b}
+.milestone-card.milestone-current,.milestone-card.milestone-origin{border:2px solid rgba(25,86,155,.2)}
+.milestone-card.milestone-origin:hover{background:var(--navy);border-color:#00c4c4;box-shadow:0 18px 48px rgba(0,166,166,.28)}
+.milestone-card.milestone-origin:hover .milestone-year{color:#fff}
+.milestone-card.milestone-origin:hover .milestone-type{background:rgba(255,255,255,.2);color:#fff}
+.milestone-media-video{background:#07182c}
+.detector-installation-video{background:transparent;object-fit:cover}
+.milestone-media-full{object-fit:contain!important;background:#fff;padding:0 6px}
+.milestone-media-pair{width:100%;height:180px;display:grid;grid-template-columns:1.15fr .85fr;gap:4px;margin-bottom:20px;overflow:hidden;border-radius:14px 14px 0 0}
+.milestone-media-pair .milestone-media{width:100%;height:180px;margin:0;border-radius:0;object-fit:cover}
+@media(max-width:760px){.milestone-card.media-milestone{padding-bottom:20px}.milestone-media{height:112px}}
+@media(hover:none),(pointer:coarse){.milestones-grid{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;scroll-snap-type:x proximity;cursor:auto}.milestones-track{transform:none!important;transition:none}.milestone-card{scroll-snap-align:center}}
+
+/* â”€â”€ FOOTER â”€â”€ */
+footer{background:var(--dark);color:var(--slate);padding:70px 40px 36px}
+.foot-grid{max-width:1300px;margin:0 auto 44px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+.foot-brand .fn{font-size:19px;font-weight:800;
+  background:linear-gradient(135deg,#fff,var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;display:block;margin-bottom:10px}
+.foot-brand p{font-size:.85rem;line-height:1.8;color:rgba(176,189,205,.7);max-width:230px}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px}
+.foot-col a,.foot-col li{display:block;color:rgba(176,189,205,.65);
+  text-decoration:none;font-size:.85rem;margin-bottom:8px;
+  list-style:none;transition:color .2s}
+.foot-col a:hover{color:var(--cyan)}
+.foot-bot{max-width:1300px;margin:0 auto;
+  border-top:1px solid rgba(255,255,255,.07);padding-top:20px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;
+  gap:10px;font-size:.78rem;color:rgba(176,189,205,.42)}
+.cpills{display:flex;gap:10px;flex-wrap:wrap}
+.cpill{background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);
+  color:var(--cyan);font-size:10.5px;font-weight:600;
+  padding:4px 12px;border-radius:50px}
+
+/* responsive */
+@media(max-width:900px){
+  .who-grid,.mv-grid,.team-grid,.foot-grid{grid-template-columns:1fr}
+  .vals-grid{grid-template-columns:repeat(2,1fr)}
+  .review-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  section{padding:70px 24px}
+}
+@media(max-width:600px){
+  .vals-grid{grid-template-columns:1fr}
+  .review-list{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .foot-grid{grid-template-columns:1fr}
+}
+@keyframes fadeSlideIn{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Radial Reveal Text Effect */
+.radial-reveal-text{
+  position:relative;
+  display:inline-block;
+  cursor:default;
+  overflow:hidden;
+  --reveal-x:50%;
+  --reveal-y:50%;
+  --reveal-active:0;
+}
+.radial-reveal-text::before{
+  content:attr(data-text);
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  color:var(--cyan);
+  clip-path:circle(calc(var(--reveal-active) * 150%) at var(--reveal-x) var(--reveal-y));
+  transition:clip-path 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events:none;
+  will-change:clip-path;
+}
+</style>
+<meta name="description" content="Learn about ProMED Solutions: our story, mission, values and the leadership team behind Pakistan's multi-vendor medical imaging service company.">
+<meta name="theme-color" content="#031428">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://www.promedsol.com.pk/about-us.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ProMED Solutions">
+<meta property="og:title" content="About ProMED Solutions | Our Story, Mission &amp; Leadership">
+<meta property="og:description" content="Learn about ProMED Solutions: our story, mission, values and the leadership team behind Pakistan's multi-vendor medical imaging service company.">
+<meta property="og:url" content="https://www.promedsol.com.pk/about-us.html">
+<meta property="og:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About ProMED Solutions | Our Story, Mission &amp; Leadership">
+<meta name="twitter:description" content="Learn about ProMED Solutions: our story, mission, values and the leadership team behind Pakistan's multi-vendor medical imaging service company.">
+<meta name="twitter:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<script src="assets/promed-cursor-ring.js"></script><script>initProMEDCursorRing();</script>
+<script src="assets/particle-drift.js"></script>
+<div class="scroll-bar" id="sb"></div>
+
+<!-- NAVBAR -->
+<script src="assets/nav.js"></script>
+
+<!-- â•â• ORIGINAL ABOUT PAGE â•â• -->
+<section class="site-hero" style="background:transparent;padding:0;margin:0;overflow:hidden;position:relative;height:650px;">
+  <canvas id="pdCanvas" style="position:absolute;inset:0;width:100%;height:100%;display:block;"></canvas>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:10;pointer-events:none;text-align:center;">
+    <div>
+      <div style="font-size:clamp(3rem,6vw,5.5rem);font-weight:900;color:#fff;letter-spacing:-.05em;line-height:1;margin-bottom:12px;">ProMED Solutions</div>
+      <div style="width:56px;height:2px;background:#19569B;margin:0 auto 16px;border-radius:2px;"></div>
+      <div style="font-size:1rem;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.16em;text-transform:uppercase;">Redefining Healthcare</div>
+    </div>
+  </div>
+</section>
+
+<section class="who" id="who">
+  <div class="container">
+    <div class="sec-hdr"><div class="sec-eyebrow">Our Identity</div><h2 class="sec-title">Who We Are</h2><p class="sec-sub">Engineering excellence in diagnostic healthcare - trusted by Pakistan's leading medical institutions.</p></div>
+    <div class="who-grid">
+      <div class="who-text reveal left"><h3 class="radial-reveal-text">ProMED Solutions</h3><div class="info-cards">
+        <div class="info-card"><p>ProMED Solutions brings together sales, service, and engineering expertise to support every imaging system across Pakistan, with factory-trained engineers, fast response times, and dependable uptime built for real-world healthcare demands.</p></div>
+        <div class="who-proof" aria-label="ProMED strengths">
+          <div class="who-proof-item"><strong>Multi-vendor</strong><span>Technical expertise</span></div>
+          <div class="who-proof-item"><strong>Fast response</strong><span>Service coverage</span></div>
+          <div class="who-proof-item"><strong>Built to last</strong><span>Uptime focus</span></div>
+        </div>
+      </div></div>
+      <div class="who-img-wrap reveal right"><video muted loop playsinline preload="none" data-lazy poster="assets/video/drone-ascending-landscape-poster.webp">
+  <source src="assets/video/drone-ascending-landscape.webm" type="video/webm">
+  <source src="assets/video/drone-ascending-landscape.mp4" type="video/mp4">
+</video></div>
+    </div>
+  </div>
+</section>
+
+<section class="mv" id="mission">
+  <div class="container"><div class="sec-hdr"><div class="sec-eyebrow">Purpose &amp; Direction</div><h2 class="sec-title">Mission &amp; Vision</h2><p class="sec-sub">The principles that drive every decision, every service call, and every relationship we build.</p></div>
+    <div class="mv-grid"><div class="mv-card reveal left"><div class="mv-icon-wrap" aria-hidden="true">🎯</div><h3>Our Mission</h3><p>To lead Pakistan's diagnostic imaging sector with unwavering reliability and technical mastery - delivering solutions that meet expectations and keep healthcare infrastructure operational when it matters most.</p></div><div class="mv-card reveal right"><div class="mv-icon-wrap" aria-hidden="true">🔭</div><h3>Our Vision</h3><p>To become South Asia's foremost authority in medical imaging engineering - building national capability, elevating clinical outcomes, and setting the standard for multi-vendor healthcare technology support.</p></div></div>
+    <div class="review-heading reveal">ProMED Reviews</div><div class="review-list">
+      <div class="review-message reveal facility-review">
+        <div class="review-photo-wrap">
+          <img src="assets/images/sir-waseem-iqbal-full.webp" alt="Dr. Hassan Saleem">
+        </div>
+        <div class="review-body">
+          <div class="review-label">Clinical Feedback</div>
+          <p><span class="review-quote">&ldquo;</span>ProMED has been a dependable partner for our imaging systems. They respond quickly, understand the equipment well, and support the department without adding stress to patient care.<span class="review-quote">&rdquo;</span></p>
+          <div class="review-meta"><span class="review-author">Dr. Hassan Saleem</span><span class="review-author review-role">Radiology Department</span><span class="review-author review-org">Islamabad Diagnostic Centre</span></div>
+        </div>
+      </div>
+      <div class="review-message reveal facility-review">
+        <div class="review-photo-wrap">
+          <img src="assets/images/miss-sana-aamir-review.webp" alt="Ms. Sana Aamir">
+        </div>
+        <div class="review-body">
+          <div class="review-label">Facility Review</div>
+          <p><span class="review-quote">&ldquo;</span>What stands out is how quickly their team acts. They know the systems, solve issues practically, and help keep departments running smoothly with minimal disruption.<span class="review-quote">&rdquo;</span></p>
+          <div class="review-meta"><span class="review-author">Ms. Sana Aamir</span><span class="review-author review-role">Country Head of Diagnostic Department</span><span class="review-author review-org">Chughtai Lab</span></div>
+        </div>
+      </div>
+      <div class="review-message reveal facility-review third-review-card">
+        <div class="review-photo-wrap">
+          <img src="assets/images/sir-waleed-iqbal-partnership.webp" alt="Engr. Waseem Iqbal">
+        </div>
+        <div class="review-body">
+          <div class="review-label">Trusted Partnership</div>
+          <p><span class="review-quote">&ldquo;</span>From installation to troubleshooting, ProMED feels like a true service partner - hands-on, accountable, and focused on helping us deliver better care.<span class="review-quote">&rdquo;</span></p>
+          <div class="review-meta"><span class="review-author">Engr. Waseem Iqbal</span><span class="review-author review-role">HOD Biomedical Engineering</span><span class="review-author review-org">Maroof International Hospital</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vals" id="values"><div class="container"><div class="sec-hdr"><div class="sec-eyebrow">What We Stand For</div><h2 class="sec-title">Core Values</h2><p class="sec-sub">These are not aspirational slogans - they are the foundations of how we operate every day.</p></div><div class="vals-grid"><div class="val-card reveal"><div class="val-icon" aria-hidden="true">💡</div><h4>Innovation</h4><p>Driving continuous improvement through technology and engineering creativity.</p></div><div class="val-card reveal"><div class="val-icon" aria-hidden="true">🛡️</div><h4>Integrity</h4><p>Building enduring trust through transparency and honest engagement.</p></div><div class="val-card reveal"><div class="val-icon" aria-hidden="true">🤝</div><h4>Commitment</h4><p>We show up and follow through, from a service call to a full installation.</p></div><div class="val-card reveal"><div class="val-icon" aria-hidden="true">✅</div><h4>Responsibility</h4><p>Full ownership of every outcome and accountability to our healthcare partners.</p></div></div></div></section>
+
+<section class="leadership" id="leadership"><div class="container"><div class="sec-hdr"><div class="sec-eyebrow">The People Behind the Vision</div><h2 class="sec-title">Our Leadership</h2><p class="sec-sub">Decades of combined expertise. A shared commitment to transforming healthcare engineering in Pakistan.</p></div><div class="team-grid"><div class="team-card emad-card reveal left"><div class="team-photo"><img src="assets/images/gallery/Emad_Jadoon_final.webp" alt="Sir Emad Jadoon - CEO" loading="lazy" decoding="async"></div><div class="team-info"><h4>Engr. Emad Jadoon</h4><p class="team-role">CEO &amp; Director Operations</p><p>15+ years leading healthcare engineering and national service operations.</p></div></div><div class="team-card zaafar-card reveal right"><div class="team-photo"><img src="assets/images/gallery/Zaafar_Mirza_final.webp" alt="Engr. Zaafar Mirza - MD" loading="lazy" decoding="async"></div><div class="team-info"><h4>Engr. Zaafar Mirza</h4><p class="team-role">Managing Director</p><p>Medical imaging specialist focused on MRI, X-Ray and ultrasound systems.</p></div></div></div></div></section>
+
+<section class="milestones" id="milestones"><div class="container"><div class="sec-hdr"><div class="sec-eyebrow">Our Journey</div><h2 class="sec-title">Milestones &amp; Achievements</h2><p class="sec-sub">From startup to industry leader in medical imaging solutions.</p><div class="timeline-caption">Company milestones | 2019-2026</div></div><div class="milestones-grid"><div class="milestones-track"><div class="milestone-card reveal"><div class="milestone-year">2019</div><span class="milestone-type">Founded</span><h4>Company established in Pakistan</h4><p class="milestone-caption">ProMED began with a clear focus on dependable diagnostic imaging support.</p></div><div class="milestone-card reveal"><div class="milestone-year">2020</div><span class="milestone-type">First Contract</span><h4>First major service agreement</h4><p class="milestone-caption">Our first service contract marked the start of formal field operations.</p></div><div class="milestone-card reveal"><div class="milestone-year">2021</div><span class="milestone-type">Karachi Branch</span><h4>Karachi branch opened</h4><p class="milestone-caption">A new Karachi branch strengthened regional service coverage and customer partnerships.</p></div><div class="milestone-card reveal"><div class="milestone-year">2022</div><span class="milestone-type">Infinity X-ray</span><h4>Infinity X-ray installation</h4><p class="milestone-caption">A major X-ray installation expanded our field presence and technical capability.</p></div><div class="milestone-card reveal"><div class="milestone-year">2022</div><span class="milestone-type">Detector Installation</span><h4>Detector installation completed</h4><p class="milestone-caption">Our engineers delivered hands-on installation and commissioning support.</p></div><div class="milestone-card reveal"><div class="milestone-year">2022</div><span class="milestone-type">Warehouse</span><h4>Warehouse established</h4><p class="milestone-caption">Dedicated infrastructure strengthened equipment and spare parts availability.</p></div><div class="milestone-card reveal"><div class="milestone-year">2023</div><span class="milestone-type">Lahore Office</span><h4>Lahore office opened</h4><p class="milestone-caption">ProMED expanded its Punjab footprint with a dedicated Lahore office to support regional healthcare partners more closely.</p></div><div class="milestone-card reveal"><div class="milestone-year">2023</div><span class="milestone-type">Dubai Office</span><h4>Dubai office opened</h4><p class="milestone-caption">Our Dubai presence strengthened international coordination and access to regional healthcare technology partnerships.</p></div><div class="milestone-card reveal"><div class="milestone-year">2023</div><span class="milestone-type">Partnership</span><h4>First per-patient partnership</h4><p class="milestone-caption">We launched our first per-patient partnership model to improve continuity of support and patient-centered imaging access.</p></div><div class="milestone-card reveal"><div class="milestone-year">2023</div><span class="milestone-type">MRI Expansion</span><h4>Installation of 10 MRI units</h4><p class="milestone-caption">We completed installation of 10 MRI systems, significantly increasing operational capability and clinical support coverage.</p></div><div class="milestone-card reveal"><div class="milestone-year">2023</div><span class="milestone-type">ISO Certification</span><h4>ISO certification secured</h4><p class="milestone-caption">Our quality management systems were formalized with ISO certification to support consistent service excellence.</p></div><div class="milestone-card reveal"><div class="milestone-year">2025</div><span class="milestone-type">Collaboration</span><h4>Chughtai Lab collaboration agreement</h4><p class="milestone-caption">A strategic collaboration agreement expanded ProMED's regional healthcare partnerships.</p></div><div class="milestone-card reveal"><div class="milestone-year">2025</div><span class="milestone-type">Revenue Partnership</span><h4>Formal revenue partnership with Chughtai Lab</h4><p class="milestone-caption">We formalized revenue-based collaboration with Chughtai Lab to deepen long-term imaging support.</p></div><div class="milestone-card reveal"><div class="milestone-year">2026</div><span class="milestone-type">Collaboration</span><h4>Karem Sallen Ltd UK collaboration</h4><p class="milestone-caption">A new collaboration with Karem Sallen Ltd UK advanced international strategic alignment and market reach.</p></div><div class="milestone-card reveal"><div class="milestone-year">2026</div><span class="milestone-type">Collaboration</span><h4>Unimedica China collaboration</h4><p class="milestone-caption">Our collaboration with Unimedica China strengthened cross-border equipment and service opportunities.</p></div><div class="milestone-card reveal"><div class="milestone-year">2025</div><span class="milestone-type">Collaboration</span><h4>Strategic partnerships formalized</h4><p class="milestone-caption">A formal MoU with RSP and new collaboration agreements expanded our network.</p></div><div class="milestone-card reveal"><div class="milestone-year">2026</div><span class="milestone-type">Partnerships</span><h4>International collaboration strengthened</h4><p class="milestone-caption">New alliances with Karem Selen Ltd and Unimedicom broadened our technical reach.</p></div></div></div></div></section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <span class="fn">ProMED Solutions</span>
+      <p>Pakistan's leading multi-vendor diagnostic imaging support company - delivering precision maintenance and equipment solutions nationwide.</p>
+    </div>
+    <div class="foot-col">
+      <h4>About</h4>
+      <a href="#who">Who We Are</a>
+      <a href="#mission">Mission &amp; Vision</a>
+      <a href="#values">Values</a>
+      <a href="#leadership">Leadership</a>
+    </div>
+    <div class="foot-col">
+      <h4>Services</h4>
+      <a href="central-operations-services.html">CT Maintenance</a>
+      <a href="central-operations-services.html">MRI Support</a>
+      <a href="central-operations-services.html">X-Ray Services</a>
+      <a href="central-operations-services.html">Parts Supply</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <a href="mailto:info@promedsol.com.pk">info@promedsol.com.pk</a>
+      <a href="tel:+92512749013">+92 51 2749013</a>
+      <a href="https://www.promedsol.com.pk" target="_blank">www.promedsol.com.pk</a>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>(c) 2024 ProMED Solutions. All rights reserved.</span>
+    <div class="cpills">
+      <span class="cpill">PNRA Certified</span>
+      <span class="cpill">ISO 9001:2015</span>
+      <span class="cpill">OEM Authorized</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* scroll bar */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('sb').style.width=
+    (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+});
+
+/* reveal on scroll */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      // stagger children inside vals-grid
+      e.target.querySelectorAll&&e.target.parentElement.querySelectorAll('.reveal').forEach((el,i)=>{
+        el.style.transitionDelay=i*.1+'s';
+      });
+      ro.unobserve(e.target);
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* smooth scroll for nav links */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+
+/* Radial Reveal Text Effect */
+document.addEventListener('DOMContentLoaded',()=>{
+  const radialTexts=document.querySelectorAll('.radial-reveal-text');
+  radialTexts.forEach(el=>{
+    const text=el.textContent;
+    el.setAttribute('data-text',text);
+    
+    el.addEventListener('pointermove',(e)=>{
+      const rect=el.getBoundingClientRect();
+      const x=((e.clientX-rect.left)/rect.width)*100;
+      const y=((e.clientY-rect.top)/rect.height)*100;
+      el.style.setProperty('--reveal-x',x+'%');
+      el.style.setProperty('--reveal-y',y+'%');
+      el.style.setProperty('--reveal-active','1');
+    });
+    
+    el.addEventListener('pointerleave',()=>{
+      el.style.setProperty('--reveal-active','0');
+    });
+  });
+});
+</script>
+<script>
+document.querySelectorAll('.nav-item > .nav-link').forEach(function(link){
+  var menu=link.parentElement.querySelector('.drop');
+  if(!menu)return;
+  link.addEventListener('click',function(event){
+    document.querySelectorAll('.nav-item.open').forEach(function(item){item.classList.remove('open');});
+  });
+});
+document.addEventListener('click',function(event){
+  if(!event.target.closest('.nav-item')){
+    document.querySelectorAll('.nav-item.open').forEach(function(item){item.classList.remove('open');});
+  }
+});
+</script>
+<script>
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var track=document.querySelector('.milestones-track');
+  if(track){
+    Array.prototype.slice.call(track.querySelectorAll('.milestone-card')).forEach(function(card){
+      var year=card.querySelector('.milestone-year')?.textContent.trim();
+      var type=card.querySelector('.milestone-type')?.textContent.trim();
+      var title=card.querySelector('h4')?.textContent.trim();
+      var removeRevenue=year==='2025' && type==='Revenue Partnership' && title==='Formal revenue partnership with Chughtai Lab';
+      var removeCollaboration=year==='2025' && type==='Collaboration' && title==='Strategic partnerships formalized';
+      var removeInternational=year==='2026' && type==='Partnerships' && title==='International collaboration strengthened';
+      if(removeRevenue || removeCollaboration || removeInternational) card.remove();
+    });
+  }
+  var unimedicaText=track ? Array.prototype.slice.call(track.querySelectorAll('.milestone-card')).find(function(card){
+    var title=card.querySelector('h4');
+    return title && title.textContent.trim()==='Unimedica China collaboration';
+  }) : null;
+  if(unimedicaText){
+    unimedicaText.querySelector('h4').textContent='Unimedicom collaboration';
+    unimedicaText.querySelector('.milestone-caption').textContent='Our collaboration with Unimedicom strengthened cross-border equipment and service opportunities.';
+  }
+  var milestones=track ? track.querySelectorAll('.milestone-card') : [];
+  if(!track || milestones.length < 4) return;
+
+  function addMedia(card, media, alt){
+    card.classList.add('media-milestone');
+    var image=document.createElement('img');
+    image.className='milestone-media';
+    image.src=media;
+    image.alt=alt;
+    card.insertBefore(image,card.firstElementChild);
+  }
+
+  addMedia(milestones[0],'assets/images/milestone-2019-logo-wide.webp','ProMED Solutions logo');
+  milestones[0].querySelector('.milestone-media').classList.add('milestone-media-full');
+  addMedia(milestones[1],'assets/images/milestone-2020-contract.webp','Service contract document');
+  milestones[2].querySelector('.milestone-year').textContent='2021';
+  milestones[2].querySelector('.milestone-type').textContent='Karachi Branch';
+  milestones[2].querySelector('h4').textContent='Karachi branch opened';
+  milestones[2].querySelector('.milestone-caption').textContent='A new Karachi branch strengthened regional service coverage and customer partnerships.';
+  addMedia(milestones[2],'assets/images/karachi-branch-2021-screenshot.webp','Karachi branch screenshot');
+
+  var infinityCard=milestones[3];
+  var detectorCard=milestones[4];
+  var warehouseCard=milestones[5];
+  var infinityVideo=document.createElement('video');
+  infinityVideo.className='milestone-media milestone-media-video';
+  infinityVideo.muted=true;
+  infinityVideo.loop=true;
+  infinityVideo.playsInline=true;
+  infinityVideo.preload='none';infinityVideo.dataset.lazy='1';
+  infinityVideo.poster='assets/video/infinity-medtech-poster.webp';infinityVideo.innerHTML='<source src="assets/video/infinity-medtech.webm" type="video/webm"><source src="assets/video/infinity-medtech.mp4" type="video/mp4">';
+  infinityCard.insertBefore(infinityVideo, infinityCard.firstElementChild);if(window.pmLazyVideo)pmLazyVideo(infinityVideo);
+  var detectorVideo=document.createElement('video');
+  detectorVideo.className='milestone-media milestone-media-video';
+  detectorVideo.classList.add('detector-installation-video');
+  detectorVideo.muted=true;
+  detectorVideo.loop=true;
+  detectorVideo.playsInline=true;
+  detectorVideo.preload='none';detectorVideo.dataset.lazy='1';
+  detectorVideo.poster='assets/video/detector-installation-2022-poster.webp';detectorVideo.innerHTML='<source src="assets/video/detector-installation-2022.webm" type="video/webm"><source src="assets/video/detector-installation-2022.mp4" type="video/mp4">';
+  detectorCard.insertBefore(detectorVideo, detectorCard.firstElementChild);if(window.pmLazyVideo)pmLazyVideo(detectorVideo);
+  var warehouseVideo=document.createElement('video');
+  warehouseVideo.className='milestone-media milestone-media-video';
+  warehouseVideo.muted=true;
+  warehouseVideo.loop=true;
+  warehouseVideo.playsInline=true;
+  warehouseVideo.preload='none';warehouseVideo.dataset.lazy='1';
+  warehouseVideo.poster='assets/video/warehouse-2022-poster.webp';warehouseVideo.innerHTML='<source src="assets/video/warehouse-2022.webm" type="video/webm"><source src="assets/video/warehouse-2022.mp4" type="video/mp4">';
+  warehouseCard.insertBefore(warehouseVideo, warehouseCard.firstElementChild);if(window.pmLazyVideo)pmLazyVideo(warehouseVideo);
+
+  var lahoreCard=milestones[6];
+  if(lahoreCard){
+    addMedia(lahoreCard,'assets/images/lahore-office-2023.webp','Minar-e-Pakistan landmark for Lahore office');
+    lahoreCard.querySelector('.milestone-media').classList.add('milestone-media-full');
+  }
+
+  var dubaiCard=milestones[7];
+  if(dubaiCard){
+    addMedia(dubaiCard,'assets/images/dubai-office-2023.webp','Dubai skyline landmark');
+    dubaiCard.querySelector('.milestone-media').classList.add('milestone-media-full');
+  }
+
+  var partnershipCard=milestones[8];
+  if(partnershipCard){
+    addMedia(partnershipCard,'assets/images/first-per-patient-partnership-2023.webp','First per-patient partnership signing');
+  }
+
+  var chughtaiCard=milestones[11];
+  if(chughtaiCard){
+    addMedia(chughtaiCard,'assets/images/chughtai-collaboration-2025.webp','Chughtai Lab collaboration signing');
+  }
+
+  var mriCard=milestones[9];
+  if(mriCard){
+    addMedia(mriCard,'assets/images/mri-expansion-2023.webp','MRI installation team and scanner');
+  }
+
+  var isoCard=milestones[10];
+  if(isoCard){
+    addMedia(isoCard,'assets/images/iso-certification-2023.webp','ISO 45001:2018 certificate');
+    isoCard.querySelector('.milestone-media').classList.add('milestone-media-full');
+  }
+
+  var unimedicaCard=Array.prototype.slice.call(milestones).find(function(card){
+    var title=card.querySelector('h4');
+    return title && title.textContent.trim()==='Unimedicom collaboration';
+  });
+  if(unimedicaCard){
+    addMedia(unimedicaCard,'assets/images/unimedica-china-2026.webp','Unimedicom logo for Unimedicom collaboration');
+    unimedicaCard.querySelector('.milestone-media').classList.add('milestone-media-full');
+  }
+
+  var karemCard=Array.prototype.slice.call(milestones).find(function(card){
+    var title=card.querySelector('h4');
+    return title && title.textContent.trim()==='Karem Sallen Ltd UK collaboration';
+  });
+  if(karemCard){
+    addMedia(karemCard,'assets/images/karem-sallen-uk-2026.webp','Karem Sallen Ltd UK collaboration');
+    karemCard.querySelector('.milestone-media').classList.add('milestone-media-full');
+  }
+
+  milestones.forEach(function(card){
+    var year=card.querySelector('.milestone-year');
+    if(!year) return;
+    if(year.textContent.trim()==='2019') card.classList.add('milestone-origin');
+    if(year.textContent.trim()==='2026') card.classList.add('milestone-current');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.milestone-card').forEach(function(card){
+    var title=card.querySelector('h4');
+    if(title && title.textContent.trim()==='First per-patient partnership'){
+      var caption=card.querySelector('.milestone-caption');
+      if(caption) caption.textContent='We launched our first per-patient partnership model, coordinating equipment access, maintenance support, and patient-focused imaging delivery.';
+    }
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var viewport=document.querySelector('.milestones-grid');
+  var track=document.querySelector('.milestones-track');
+  if(!viewport || !track) return;
+  var targetX=0;
+  var currentX=0;
+  var frameActive=false;
+  function animateTrack(){
+    currentX += (targetX-currentX)*.12;
+    track.style.transform='translate3d('+currentX+'px,0,0)';
+    if(Math.abs(targetX-currentX)>.2){
+      requestAnimationFrame(animateTrack);
+    }else{
+      currentX=targetX;
+      track.style.transform='translate3d('+currentX+'px,0,0)';
+      frameActive=false;
+    }
+  }
+  viewport.addEventListener('pointermove',function(event){
+    if(event.pointerType==='touch') return;
+    var rect=viewport.getBoundingClientRect();
+    var progress=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width));
+    var maxOffset=Math.max(0,track.scrollWidth-viewport.clientWidth);
+    targetX=-maxOffset*progress;
+    if(!frameActive){
+      frameActive=true;
+      requestAnimationFrame(animateTrack);
+    }
+  });
+});
+</script>
+<script src="assets/lazy-video.js"></script>
+</body>
+<script>
+if(typeof initParticleDrift==='function'){
+  initParticleDrift('pdCanvas', {
+    background:'#031428',
+    baseColor:'#9CB4CD',
+    accentColor:'#19569B',
+    density:260,
+    dotSize:5,
+    speed:34,
+    direction:0,
+    hover:170,
+    linkDistance:210,
+    linkThickness:1
+  });
+}
+</script>
+</html>
+

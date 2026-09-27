@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Division - Central Operations - ProMED Solutions</title>
+<link rel="stylesheet" href="assets/responsive.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#031428;--blue:#19569B;--blue2:#1e6ab5;--white:#fff;
+  --light:#F4F7FB;--mid:#E8EEF6;--text:#4a5c6f;--cyan:#00E5FF}
+html{scroll-behavior:smooth}
+body{font-family:'Urbanist',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:900;background:rgba(3,20,40,.97);
+  backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 48px;height:70px;
+  display:flex;align-items:center;justify-content:space-between;min-width:0}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:44px;width:auto;object-fit:contain}
+.nav-brand-name{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.nav-brand-tag{font-size:9px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.4)}
+.nav-links{display:flex;list-style:none;gap:0;align-items:center;flex-wrap:nowrap;
+  white-space:nowrap;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-link{color:rgba(255,255,255,.6);font-weight:600;font-size:13px;
+  text-decoration:none;padding:24px 18px;display:block;transition:color .2s;white-space:nowrap}
+.nav-link:hover{color:#fff}
+.nav-cta{background:var(--blue);color:#fff;padding:9px 22px;border-radius:6px;
+  font-weight:700;font-size:13px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--blue2)}
+
+/* HERO */
+.hero{position:relative;height:70vh;min-height:550px;
+  display:flex;align-items:center;overflow:hidden;background:var(--navy);isolation:isolate}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(circle at 50% 45%,rgba(25,86,155,.2),transparent 48%),
+  linear-gradient(180deg,rgba(3,20,40,.08),rgba(3,20,40,.55))}
+.hero-cursor-field{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;mix-blend-mode:screen}
+#pdCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none;background:radial-gradient(circle at center,#031a2c 0%,#031428 45%,#010b15 100%)}
+#twinGalaxyCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none;opacity:.72}
+.hero-content{position:relative;z-index:2;max-width:1400px;margin:0 auto;
+  padding:0 48px;text-align:center}
+.hero-mark{width:58px;height:58px;margin:0 auto 18px;border:1px solid rgba(0,229,255,.42);
+  border-radius:16px;padding:8px;background:rgba(3,20,40,.72);box-shadow:0 0 34px rgba(0,229,255,.18)}
+.hero-mark img{width:100%;height:100%;object-fit:contain;display:block}
+.hero-badge{display:inline-block;background:rgba(0,229,255,.15);
+  border:2px solid rgba(0,229,255,.4);color:var(--cyan);
+  padding:10px 24px;border-radius:50px;font-size:11px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.14em;margin-bottom:24px;
+  backdrop-filter:blur(10px)}
+.hero h1{font-size:clamp(2.8rem,5.5vw,4.5rem);font-weight:900;color:#fff;
+  margin-bottom:20px;line-height:1.08;letter-spacing:-.03em;
+  text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.hero-subtitle{font-size:1.15rem;color:rgba(255,255,255,.88);
+  max-width:780px;margin:0 auto 40px;line-height:1.7}.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1);will-change:transform,opacity}.reveal.left{transform:translateX(-32px)}.reveal.right{transform:translateX(32px)}.reveal.vis{opacity:1;transform:translate(0)}
+.scroll-reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+.scroll-reveal.is-visible{opacity:1;transform:translateY(0)}
+.product-card,.stat-box,.equip-card,.qct-card{will-change:transform}
+
+/* ABOUT SALES */
+.about-sales{background:var(--white);padding:64px 48px 20px}
+.about-sales .sec-hdr{margin-bottom:0}
+.container{max-width:1300px;margin:0 auto}
+.sec-hdr{text-align:center;margin-bottom:48px}
+.sec-eyebrow{display:inline-block;font-size:10px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--blue);
+  border:1px solid rgba(25,86,155,.25);border-radius:50px;
+  padding:6px 18px;margin-bottom:14px}
+.sec-title{font-size:clamp(2rem,4vw,2.8rem);font-weight:900;color:var(--navy);
+  letter-spacing:-.04em;margin-bottom:16px;line-height:1.1}
+.sec-sub{font-size:1rem;color:#5a6b7f;max-width:900px;margin:0 auto;line-height:1.9}
+
+/* INFINITY MEDTECH */
+.infinity{background:linear-gradient(135deg,var(--light),#fff);padding:64px 48px;
+  position:relative;overflow:hidden}
+.infinity-partner{background:#fff}
+.infinity-partner::before{display:none}
+.infinity::before{content:'';position:absolute;top:-200px;right:-200px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(25,86,155,.06),transparent 70%)}
+.infinity-content{max-width:1300px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.infinity-badge{display:inline-flex;align-items:center;gap:10px;
+  background:var(--navy);color:#fff;padding:8px 20px;border-radius:6px;
+  font-size:11px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:24px}
+.infinity-content h2{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900;
+  color:var(--navy);margin-bottom:24px;line-height:1.1;letter-spacing:-.03em}
+.official-partner-link{display:inline-flex;align-items:center;gap:8px;margin:-8px 0 18px;color:var(--blue);font-size:.82rem;font-weight:700;text-decoration:none;letter-spacing:.04em}
+.official-partner-link:hover{text-decoration:underline;color:var(--blue2)}
+.partner-logo-panel{display:flex;align-items:center;justify-content:center;width:420px;max-width:100%;height:100px;padding:10px 18px;margin-bottom:20px;background:#fff;border-radius:6px;box-shadow:0 6px 18px rgba(3,20,40,.08)}
+.partner-logo-panel img{display:block;width:360px;max-width:100%;height:80px;object-fit:contain}
+.infinity-stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+.stat-box{background:#fff;border:2px solid var(--mid);border-radius:12px;
+  padding:28px 24px;text-align:center;transition:all .4s}
+.stat-box:hover{transform:translateY(-6px);border-color:var(--blue);
+  box-shadow:0 16px 48px rgba(25,86,155,.12)}
+.stat-num{font-size:2.8rem;font-weight:900;color:var(--navy);
+  display:block;margin-bottom:8px;letter-spacing:-.04em}
+.stat-label{font-size:.85rem;color:var(--text);font-weight:600}
+.infinity-img-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.infinity-img{border-radius:16px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(3,20,40,.12)}
+.infinity-img img{width:100%;height:280px;object-fit:cover;display:block;
+  transition:transform .6s}
+.infinity-img:hover img{transform:scale(1.05)}
+.infinity-video{display:block;width:100%;max-height:520px;aspect-ratio:16/9;object-fit:cover;border-radius:10px;background:#071826}
+
+/* PRODUCTS */
+.products{background:var(--light);padding:64px 48px}
+.products-viewport{overflow:hidden;margin:0 -48px;padding:8px 48px 28px;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.products-grid{display:flex;gap:24px;width:max-content;animation:productFlow 42s linear infinite}
+@keyframes productFlow{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
+.products-viewport:hover .products-grid,.products-viewport:focus-within .products-grid{animation-play-state:paused}
+.product-card{background:#fff;border:2px solid #e0eaf6;border-radius:20px;
+  flex:0 0 clamp(250px,20vw,300px);padding:32px 28px;text-align:left;transition:all .6s cubic-bezier(.34,1.56,.64,1);
+  position:relative;overflow:hidden}
+.product-card::after{content:'';position:absolute;top:-30%;left:-70%;width:42%;height:160%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);
+  transform:skewX(-18deg);transition:left .7s ease;pointer-events:none}
+.product-card.scroll-reveal{transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1),border-color .35s ease,box-shadow .35s ease}
+.product-card.scroll-reveal:not(.is-visible){transform:translateY(28px) scale(.97)}
+.product-card.is-visible{animation:productCardSettle .7s cubic-bezier(.22,1,.36,1) both}
+@keyframes productCardSettle{0%{filter:blur(2px)}100%{filter:blur(0)}}
+.product-card:hover{transform:translateY(-12px);border-color:var(--blue);
+  box-shadow:0 20px 50px rgba(25,86,155,.15)}
+.product-card:hover::after{left:130%}
+.product-icon{width:64px;height:42px;margin:0 0 24px;background:var(--navy);
+  border-left:4px solid var(--cyan);border-radius:4px;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:13px;font-weight:800;letter-spacing:.14em;box-shadow:0 8px 18px rgba(3,20,40,.16);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease}
+.product-card:hover .product-icon{transform:translateX(5px);box-shadow:0 12px 24px rgba(3,20,40,.24)}
+.product-image{display:block;width:100%;height:112px;margin:0 0 24px;border-radius:8px;object-fit:contain;background:#fff}
+.product-card h3{font-size:1.1rem;font-weight:800;color:var(--navy);margin-bottom:12px;letter-spacing:-.02em}
+.product-card p{font-size:.88rem;color:var(--text);line-height:1.7}
+
+/* EQUIPMENT */
+.equipment{background:#fff;padding:64px 48px}
+.equip-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;
+  background:#E8EEF6;border-radius:12px;overflow:hidden}
+.equip-card{background:#fff;padding:40px 36px;position:relative;overflow:hidden;
+  transition:background .3s}
+.equip-card::before{content:'';position:absolute;top:0;left:0;right:0;
+  height:3px;background:var(--blue);transform:scaleX(0);
+  transform-origin:left;transition:transform .35s}
+.equip-card:hover{background:var(--navy)}
+.equip-card:hover::before{transform:scaleX(1)}
+.equip-card:hover h3{color:#fff}
+.equip-card:hover p{color:rgba(255,255,255,.7)}
+.equip-card h3{font-size:1.3rem;font-weight:800;color:var(--navy);
+  margin-bottom:14px;transition:color .3s}
+.equip-card p{font-size:.95rem;color:var(--text);line-height:1.8;transition:color .3s}
+
+/* MISSION VISION */
+.mission-vision{background:var(--navy);padding:64px 48px;position:relative;overflow:hidden}
+.mission-vision::before{content:'';position:absolute;inset:0;opacity:.05;
+  background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.03) 40px,rgba(255,255,255,.03) 80px)}
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;
+  max-width:1300px;margin:0 auto}
+.mv-card{background:rgba(255,255,255,.05);backdrop-filter:blur(20px);
+  border:2px solid rgba(255,255,255,.1);border-radius:24px;
+  padding:44px 40px;transition:all .6s cubic-bezier(.34,1.56,.64,1)}
+.mv-card:hover{transform:translateY(-8px);background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.2);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.mv-icon{width:56px;height:56px;background:rgba(255,255,255,.1);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:20px}
+.mv-card h3{font-size:1.6rem;font-weight:900;color:#fff;margin-bottom:16px}
+.mv-card p{font-size:1rem;color:rgba(255,255,255,.75);line-height:1.85}
+
+/* CTA */
+.cta-section{background:var(--navy);padding:72px 48px;text-align:center;
+  position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;opacity:.04;
+  background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 1px,transparent 40px)}
+.cta-section h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;
+  color:#fff;margin-bottom:14px;letter-spacing:-.04em}
+.cta-section p{font-size:1rem;color:rgba(255,255,255,.5);margin-bottom:36px}
+.cta-btn{display:inline-block;background:#fff;color:var(--navy);
+  padding:15px 44px;border-radius:6px;font-weight:800;font-size:.95rem;
+  text-decoration:none;transition:all .3s;letter-spacing:-.01em}
+.cta-btn:hover{background:var(--blue);color:#fff;transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:#040f1e;color:rgba(255,255,255,.4);padding:64px 48px 32px}
+.foot-grid{max-width:1300px;margin:0 auto 48px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.foot-brand-name{font-size:17px;font-weight:800;color:#fff;
+  display:block;margin-bottom:10px}
+.foot-brand p{font-size:.84rem;line-height:1.8;color:rgba(255,255,255,.35)}
+.foot-col h4{color:rgba(255,255,255,.55);font-size:.72rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.foot-col a{display:block;color:rgba(255,255,255,.35);text-decoration:none;
+  font-size:.84rem;margin-bottom:10px;transition:color .2s}
+.foot-col a:hover{color:#fff}
+.foot-bot{max-width:1300px;margin:0 auto;
+  border-top:1px solid rgba(255,255,255,.06);padding-top:24px;
+  text-align:center;font-size:.76rem}
+
+/* QCT MAIN CARD */
+.qct-main-card{background:linear-gradient(135deg,#fff,var(--light));
+  border:2px solid #e0eaf6;border-radius:24px;padding:48px 44px;
+  margin-bottom:32px;transition:all .35s;cursor:pointer;position:relative;
+  overflow:hidden}
+.qct-main-card::before{content:'';position:absolute;top:0;left:0;right:0;
+  height:4px;background:var(--blue);transform:scaleX(0);
+  transform-origin:left;transition:transform .35s}
+.qct-main-card:hover{background:var(--navy);border-color:var(--navy);
+  transform:translateY(-4px);box-shadow:0 20px 60px rgba(3,20,40,.25)}
+.qct-main-card:hover::before{transform:scaleX(1)}
+.qct-main-card:hover h3{color:#fff !important}
+.qct-main-card:hover h4{color:#fff !important}
+.qct-main-card:hover p{color:rgba(255,255,255,.75) !important}
+.qct-main-card:hover li{color:rgba(255,255,255,.7) !important;
+  border-bottom-color:rgba(255,255,255,.15) !important}
+.qct-main-card:hover .qct-highlight{background:rgba(255,255,255,.08) !important;
+  border-left-color:var(--cyan) !important}
+.qct-main-card:hover .qct-highlight strong{color:var(--cyan) !important}
+.qct-main-card:hover .qct-app-card{background:rgba(255,255,255,.05) !important;
+  border-color:rgba(255,255,255,.15) !important}
+
+/* QCT CARDS */
+.qct-card{background:#fff;border:2px solid #e0eaf6;border-radius:20px;
+  padding:36px 28px;text-align:center;transition:all .35s;position:relative;
+  overflow:hidden;cursor:pointer}
+.qct-card::before{content:'';position:absolute;top:0;left:0;right:0;
+  height:3px;background:var(--blue);transform:scaleX(0);
+  transform-origin:left;transition:transform .35s}
+.qct-card:hover{background:var(--navy);border-color:var(--navy);
+  transform:translateY(-4px)}
+.qct-card:hover::before{transform:scaleX(1)}
+.qct-icon{width:64px;height:64px;margin:0 auto 20px;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:28px;transition:all .35s}
+.qct-card:hover .qct-icon{background:rgba(255,255,255,.15);transform:scale(1.1)}
+.qct-card h4{font-size:1.15rem;font-weight:800;color:var(--navy);
+  margin-bottom:12px;transition:color .35s}
+.qct-card:hover h4{color:#fff}
+.qct-card p{font-size:.9rem;color:#5a6b7f;line-height:1.7;margin:0;
+  transition:color .35s}
+.qct-card:hover p{color:rgba(255,255,255,.7)}
+
+@media(max-width:900px){
+  .infinity-content,.mv-grid,.equip-grid{grid-template-columns:1fr}
+  .products-grid{gap:18px}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .products-grid,.product-card,.product-card::after,.product-icon{animation:none!important;transition:none!important}
+}
+</style>
+<meta name="description" content="Digital X-ray detectors, imaging systems and OEM partner equipment supplied and installed by ProMED Solutions across Pakistan.">
+<meta name="theme-color" content="#031428">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://www.promedsol.com.pk/central-operations-sales.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ProMED Solutions">
+<meta property="og:title" content="Sales Division | ProMED Solutions">
+<meta property="og:description" content="Digital X-ray detectors, imaging systems and OEM partner equipment supplied and installed by ProMED Solutions across Pakistan.">
+<meta property="og:url" content="https://www.promedsol.com.pk/central-operations-sales.html">
+<meta property="og:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sales Division | ProMED Solutions">
+<meta name="twitter:description" content="Digital X-ray detectors, imaging systems and OEM partner equipment supplied and installed by ProMED Solutions across Pakistan.">
+<meta name="twitter:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<script src="assets/nav.js"></script>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="twinGalaxyCanvas" aria-hidden="true"></canvas>
+  <div class="hero-content">
+    <h1 class="reveal">Market Leadership in<br>Diagnostic Imaging</h1>
+    <p class="hero-subtitle reveal right">Led by experienced biomedical engineers, we market exclusive medical imaging products with excellent customer relations and deep market understanding.</p>
+  </div>
+</section>
+
+<!-- ABOUT SALES -->
+<section class="about-sales">
+  <div class="container">
+    <div class="sec-hdr reveal">
+      <div class="sec-eyebrow">Our Expertise</div>
+      <h2 class="sec-title">Sales Department Overview</h2>
+      <p class="sec-sub">ProMED Solutions connects healthcare providers with trusted diagnostic imaging technology from leading international and local manufacturers. Our Sales Department specializes in Diagnostic Imaging and Nuclear Medicine, delivering the right equipment with responsive guidance, dependable supply, and solutions built around clinical needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" style="background:#fff">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="sec-eyebrow">Product Portfolio</div>
+      <h2 class="sec-title">Medical Imaging Solutions</h2>
+      <p class="sec-sub">Comprehensive range of diagnostic imaging equipment from world-leading manufacturers</p>
+    </div>
+    <div class="products-viewport" aria-label="Medical imaging modalities">
+      <div class="products-grid">
+      <div class="product-card reveal left">
+        <img class="product-image" src="assets/images/modality-icons/digital-xray.webp" alt="Digital X-Ray system">
+        <h3>Digital X-Ray</h3>
+        <p>INFINITY MEDTECH &amp; RAYENCE digital radiography systems with wireless detectors</p>
+      </div>
+      <div class="product-card reveal">
+        <img class="product-image" src="assets/images/modality-icons/mri-system.webp" alt="MRI system">
+        <h3>MRI Systems</h3>
+        <p>High-field MRI solutions from leading manufacturers with complete support</p>
+      </div>
+      <div class="product-card reveal right reveal">
+        <img class="product-image" src="assets/images/modality-icons/ct-system.webp" alt="CT system" loading="lazy" decoding="async">
+        <h3>CT Systems</h3>
+        <p>Multi-slice CT systems with installation and technical support</p>
+      </div>
+      <div class="product-card reveal left reveal">
+        <img class="product-image" src="assets/images/modality-icons/dexa-qct.webp" alt="DEXA and QCT system" loading="lazy" decoding="async">
+        <h3>DEXA / QCT</h3>
+        <p>Bone densitometry and QCT solutions for osteoporosis diagnosis</p>
+      </div>
+      <div class="product-card reveal left reveal">
+        <img class="product-image" src="assets/images/modality-icons/nuclear-medicine.webp" alt="Nuclear Medicine system" loading="lazy" decoding="async">
+        <h3>Nuclear Medicine</h3>
+        <p>Reliable gamma camera and radiopharmaceutical imaging solutions</p>
+      </div>
+      <div class="product-card reveal right reveal">
+        <img class="product-image" src="assets/images/modality-icons/pet-ct-system.webp" alt="PET/CT system" loading="lazy" decoding="async">
+        <h3>PET/CT Systems</h3>
+        <p>Advanced nuclear imaging systems for functional and molecular diagnosis</p>
+      </div>
+      <div class="product-card reveal right reveal">
+        <img class="product-image" src="assets/images/modality-icons/ultrasound-system.webp" alt="Ultrasound system" loading="lazy" decoding="async">
+        <h3>Ultrasound</h3>
+        <p>Diagnostic ultrasound systems for general and specialized imaging</p>
+      </div>
+      <div class="product-card reveal left reveal">
+        <img class="product-image" src="assets/images/modality-icons/mammography-system.webp" alt="Mammography system" loading="lazy" decoding="async">
+        <h3>Mammography</h3>
+        <p>Dedicated breast imaging technology for accurate clinical screening</p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFINITY MEDTECH -->
+<section class="infinity infinity-partner">
+  <div class="infinity-content">
+    <div>
+      <div class="infinity-badge">&#x1F3C6; PREMIER PARTNERSHIP</div>
+      <div class="partner-logo-panel">
+        <img src="assets/logos/partners/Infinity_Medtech_Systems_Pvt_Ltd_logo.webp" alt="INFINITY MEDTECH SYSTEMS Logo" loading="lazy" decoding="async">
+      </div>
+      <h2>INFINITY MEDTECH</h2>
+      <a class="official-partner-link" href="https://infinitymedical.tech/about-us/" target="_blank" rel="noopener noreferrer">Official website &#x2197;</a>
+      <p style="font-size:1.1rem;color:var(--navy);line-height:1.9;margin-bottom:20px;font-weight:700">International imaging systems and technology partner</p>
+      <p style="font-size:.98rem;color:#4a5d74;line-height:1.85;margin-bottom:16px">ProMED Solutions is the <strong>official exclusive distributor</strong> of INFINITY MEDTECH digital X-ray systems across Pakistan - delivering international imaging technology to healthcare institutions nationwide.</p>
+      <div style="background:rgba(25,86,155,.06);border-left:4px solid var(--blue);padding:20px 24px;border-radius:8px;margin:24px 0">
+        <p style="font-size:.92rem;color:var(--navy);line-height:1.8;margin:0">
+          <strong style="color:var(--blue);font-size:1.05rem">200+ Digital X-Ray Systems Deployed</strong><br>
+          Successfully installed and commissioned in major hospitals, diagnostic centers, and medical facilities across Pakistan - representing the gold standard in digital radiography.
+        </p>
+      </div>
+      <div class="infinity-stats">
+        <div class="stat-box">
+          <span class="stat-num">200+</span>
+          <span class="stat-label">X-Ray Systems Installed</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">15+</span>
+          <span class="stat-label">Hospital Partners</span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal right">
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(3,20,40,.12);background:linear-gradient(135deg,#0a1e31,#071826);padding:30px;min-height:320px;display:flex;align-items:center;justify-content:center">
+        <video class="infinity-video" muted loop playsinline aria-label="Infinity Medtech Systems video" preload="none" data-lazy poster="assets/video/infinity-medtech-poster.webp">
+  <source src="assets/video/infinity-medtech.webm" type="video/webm">
+  <source src="assets/video/infinity-medtech.mp4" type="video/mp4">
+</video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RAYENCE PARTNERSHIP -->
+<section class="infinity" style="background:linear-gradient(135deg,#fff,var(--light))">
+  <div class="infinity-content">
+    <div class="reveal left">
+      <div style="display:grid;grid-template-columns:1fr;gap:16px">
+        <div class="infinity-img" style="height:520px;background:linear-gradient(135deg,#091a2d,#0c2441);border:1px solid rgba(0,229,255,.12);display:flex;align-items:center;justify-content:center;padding:30px">
+          <video class="infinity-video" muted loop playsinline aria-label="Rayence video" preload="none" data-lazy poster="assets/video/detector-installation-2022-poster.webp">
+  <source src="assets/video/detector-installation-2022.webm" type="video/webm">
+  <source src="assets/video/detector-installation-2022.mp4" type="video/mp4">
+</video>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="infinity-badge" style="background:var(--blue)">&#x1F310; GLOBAL TECHNOLOGY PARTNER</div>
+      <div class="partner-logo-panel">
+        <img src="assets/logos/partners/Rayence_logo.webp" alt="RAYENCE Logo" loading="lazy" decoding="async">
+      </div>
+      <h2>RAYENCE</h2>
+      <a class="official-partner-link" href="https://www.rayence.com/" target="_blank" rel="noopener noreferrer">Official website &#x2197;</a>
+      <p style="font-size:1.1rem;color:var(--navy);line-height:1.9;margin-bottom:20px;font-weight:700">South Korean digital X-ray technology brand</p>
+      <p style="font-size:.98rem;color:#4a5d74;line-height:1.85;margin-bottom:16px">ProMED Solutions partners with <strong>RAYENCE</strong>, a South Korean global leader in digital radiography detector technology with international market support, bringing cutting-edge <strong>wireless flat panel detectors</strong> to Pakistan's healthcare sector.</p>
+      <div style="background:rgba(25,86,155,.06);border-left:4px solid var(--blue);padding:20px 24px;border-radius:8px;margin:24px 0">
+        <p style="font-size:.92rem;color:var(--navy);line-height:1.8;margin:0">
+          <strong style="color:var(--blue);font-size:1.05rem">Premium Wireless Detectors</strong><br>
+          RAYENCE wireless detectors offer exceptional image quality, fast acquisition times, and unmatched reliability - integrated across our X-Ray installations nationwide.
+        </p>
+      </div>
+      <div class="infinity-stats">
+        <div class="stat-box">
+          <span class="stat-num">100+</span>
+          <span class="stat-label">RAYENCE Detectors Deployed</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">99%</span>
+          <span class="stat-label">Uptime Performance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QCT BONE DENSITOMETRY -->
+<section class="products">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="sec-eyebrow">&#x1F984; Advanced Bone Health Assessment</div>
+      <h2 class="sec-title">QCT - Quantitative Computed Tomography</h2>
+      <p class="sec-sub">Precision bone mineral density assessment powered by Mindways Software technology</p>
+    </div>
+    
+    <div style="max-width:1100px;margin:0 auto">
+      <!-- Main QCT Description -->
+      <div class="qct-main-card reveal">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+          <div>
+            <h3 style="font-size:1.8rem;font-weight:900;color:var(--navy);margin-bottom:10px;line-height:1.2;transition:color .35s">Mindways Software QCT PRO</h3>
+            <a href="https://www.qct.com/AboutUs.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;color:var(--blue);font-size:.82rem;font-weight:800;text-decoration:none;letter-spacing:.04em;margin-bottom:20px">About Mindways Software <span aria-hidden="true">&#8599;</span></a>
+            <p style="font-size:1.05rem;color:#4a5d74;line-height:1.9;margin-bottom:20px;transition:color .35s">Mindways Software is an industry-leading innovator in quantitative CT analysis for clinical and research applications. Its fourth-generation QCT PRO platform delivers three-dimensional bone mineral density assessment using established calibration standards and existing CT infrastructure.</p>
+            <p style="font-size:.98rem;color:#5a6b7f;line-height:1.85;margin-bottom:20px;transition:color .35s">ProMED Solutions supplies and integrates <strong>Mindways Software QCT PRO</strong> to help healthcare providers make precise BMD measurements for osteoporosis assessment, fracture-risk evaluation, and long-term clinical monitoring.</p>
+            <div style="background:rgba(25,86,155,.06);border-left:4px solid var(--blue);padding:18px 22px;border-radius:8px;transition:all .35s" class="qct-highlight">
+              <p style="font-size:.92rem;color:var(--navy);line-height:1.75;margin:0;transition:color .35s">
+                <strong style="color:var(--blue);transition:color .35s">FDA-Cleared Technology</strong><br>
+                Mindways QCT systems provide accurate trabecular bone density measurements essential for osteoporosis diagnosis and fracture risk assessment.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div style="background:#fff;border:2px solid #e0eaf6;border-radius:16px;padding:32px 28px;transition:all .35s" class="qct-app-card">
+              <img src="assets/images/qct-pro.webp" alt="QCT Pro bone density assessment" style="display:block;width:100%;height:auto;max-height:240px;object-fit:contain;border-radius:10px;margin:0 auto 24px" loading="lazy" decoding="async">
+              <h4 style="font-size:1.1rem;font-weight:800;color:var(--navy);margin-bottom:20px;transition:color .35s">Clinical Applications</h4>
+              <ul style="list-style:none;padding:0;margin:0">
+                <li style="padding:12px 0;border-bottom:1px solid #e0eaf6;color:#4a5d74;font-size:.95rem;transition:all .35s">&#x2713; Osteoporosis screening and diagnosis</li>
+                <li style="padding:12px 0;border-bottom:1px solid #e0eaf6;color:#4a5d74;font-size:.95rem;transition:all .35s">&#x2713; Fracture risk assessment</li>
+                <li style="padding:12px 0;border-bottom:1px solid #e0eaf6;color:#4a5d74;font-size:.95rem;transition:all .35s">&#x2713; Spine and hip BMD measurement</li>
+                <li style="padding:12px 0;border-bottom:1px solid #e0eaf6;color:#4a5d74;font-size:.95rem;transition:all .35s">&#x2713; Treatment monitoring over time</li>
+                <li style="padding:12px 0;color:#4a5d74;font-size:.95rem;transition:color .35s">&#x2713; Trabecular bone analysis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Advantages -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+        <div class="qct-card reveal left">
+          <div class="qct-icon">&#x1F4CA;</div>
+          <h4>3D Volumetric</h4>
+          <p>True volumetric BMD - superior to planar DEXA</p>
+        </div>
+        
+        <div class="qct-card">
+          <div class="qct-icon">&#x1F3AF;</div>
+          <h4>Calibration Phantom</h4>
+          <p>Phantom-based accuracy for consistent results</p>
+        </div>
+        
+        <div class="qct-card">
+          <div class="qct-icon">&#x1F52C;</div>
+          <h4>Clinical Validation</h4>
+          <p>FDA-cleared, clinically proven technology</p>
+        </div>
+      </div>
+
+      <!-- Integration Note -->
+      <div style="margin-top:32px;text-align:center;padding:32px;background:rgba(25,86,155,.04);border-radius:16px">
+        <p style="font-size:.95rem;color:#4a5d74;line-height:1.8;max-width:900px;margin:0 auto">
+          <strong style="color:var(--navy)">Seamless CT Integration:</strong> Mindways QCT PRO software integrates with existing CT scanners from major manufacturers including GE, Philips, Siemens, Canon, and Toshiba - enabling bone densitometry capabilities without dedicated DEXA equipment.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <span class="foot-brand-name">ProMED Solutions</span>
+      <p>Pakistan's leading multi-vendor diagnostic imaging support company.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Operations</h4>
+      <a href="central-operations-sales.html">Sales</a>
+      <a href="central-operations-services.html">Services</a>
+      <a href="central-operations-services.html">Training</a>
+      <a href="operations-partnership.html">Partnership</a>
+    </div>
+    <div class="foot-col">
+      <h4>Company</h4>
+      <a href="about-us.html">About Us</a>
+      <a href="promed-command-center.html">Operations</a>
+      <a href="team-expertise.html">Team</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <a href="mailto:info@promedsol.com.pk">info@promedsol.com.pk</a>
+      <a href="tel:+92512749013">+92 51 2749013</a>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>(c) 2024 ProMED Solutions. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="assets/lazy-video.js"></script>
+</body>
+<script>
+(function () {
+  const canvas = document.getElementById('pdCanvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const stars = [];
+  const config = {
+    maxStars: 130,
+    minSpeed: 0.18,
+    maxSpeed: 0.8,
+    linkDistance: 130,
+    glow: 18,
+    palette: ['#a8d7ff', '#5ec7ff', '#dff6ff']
+  };
+
+  function resizeCanvas() {
+    const ratio = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+
+  function makeStar() {
+    return {
+      x: Math.random(),
+      y: Math.random(),
+      vx: (Math.random() - 0.5) * (config.minSpeed + Math.random() * config.maxSpeed),
+      vy: (Math.random() - 0.5) * (config.minSpeed + Math.random() * config.maxSpeed),
+      size: Math.random() * 2.7 + 1.1,
+      color: config.palette[Math.floor(Math.random() * config.palette.length)],
+      twinkle: Math.random() * Math.PI * 2,
+      alpha: Math.random() * 0.7 + 0.3
+    };
+  }
+
+  function initStars() {
+    stars.length = 0;
+    const total = config.maxStars;
+    for (let i = 0; i < total; i++) stars.push(makeStar());
+  }
+
+  function drawBackground() {
+    const w = canvas.clientWidth || window.innerWidth;
+    const h = canvas.clientHeight || window.innerHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      s.x += s.vx * 0.16;
+      s.y += s.vy * 0.16;
+
+      if (s.x < 0 || s.x > 1) s.vx *= -1;
+      if (s.y < 0 || s.y > 1) s.vy *= -1;
+
+      const px = s.x * w;
+      const py = s.y * h;
+      const glow = 6 + Math.sin(Date.now() * 0.004 + s.twinkle) * 5;
+
+      ctx.beginPath();
+      ctx.fillStyle = s.color;
+      ctx.globalAlpha = s.alpha;
+      ctx.shadowBlur = glow;
+      ctx.shadowColor = s.color;
+      ctx.arc(px, py, s.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 0.55;
+
+    for (let i = 0; i < stars.length; i++) {
+      const a = stars[i];
+      for (let j = i + 1; j < stars.length; j++) {
+        const b = stars[j];
+        const dx = (a.x - b.x) * w;
+        const dy = (a.y - b.y) * h;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < config.linkDistance) {
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(152, 208, 255, ' + (1 - dist / config.linkDistance) * 0.45 + ')';
+          ctx.lineWidth = 1;
+          ctx.moveTo(a.x * w, a.y * h);
+          ctx.lineTo(b.x * w, b.y * h);
+          ctx.stroke();
+        }
+      }
+    }
+
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(drawBackground);
+  }
+
+  resizeCanvas();
+  initStars();
+  requestAnimationFrame(drawBackground);
+  window.addEventListener('resize', function () {
+    resizeCanvas();
+  });
+})();
+
+(function(){
+  var productTrack=document.querySelector('.products-grid');
+  if(productTrack){
+    Array.prototype.slice.call(productTrack.children).forEach(function(card){
+      var clone=card.cloneNode(true);
+      clone.setAttribute('aria-hidden','true');
+      clone.classList.remove('scroll-reveal','is-visible');
+      productTrack.appendChild(clone);
+    });
+  }
+})();
+
+(function(){
+  var items=document.querySelectorAll('.reveal');
+  if(!items.length){return;}
+  if(!('IntersectionObserver' in window)){
+    items.forEach(function(item){item.classList.add('vis')});
+    return;
+  }
+  var revealObserver=new IntersectionObserver(function(entries,observer){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('vis');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12});
+  items.forEach(function(item){revealObserver.observe(item)});
+})();
+</script>
+<script src="assets/twin-galaxy-rings.js"></script>
+<script>initTwinGalaxyRings('twinGalaxyCanvas');</script>
+<script src="assets/promed-cursor-ring.js"></script>
+<script>initProMEDCursorRing();</script>
+</html>
+

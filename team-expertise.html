@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team &mdash; ProMED Solutions</title>
+    <link rel="stylesheet" href="assets/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --navy: #031428;
+            --blue: #19569B;
+            --blue2: #1e6ab5;
+            --white: #fff;
+            --light: #F4F7FB;
+            --mid: #E8EEF6;
+            --text: #4a5c6f
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Urbanist',sans-serif;
+            background: var(--white);
+            color: var(--navy);
+            overflow-x: hidden
+        }
+
+        /* NAV */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            background: rgba(3,20,40,.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,.07)
+        }
+
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 48px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none
+        }
+
+            .nav-logo img {
+                height: 44px;
+                width: auto;
+                object-fit: contain
+            }
+
+        .nav-brand-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -.3px
+        }
+
+        .nav-brand-tag {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.4)
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,.6);
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            padding: 24px 18px;
+            display: block;
+            transition: color .2s
+        }
+
+            .nav-link:hover, .nav-link.active {
+                color: #fff
+            }
+
+        .nav-cta {
+            background: var(--blue);
+            color: #fff;
+            padding: 9px 22px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+            transition: background .2s
+        }
+
+            .nav-cta:hover {
+                background: var(--blue2)
+            }
+
+        .nav-item {
+            position: relative
+        }
+
+            .nav-item .drop {
+                display: none;
+                position: absolute;
+                top: calc(100% + 1px);
+                left: 0;
+                z-index: 10000;
+                min-width: 280px;
+                padding: 16px 0;
+                background: rgba(255,255,255,.98);
+                border: 1px solid rgba(3,20,40,.12);
+                border-radius: 12px;
+                box-shadow: 0 20px 60px rgba(3,20,40,.15)
+            }
+
+            .nav-item:hover .drop, .nav-item:focus-within .drop {
+                display: block
+            }
+
+        .drop-item {
+            display: block;
+            padding: 14px 22px;
+            color: #5a6b7f;
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            font-size: 13px;
+            font-weight: 500
+        }
+
+            .drop-item:hover {
+                color: var(--blue);
+                border-left-color: #1ecfe8;
+                background: rgba(25,86,155,.06)
+            }
+
+        .drop-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--navy);
+            margin-bottom: 2px
+        }
+
+        .drop-title {
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--navy)
+        }
+
+        .drop-desc {
+            font-size: .75rem;
+            color: #7a8a9a;
+            margin-top: 1px
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 60vh;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: var(--navy)
+        }
+
+        #heroCanvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 48px
+        }
+
+        .hero-label {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.4);
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 4px;
+            padding: 6px 16px;
+            margin-bottom: 20px
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem,5vw,4rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.08;
+            letter-spacing: -.04em;
+            margin-bottom: 16px
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,.55);
+            max-width: 600px;
+            line-height: 1.75
+        }
+
+        /* SHARED */
+        .section {
+            padding: 96px 48px
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto
+        }
+
+        .sec-hdr {
+            text-align: center;
+            margin-bottom: 64px
+        }
+
+        .sec-eyebrow {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 14px
+        }
+
+        .sec-title {
+            font-size: clamp(1.9rem,3.5vw,2.7rem);
+            font-weight: 900;
+            color: var(--navy);
+            letter-spacing: -.04em;
+            margin-bottom: 14px;
+            line-height: 1.1
+        }
+
+        .sec-sub {
+            font-size: .97rem;
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.85
+        }
+
+        /* DESCRIPTION */
+        .desc-section {
+            background: var(--light);
+            padding: 96px 48px
+        }
+
+        .desc-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center
+        }
+
+        .desc-text p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.95;
+            margin-bottom: 0
+        }
+
+        .desc-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            background: var(--mid);
+            border-radius: 12px;
+            overflow: hidden
+        }
+
+        .desc-stat {
+            background: #fff;
+            padding: 36px 32px;
+            text-align: center
+        }
+
+        .desc-stat-num {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--navy);
+            letter-spacing: -.04em;
+            display: block;
+            margin-bottom: 6px
+        }
+
+        .desc-stat-rule {
+            width: 24px;
+            height: 2px;
+            background: var(--blue);
+            margin: 0 auto 12px;
+            border-radius: 2px
+        }
+
+        .desc-stat-label {
+            font-size: .78rem;
+            color: var(--text);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .08em
+        }
+
+        /* TEAM CAROUSEL */
+        .team-section {
+            background: #fff;
+            padding: 96px 0
+        }
+
+        .team-header {
+            text-align: center;
+            padding: 0 48px;
+            margin-bottom: 64px
+        }
+
+        /* Button Carousel */
+        .carousel-wrap {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0
+        }
+
+        /* Main photo display */
+        .carousel-main {
+            position: relative;
+            width: 380px;
+            height: 420px;
+            border-radius: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 24px 70px rgba(3,20,40,.18)
+        }
+
+            .carousel-main img, .carousel-main video {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: top center;
+                transition: opacity .5s ease
+            }
+
+        .carousel-name-tag {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 48px 24px 24px;
+            background: linear-gradient(transparent,rgba(3,20,40,.95));
+            color: #fff
+        }
+
+        .carousel-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: -.02em
+        }
+
+        .carousel-role {
+            font-size: .82rem;
+            color: rgba(255,255,255,.65);
+            font-weight: 500;
+            letter-spacing: .04em
+        }
+
+        /* Arc button strip */
+        .carousel-strip {
+            position: relative;
+            width: 100%;
+            height: 140px;
+            overflow: hidden;
+            margin-top: 32px
+        }
+
+        .carousel-btn {
+            position: absolute;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+            background: none;
+            transform-origin: center;
+            transition: filter .3s,opacity .3s
+        }
+
+            .carousel-btn img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: top center;
+                display: block
+            }
+
+            .carousel-btn.active {
+                outline: 3px solid #fff;
+                box-shadow: 0 4px 20px rgba(3,20,40,.4)
+            }
+
+        /* WORK GALLERY */
+        .gallery-section {
+            background: #fff;
+            padding: 96px 48px;
+            position: relative;
+            overflow: hidden
+        }
+
+            .gallery-section::before {
+                display: none
+            }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 16px;
+            max-width: 1300px;
+            margin: 0 auto
+        }
+
+        .gallery-item {
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: transform .4s ease,box-shadow .4s ease
+        }
+
+            .gallery-item:hover {
+                transform: scale(1.03);
+                box-shadow: 0 16px 48px rgba(0,0,0,.4)
+            }
+
+            .gallery-item img, .gallery-item video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block
+            }
+
+            .gallery-item.tall {
+                grid-row: span 2;
+                aspect-ratio: unset
+            }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px 16px 14px;
+            background: linear-gradient(transparent,rgba(3,20,40,.9));
+            color: #fff;
+            font-size: .78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            opacity: 0;
+            transition: opacity .3s
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1
+        }
+
+        .gallery-cursor {
+            position: relative;
+            width: min(1200px,100%);
+            height: min(64vh,560px);
+            min-height: 360px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #f5f7f9;
+            touch-action: manipulation
+        }
+
+        .gallery-cursor-track {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            gap: 3px;
+            align-items: stretch;
+            padding: 0 3px
+        }
+
+        .gallery-cursor-frame {
+            position: relative;
+            flex: .6 1 0;
+            min-width: 0;
+            overflow: hidden;
+            border: 0;
+            padding: 0;
+            background: #dfe5ea;
+            cursor: pointer;
+            transition: flex-grow 1.25s cubic-bezier(.22,1,.36,1),filter 1s ease
+        }
+
+            .gallery-cursor-frame.is-active {
+                flex-grow: 10;
+                cursor: default
+            }
+
+            .gallery-cursor-frame:not(.is-active) {
+                filter: brightness(.72) saturate(.72)
+            }
+
+            .gallery-cursor-frame img, .gallery-cursor-frame video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                pointer-events: none;
+                user-select: none
+            }
+
+            .gallery-cursor-frame::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg,rgba(3,20,40,.02),rgba(3,20,40,.25));
+                opacity: 0;
+                transition: opacity 1s ease
+            }
+
+            .gallery-cursor-frame:not(.is-active)::after {
+                opacity: 1
+            }
+
+        .gallery-cursor-caption, .gallery-cursor-dots, .gallery-cursor-pointer, .gallery-cursor-shade {
+            display: none
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(3,20,40,.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center
+        }
+
+            .lightbox.open {
+                display: flex
+            }
+
+        .lightbox-inner {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh
+        }
+
+            .lightbox-inner img, .lightbox-inner video {
+                max-width: 90vw;
+                max-height: 85vh;
+                border-radius: 12px;
+                display: block
+            }
+
+        .lightbox-close {
+            position: absolute;
+            top: -44px;
+            right: 0;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            background: none;
+            border: none;
+            font-weight: 300;
+            opacity: .7;
+            transition: opacity .2s
+        }
+
+            .lightbox-close:hover {
+                opacity: 1
+            }
+
+        /* FOOTER */
+        footer {
+            background: #040f1e;
+            color: rgba(255,255,255,.4);
+            padding: 64px 48px 32px
+        }
+
+        .foot-grid {
+            max-width: 1300px;
+            margin: 0 auto 48px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px
+        }
+
+        .foot-brand-name {
+            font-size: 17px;
+            font-weight: 800;
+            color: #fff;
+            display: block;
+            margin-bottom: 10px
+        }
+
+        .foot-brand p {
+            font-size: .84rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,.35)
+        }
+
+        .foot-col h4 {
+            color: rgba(255,255,255,.55);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 16px
+        }
+
+        .foot-col a {
+            display: block;
+            color: rgba(255,255,255,.35);
+            text-decoration: none;
+            font-size: .84rem;
+            margin-bottom: 10px;
+            transition: color .2s
+        }
+
+            .foot-col a:hover {
+                color: #fff
+            }
+
+        .foot-bot {
+            max-width: 1300px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,.06);
+            padding-top: 24px;
+            text-align: center;
+            font-size: .76rem
+        }
+
+        /* reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all .6s ease
+        }
+
+            .reveal.vis {
+                opacity: 1;
+                transform: translateY(0)
+            }
+
+        @media(max-width:900px) {
+            .desc-grid {
+                grid-template-columns: 1fr
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2,1fr)
+            }
+
+            .carousel-main {
+                width: 300px;
+                height: 340px
+            }
+
+            .foot-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .foot-grid {
+                grid-template-columns: 1fr
+            }
+
+            .section, .desc-section, .gallery-section, .team-section {
+                padding: 64px 24px
+            }
+        }
+
+        .gallery-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin: 22px auto 0
+        }
+
+        .gallery-nav-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 0;
+            cursor: pointer;
+            background: #031428;
+            color: #fff;
+            font-size: 20px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .25s, transform .25s
+        }
+
+            .gallery-nav-btn:hover {
+                background: #19569B;
+                transform: translateY(-2px)
+            }
+
+        .gallery-nav-count {
+            min-width: 64px;
+            text-align: center;
+            font-weight: 700;
+            color: #031428;
+            font-size: .95rem
+        }
+
+        /* Field-work gallery on phones: swipeable cards instead of thin slivers */
+        @media(max-width:700px) {
+            .gallery-cursor {
+                display: block;
+                height: 420px;
+                min-height: 0;
+                overflow: visible;
+                background: transparent;
+                touch-action: pan-x pan-y
+            }
+
+            .gallery-cursor-track {
+                position: relative;
+                inset: auto;
+                height: 100%;
+                gap: 12px;
+                padding: 0 4px 6px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none
+            }
+
+                .gallery-cursor-track::-webkit-scrollbar {
+                    display: none
+                }
+
+            .gallery-cursor-frame {
+                flex: 0 0 80%;
+                scroll-snap-align: center;
+                border-radius: 14px;
+                transition: none
+            }
+
+                .gallery-cursor-frame:not(.is-active) {
+                    filter: none
+                }
+
+                .gallery-cursor-frame:not(.is-active)::after {
+                    opacity: 0
+                }
+        }
+    </style>
+    <meta name="description" content="Meet the ProMED engineers and specialists in MRI, CT, X-ray, ultrasound and QA/QC equipment.">
+<meta name="theme-color" content="#031428">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://www.promedsol.com.pk/team-expertise.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ProMED Solutions">
+<meta property="og:title" content="Our Team | ProMED Solutions">
+<meta property="og:description" content="Meet the ProMED engineers and specialists in MRI, CT, X-ray, ultrasound and QA/QC equipment.">
+<meta property="og:url" content="https://www.promedsol.com.pk/team-expertise.html">
+<meta property="og:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Our Team | ProMED Solutions">
+<meta name="twitter:description" content="Meet the ProMED engineers and specialists in MRI, CT, X-ray, ultrasound and QA/QC equipment.">
+<meta name="twitter:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+
+    <!-- NAV -->
+    <script src="assets/nav.js"></script>
+
+    <!-- HERO -->
+    <section class="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-label">Our People</div>
+            <h1>Meet the Team</h1>
+            <p>Highly trained biomedical engineers dedicated to keeping Pakistan's diagnostic imaging infrastructure running at peak performance.</p>
+        </div>
+    </section>
+
+    <!-- DESCRIPTION -->
+    <section class="desc-section">
+        <div class="desc-grid">
+            <div class="desc-text reveal">
+                <p>Our dedicated service team is at the core of our commitment to excellence. Comprised of highly trained professionals, our team ensures that all diagnostic imaging systems are maintained, operated, and serviced to the highest standards. With a focus on efficiency, reliability, and customer satisfaction, we are here to provide prompt support, minimize downtime, and ensure optimal performance for all your MRI, CT, and X-Ray equipment. Trust our experts to keep your systems running smoothly and deliver the quality service you deserve.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM CAROUSEL -->
+    <section class="team-section">
+        <div class="team-header">
+            <div class="sec-eyebrow">Our Engineers</div>
+            <h2 class="sec-title">The Service Team</h2>
+            <p class="sec-sub">Click any portrait below to learn more about our engineers and their areas of expertise.</p>
+        </div>
+
+        <div class="carousel-wrap">
+            <!-- Main Display -->
+            <div class="carousel-main" id="carouselMain">
+                <img id="carouselImg" src="" alt="">
+                <div class="carousel-name-tag">
+                    <div class="carousel-name" id="carouselName"></div>
+                    <div class="carousel-role" id="carouselRole"></div>
+                </div>
+            </div>
+            <!-- Arc Button Strip -->
+            <div class="carousel-strip" id="carouselStrip"></div>
+        </div>
+    </section>
+
+    <!-- WORK GALLERY -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="sec-hdr reveal">
+                <div class="sec-eyebrow">Field Services</div>
+                <h2 class="sec-title">On-Site Execution</h2>
+                <p class="sec-sub">Installations, commissioning, and maintenance &mdash; across Pakistan.</p>
+            </div>
+
+            <div class="gallery-grid gallery-cursor" id="galleryGrid" aria-label="Field Work gallery"></div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-inner" id="lightboxInner">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="foot-grid">
+            <div class="foot-brand">
+                <span class="foot-brand-name">ProMED Solutions</span>
+                <p>Pakistan's leading multi-vendor diagnostic imaging support company.</p>
+            </div>
+            <div class="foot-col">
+                <h4>Company</h4>
+                <a href="about-us.html">About Us</a>
+                <a href="team-expertise.html">Our Team</a>
+                <a href="promed-command-center.html">Operations</a>
+            </div>
+            <div class="foot-col">
+                <h4>Operations</h4>
+                <a href="central-operations-sales.html">Sales</a>
+                <a href="central-operations-services.html">Services</a>
+            </div>
+            <div class="foot-col">
+                <h4>Contact</h4>
+                <a href="mailto:info@promedsol.com.pk">info@promedsol.com.pk</a>
+                <a href="tel:+92512749013">+92 51 2749013</a>
+                <a href="contact-support.html">Support Request</a>
+            </div>
+        </div>
+        <div class="foot-bot">&copy; 2024 ProMED Solutions. All rights reserved.</div>
+    </footer>
+
+    <script src="assets/particle-drift.js"></script>
+    <script>
+initParticleDrift('heroCanvas', {
+    background:'#031428',
+    baseColor:'#9CB4CD',
+    accentColor:'#19569B',
+    density:260,
+    dotSize:5,
+    speed:34,
+    direction:0,
+    hover:170,
+    linkDistance:210,
+    linkThickness:1
+  });
+
+/* ── BUTTON CAROUSEL — Team ── */
+(function(){
+  var BASE = 'assets/images/team/';
+
+  var TEAM = [
+    {img: BASE+'Engr.Emad Jadoon(MRI,CT & x-ray).webp',
+    name: 'Engr. Emad Jadoon',      role: 'MRI \u00B7 CT \u00B7 X-Ray'},
+    {img: BASE+'Engr. Tajamul Zaki(CT,X-Ray) (2).webp',
+    name: 'Engineer Tajamul Zaki',     role: 'CT \u00B7 X-Ray'},
+    {img: BASE+'Engr. Zaafar Mirza(MRI,x-ray,ultrasound).webp',
+    name: 'Engr. Zaafar Mirza',     role: 'MRI \u00B7 X-Ray \u00B7 Ultrasound'},
+    {img: BASE+'Engr. Muhammed Amir(MRI,CT,x-ray)).webp',
+    name: 'Engr. Muhammad Amir',    role: 'MRI \u00B7 CT \u00B7 X-Ray'},
+    {img: BASE+'Engr. Muhammed Younuas(MRI,CT).webp',
+    name: 'Engr. Muhammad Younas',  role: 'MRI \u00B7 CT'},
+    {img: BASE+'Engr. Hamayun Tareen (MRI,X-ray).webp',
+    name: 'Engr. Hamayun Tareen',   role: 'MRI \u00B7 X-Ray'},
+     {img: BASE+'Miss Sania (admin).webp',
+      name: 'Miss Sania',             role: 'Administration'},
+    {img: BASE+'Engr. Abbas Kamal(x-ray)).webp',
+     name: 'Engr. Abbas Kamal',      role: 'X-Ray'},
+    {img: BASE+'Engr. Zia-ud-din(x-ray).webp',
+     name: 'Engr. Zia-ud-Din',       role: 'X-Ray'},
+    {img: BASE+'Engr. Rameel Nasir (CT,X-Ray).webp',
+    name: 'Engr. Rameel Nasir',     role: 'CT \u00B7 X-Ray'},
+    {img: BASE+'Engr. Waleed(X-ray).webp',
+     name: 'Engr. Waleed',           role: 'X-Ray'},
+     {img: BASE+'Engr.Waleed Ahmed(CT,X-Ray).webp',
+      name: 'Engr. Waleed Ahmed',     role: 'CT \u00B7 X-Ray'},
+     {img: BASE+'Engr.Haroon(X-Ray).webp',
+      name: 'Engr. Haroon',           role: 'X-Ray'},
+     {img: BASE+'Engr.Hafiz Ullah (X-Ray).webp',
+     name: 'Engr. Hafiz Ullah',      role: 'X-Ray'},
+     {img: BASE+'Engr.Iram Shahnaz (QA,QC Equipment).webp',
+     name: 'Engr. Iram Shahnaz',     role: 'QA / QC Equipment'},
+     {img: BASE+'Engr.Noman Hameed (CT,X-Ray).webp',
+    name: 'Engr. Noman Hameed',     role: 'CT \u00B7 X-Ray'},
+      {img: BASE+'Engr.Faizan(CT).webp',
+      name: 'Engr. Faizan',           role: 'CT'},
+     {img: BASE+'Muhammad Qamar Ali (Accounting and Finance).webp',
+      name: 'Muhammad Qamar Ali',     role: 'Accounting & Finance'}
+  ];
+
+  var N = TEAM.length;
+  var active = 0;
+
+  var mainImg   = document.getElementById('carouselImg');
+  var nameEl    = document.getElementById('carouselName');
+  var roleEl    = document.getElementById('carouselRole');
+  var strip     = document.getElementById('carouselStrip');
+
+  /* build button strip */
+  var buttons = [];
+  TEAM.forEach(function(m, i){
+    var btn = document.createElement('button');
+    btn.className = 'carousel-btn' + (i===0?' active':'');
+    btn.innerHTML = '<img src="'+m.img+'" alt="'+m.name+'" loading="lazy" decoding="async">';
+    btn.addEventListener('click', function(){ select(i); });
+    strip.appendChild(btn);
+    buttons.push(btn);
+  });
+
+  /* set main display */
+  function setMain(i){
+    mainImg.style.opacity = '0';
+    setTimeout(function(){
+      mainImg.src = TEAM[i].img;
+      mainImg.onload = function(){ mainImg.style.opacity='1'; };
+      nameEl.textContent = TEAM[i].name;
+      roleEl.textContent = TEAM[i].role;
+    }, 200);
+  }
+  setMain(0);
+  mainImg.src = TEAM[0].img;
+  mainImg.style.opacity = '1';
+  nameEl.textContent = TEAM[0].name;
+  roleEl.textContent = TEAM[0].role;
+
+  /* arc layout */
+  function layoutStrip(){
+    var W = strip.offsetWidth;
+    if(!W) return;
+    var BTN  = 62;  /* button size px */
+    var GAP  = 18;
+    var CURVE= 0.45;
+    var M    = Math.min(N, Math.floor(W / (BTN+GAP)));
+    var half = Math.floor(M/2);
+    var step = BTN + GAP;
+    var dPsi = (Math.PI*2/N)*CURVE;
+    var R    = step / (2*Math.sin(dPsi/2));
+
+    buttons.forEach(function(btn, i){
+      var slot = i - active;
+      /* wrap */
+      while(slot >  N/2) slot -= N;
+      while(slot < -N/2) slot += N;
+
+      var angle = slot * dPsi;
+      var x = R * Math.sin(angle);
+      var y = R * (1 - Math.cos(angle)) * 0.35;
+      var absSlot = Math.abs(slot);
+      var fadeInner = half - 0.4;
+      var fadeEnd   = half + 0.8;
+      var opacity = absSlot <= fadeInner ? 1
+                  : absSlot >= fadeEnd   ? 0
+                  : 1 - (absSlot - fadeInner)/(fadeEnd - fadeInner);
+      var depth = Math.max(0, 1 - (0.5*absSlot)/Math.max(1,half));
+      var scale = 0.6 + 0.4*depth;
+
+      btn.style.cssText = [
+        'left:'+(W/2 + x - BTN/2)+'px',
+        'top:'+y+'px',
+        'width:'+BTN+'px',
+        'height:'+BTN+'px',
+        'transform:scale('+scale+')',
+        'opacity:'+opacity,
+        'z-index:'+Math.round(depth*50),
+        'position:absolute',
+        'border-radius:10px',
+        'overflow:hidden',
+        'cursor:pointer',
+        'border:none',
+        'padding:0',
+        'background:none',
+        'transition:all .4s cubic-bezier(.34,1.56,.64,1)'
+      ].join(';');
+
+      if(i === active){
+        btn.style.outline = '2.5px solid #19569B';
+        btn.style.boxShadow = '0 4px 20px rgba(25,86,155,.35)';
+      } else {
+        btn.style.outline = 'none';
+        btn.style.boxShadow = 'none';
+      }
+    });
+  }
+
+  function select(i){
+    active = i;
+    buttons.forEach(function(b,j){ b.classList.toggle('active', j===i); });
+    setMain(i);
+    layoutStrip();
+  }
+
+  layoutStrip();
+  window.addEventListener('resize', layoutStrip);
+
+  /* auto-rotate */
+  setInterval(function(){
+    select((active+1) % N);
+  }, 3500);
+})();
+
+/* WORK GALLERY */
+(function(){
+  var grid = document.getElementById('galleryGrid');
+  if(!grid) return;
+
+  var BASE = 'assets/images/team/';
+  var items = [
+    {src: BASE+'01-8.webp', type:'img', caption:'Field Imaging Installation'},
+    {src: BASE+'02-9.webp', type:'img', caption:'Diagnostic System Commissioning'},
+    {src: BASE+'03-10.webp', type:'img', caption:'On-Site Engineering Support'},
+    {src: BASE+'04-11.webp', type:'img', caption:'Medical Imaging Service'},
+    {src: BASE+'05-12.webp', type:'img', caption:'Equipment Maintenance'},
+    {src: BASE+'06-Brain_CT_Scan_Images_Monitor_Duplicate_View.webp', type:'img', caption:'CT Scan Review'},
+    {src: BASE+'07-Cervical_Spine_X_Ray_Film_Scan_Alt.webp', type:'img', caption:'X-Ray Imaging'},
+    {src: BASE+'08-Chest_X_Ray_Image_Displayed_On_Monitor.webp', type:'img', caption:'Chest X-Ray Review'},
+    {src: BASE+'09-Close_Up_MRI_Shaft_Component_Assembly_Alt.webp', type:'img', caption:'MRI Component Service'},
+    {src: BASE+'10-Completed_Digital_X_Ray_Room.webp', type:'img', caption:'Completed X-Ray Room'},
+    {src: BASE+'11-CT_Scanner_Room_Night_Sky_Mural_Ceiling.webp', type:'img', caption:'CT Scanner Room'},
+    {src: BASE+'12-CT_Scanner_Room_With_Diagnostic_Monitor.webp', type:'img', caption:'CT Diagnostic Monitor'},
+    {src: BASE+'13-CT_Scanner_Room_With_Sky_Mural_Ceiling.webp', type:'img', caption:'CT Installation'},
+    {src: BASE+'14-Digital_Radiography_System_Full_Room_View.webp', type:'img', caption:'Digital Radiography System'},
+    {src: BASE+'15-Digital_X_Ray_Detector_Panel_Readout.webp', type:'img', caption:'Digital X-Ray Detector'},
+    {src: BASE+'16-Digital_X_Ray_System_Close_Up_Table.webp', type:'img', caption:'Digital X-Ray System'},
+    {src: BASE+'17-Engineer_Beside_Newly_Unpacked_CT_Scanner.webp', type:'img', caption:'CT Scanner Delivery'},
+    {src: BASE+'18-Engineer_Inspecting_CT_Scanner_Room.webp', type:'img', caption:'CT Room Inspection'},
+    {src: BASE+'19-Engineer_Posing_With_CT_Scanner_Second_Shot.webp', type:'img', caption:'CT Scanner Commissioning'},
+    {src: BASE+'20-Engineer_Posing_With_Installed_CT_Scanner.webp', type:'img', caption:'Installed CT Scanner'},
+    {src: BASE+'21-Engineer_Servicing_MRI_Machine_Bore.webp', type:'img', caption:'MRI Service'},
+    {src: BASE+'22-WhatsApp Image 2026-09-10 at 11.44.08 AM.webp', type:'img', caption:'Field Engineering Support'},
+    {src: BASE+'23-WhatsApp Image 2026-09-11 at 10.45.19 PM.webp', type:'img', caption:'Equipment Installation'},
+    {src: BASE+'24-WhatsApp Image 2026-09-16 at 10.33.36 AM.webp', type:'img', caption:'On-Site Maintenance'},
+    {src: BASE+'25-WhatsApp Image 2026-09-17 at 11.23.55 AM.webp', type:'img', caption:'Diagnostic Imaging Work'}
+  ];
+
+  var active = 0;
+  var track = document.createElement('div');
+  track.className = 'gallery-cursor-track';
+  grid.appendChild(track);
+
+  function createMedia(item){
+    var media = document.createElement(item.type === 'video' ? 'video' : 'img');
+    if(item.type !== 'video'){ media.loading = 'lazy'; media.decoding = 'async'; }
+    media.src = item.src;
+    media.alt = item.caption;
+    if(item.type === 'video'){
+      media.autoplay = true;
+      media.muted = true;
+      media.loop = true;
+      media.playsInline = true;
+    }
+    return media;
+  }
+
+  items.forEach(function(item, i){
+    var frame = document.createElement('button');
+    frame.className = 'gallery-cursor-frame' + (i === active ? ' is-active' : '');
+    frame.type = 'button';
+    frame.setAttribute('aria-label','Show field service image '+(i + 1));
+    frame.appendChild(createMedia(item));
+    frame.addEventListener('mouseenter', function(){ if(!isPhone()) select(i); });
+    frame.addEventListener('focus', function(){ if(!isPhone()) select(i); });
+    frame.addEventListener('click', function(){ select(i); });
+    track.appendChild(frame);
+  });
+
+  function select(next){
+    if(next < 0 || next >= items.length) return;
+    active = next;
+    Array.prototype.forEach.call(track.children, function(frame, i){
+      frame.classList.toggle('is-active', i === active);
+    });
+    if(typeof updateCounter === 'function') updateCounter();
+  }
+
+  /* prev / next buttons + counter below the gallery */
+  var nav = document.createElement('div');
+  nav.className = 'gallery-nav';
+  nav.innerHTML = '<button type="button" class="gallery-nav-btn" aria-label="Previous photo">&#8592;</button><span class="gallery-nav-count" aria-live="polite"></span><button type="button" class="gallery-nav-btn" aria-label="Next photo">&#8594;</button>';
+  grid.parentNode.insertBefore(nav, grid.nextSibling);
+  var counter = nav.querySelector('.gallery-nav-count');
+  var isPhone = function(){ return window.matchMedia('(max-width:700px)').matches; };
+
+  function updateCounter(){ counter.textContent = (active + 1) + ' / ' + items.length; }
+  function go(next){
+    next = (next + items.length) % items.length;
+    select(next);
+    if(isPhone()){
+      track.children[next].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    }
+  }
+  nav.children[0].addEventListener('click', function(){ go(active - 1); });
+  nav.children[2].addEventListener('click', function(){ go(active + 1); });
+
+  updateCounter();
+  var scrollTimer;
+  track.addEventListener('scroll', function(){
+    if(!isPhone()) return;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function(){
+      var mid = track.getBoundingClientRect().left + track.clientWidth / 2, best = 0, bestD = Infinity;
+      Array.prototype.forEach.call(track.children, function(f, i){
+        var r = f.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid);
+        if(d < bestD){ bestD = d; best = i; }
+      });
+      if(best !== active){ select(best); }
+    }, 90);
+  }, {passive:true});
+})();
+
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.18});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});</script>
+</body>
+<script src="assets/promed-cursor-ring.js"></script>
+<script>initProMEDCursorRing();</script>
+</html>
+

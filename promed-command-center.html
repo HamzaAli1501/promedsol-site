@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imaging Systems &amp; Clinical Engineering - ProMED Solutions</title>
+<link rel="stylesheet" href="assets/responsive.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#031428;--blue:#19569B;--blue2:#1e6ab5;--white:#fff;--light:#F4F7FB;--mid:#E8EEF6;--text:#4a5c6f}
+html{scroll-behavior:smooth}
+body{font-family:'Urbanist',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:9999;isolation:isolate;overflow:visible;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(20px);border-bottom:1px solid rgba(3,20,40,.10)}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 48px;height:70px;
+  display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:44px;width:auto;object-fit:contain}
+.nav-brand-name{font-size:16px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
+.nav-brand-tag{font-size:9px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:#7a8a9a}
+.nav-links{display:flex;list-style:none;gap:0;overflow:visible}
+.nav-item{position:relative;z-index:20}
+.nav-link{color:var(--navy);font-weight:600;font-size:13px;
+  text-decoration:none;padding:24px 18px;display:block;transition:color .2s}
+.nav-link:hover,.nav-link.active{color:var(--blue)}
+.nav-link.active::after{content:'';position:absolute;bottom:0;left:18px;right:18px;
+  height:2px;background:var(--blue);border-radius:2px}
+
+/* dropdown */
+.drop{display:none;position:absolute;top:calc(100% + 1px);left:0;z-index:10000;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(20px);
+  border:1px solid rgba(3,20,40,.12);border-radius:12px;
+  min-width:280px;padding:16px 0;
+  opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px);
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 20px 60px rgba(3,20,40,.15)}
+.nav-item:hover .drop,.nav-item:focus-within .drop,.nav-item.open > .drop{display:block;opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+.nav-item.open > .drop{display:block!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translateY(0)!important}
+.drop-item{padding:14px 22px;color:#5a6b7f;text-decoration:none;display:block;
+  transition:all .25s;border-left:3px solid transparent;font-size:13px;font-weight:500}
+.drop-item:hover{color:var(--blue);border-left-color:var(--blue2);
+  background:rgba(25,86,155,.06)}
+.drop-label{font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--navy);margin-bottom:2px}
+.drop-title{font-size:.9rem;font-weight:700;color:var(--navy)}
+.drop-desc{font-size:.75rem;color:#7a8a9a;margin-top:1px}
+
+.nav-cta{background:var(--blue);color:#fff;padding:9px 22px;border-radius:6px;
+  font-weight:700;font-size:13px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--blue2)}
+
+/* HERO */
+.hero{position:relative;height:80vh;min-height:620px;
+  display:flex;align-items:center;overflow:hidden;background:#031428 !important;isolation:isolate}
+#pdCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;background:#031428 !important;mix-blend-mode:screen}
+.hero-content{position:relative;z-index:3;max-width:1400px;
+  margin:0 auto;padding:0 48px;text-align:center}
+.hero-label{display:inline-block;font-size:10px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);
+  border:1px solid rgba(255,255,255,.15);border-radius:4px;
+  padding:6px 16px;margin-bottom:24px}
+.hero h1{font-size:clamp(2.6rem,5vw,4.2rem);font-weight:900;color:#fff;
+  line-height:1.08;letter-spacing:-.04em;margin-bottom:18px}
+.hero-sub{font-size:1.1rem;color:rgba(255,255,255,.6);
+  max-width:680px;margin:0 auto;line-height:1.75}
+
+/* STAT CARDS */
+.stats-wrap{background:var(--white);padding:0 48px}
+.stats-grid{max-width:1300px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin-top:-60px;position:relative;z-index:10}
+.stat-card{background:#fff;border:1px solid var(--mid);
+  padding:44px 32px;text-align:center;
+  transition:all .4s ease;opacity:0;transform:translateY(30px);
+  border-right:none}
+.stat-card:first-child{border-radius:12px 0 0 12px;border-left:1px solid var(--mid)}
+.stat-card:last-child{border-radius:0 12px 12px 0;border-right:1px solid var(--mid)}
+.stat-card.vis{opacity:1;transform:translateY(0)}
+.stat-card:hover{background:var(--navy);border-color:var(--navy)}
+.stat-card:hover .stat-num{-webkit-text-fill-color:#fff;color:#fff;background:none}
+.stat-card:hover .stat-label{color:rgba(255,255,255,.6)}
+.stat-card:hover .stat-rule{background:rgba(255,255,255,.2)}
+.stat-rule{width:32px;height:2px;background:var(--blue);
+  margin:0 auto 20px;transition:background .3s}
+.stat-num{font-size:2.8rem;font-weight:900;color:var(--navy);
+  display:block;line-height:1;margin-bottom:10px;
+  letter-spacing:-.04em;transition:color .3s}
+.stat-label{font-size:.82rem;color:var(--text);font-weight:600;
+  line-height:1.5;text-transform:uppercase;letter-spacing:.06em;
+  transition:color .3s}
+
+/* SECTION SHARED */
+.section{padding:100px 48px}
+.container{max-width:1300px;margin:0 auto}
+.sec-hdr{text-align:center;margin-bottom:64px}
+.sec-eyebrow{display:inline-block;font-size:10px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--blue);
+  margin-bottom:14px}
+.sec-title{font-size:clamp(1.9rem,3.5vw,2.7rem);font-weight:900;
+  color:var(--navy);letter-spacing:-.04em;margin-bottom:14px;line-height:1.1}
+.sec-sub{font-size:.97rem;color:var(--text);
+  max-width:600px;margin:0 auto;line-height:1.85}
+
+/* DIVISION CARDS - PROFESSIONAL */
+.div-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  background:var(--mid);border:1px solid var(--mid);border-radius:12px;
+  overflow:hidden}
+.div-card{background:#fff;padding:48px 36px;text-decoration:none;
+  display:block;transition:all .35s ease;position:relative;overflow:hidden}
+.div-card::before{content:'';position:absolute;top:0;left:0;right:0;
+  height:3px;background:var(--blue);transform:scaleX(0);
+  transform-origin:left;transition:transform .35s ease}
+.div-card:hover{background:var(--navy)}
+.div-card:hover::before{transform:scaleX(1)}
+.div-card:hover .div-num{color:rgba(255,255,255,.15)}
+.div-card:hover h3{color:#fff}
+.div-card:hover p{color:rgba(255,255,255,.55)}
+.div-card:hover .div-cta{color:rgba(255,255,255,.8)}
+.div-card:hover .div-arrow{transform:translateX(6px)}
+.div-num{font-size:2.8rem;font-weight:900;color:var(--mid);
+  line-height:1;margin-bottom:24px;transition:color .35s;
+  letter-spacing:-.04em}
+.div-card h3{font-size:1.2rem;font-weight:800;color:var(--navy);
+  margin-bottom:14px;line-height:1.3;transition:color .35s}
+.div-card p{font-size:.88rem;color:var(--text);line-height:1.8;
+  margin-bottom:28px;transition:color .35s}
+.div-cta{display:flex;align-items:center;gap:8px;
+  font-size:.82rem;font-weight:700;color:var(--blue);
+  text-transform:uppercase;letter-spacing:.08em;transition:color .35s}
+.div-arrow{transition:transform .35s}
+
+/* OPERATIONS EQUIPMENT VIEWER */
+.equipment-viewer{padding:84px 48px;background:#fff;overflow:hidden}
+.equipment-viewer .container{max-width:1100px}
+.equipment-stage{position:relative;height:min(62vw,620px);min-height:360px;overflow:hidden;
+  border-radius:20px;background:var(--navy);border:1px solid rgba(25,86,155,.2);
+  box-shadow:0 24px 70px rgba(3,20,40,.18)}
+.equipment-stage::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,rgba(3,20,40,.28),transparent 42%,rgba(0,229,255,.08))}
+.equipment-image{position:absolute;left:50%;top:50%;width:100%;height:100%;max-width:none;object-fit:cover;
+  user-select:none;pointer-events:none;transform:translate3d(-50%,-50%,0)}
+.equipment-badge{position:absolute;left:24px;top:22px;z-index:2;color:#fff;
+  font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 12px;border:1px solid rgba(255,255,255,.28);border-radius:4px;
+  background:rgba(3,20,40,.58);backdrop-filter:blur(10px)}
+@media(max-width:600px){
+  .equipment-viewer{padding:64px 24px}
+  .equipment-stage{height:82vw;min-height:260px}
+}
+@media(prefers-reduced-motion:reduce){.equipment-stage.idle .equipment-image{animation:none}}
+
+/* TIMELINE */
+.tl-section{background:var(--navy);padding:100px 48px;position:relative;overflow:hidden}
+.tl-section::before{content:'';position:absolute;inset:0;opacity:.03;
+  background-image:repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 1px,transparent 60px),
+    repeating-linear-gradient(#fff 0,#fff 1px,transparent 1px,transparent 60px)}
+.tl-track{max-width:960px;margin:64px auto 0;position:relative}
+.tl-spine{position:absolute;left:0;top:8px;bottom:8px;width:1px;
+  background:rgba(255,255,255,.12)}
+.tl-spine-fill{position:absolute;left:0;top:0;width:1px;
+  background:linear-gradient(to bottom,var(--blue),rgba(25,86,155,.1));
+  height:0;transition:height 1.5s ease}
+.tl-item{display:grid;grid-template-columns:160px 1fr;
+  gap:48px;align-items:start;margin-bottom:64px;
+  opacity:0;transform:translateX(-20px);
+  transition:all .6s ease}
+.tl-item.vis{opacity:1;transform:translateX(0)}
+.tl-left{text-align:right;padding-right:40px;position:relative;padding-top:6px}
+.tl-left::after{content:'';position:absolute;right:-1px;top:10px;
+  width:9px;height:9px;border-radius:50%;background:var(--blue);
+  border:2px solid rgba(255,255,255,.2);
+  box-shadow:0 0 0 4px rgba(25,86,155,.25);
+  transform:translateX(50%)}
+.tl-item.vis .tl-left::after{box-shadow:0 0 0 6px rgba(25,86,155,.35)}
+.tl-year{font-size:1.6rem;font-weight:900;color:#fff;
+  letter-spacing:-.04em;line-height:1;display:block;margin-bottom:4px}
+.tl-right{border:1px solid rgba(255,255,255,.08);border-radius:12px;
+  padding:28px 32px;background:rgba(255,255,255,.04);
+  transition:all .4s ease}
+.tl-item:hover .tl-right{background:rgba(255,255,255,.07);
+  border-color:rgba(25,86,155,.5)}
+.tl-right h4{font-size:1.1rem;font-weight:800;color:#fff;
+  margin-bottom:10px;letter-spacing:-.02em}
+.tl-right p{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.75}
+.tl-tag{display:inline-block;font-size:.7rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--blue);background:rgba(25,86,155,.2);
+  padding:4px 10px;border-radius:4px;margin-bottom:12px}
+
+/* FOOTER */
+footer{background:#040f1e;color:rgba(255,255,255,.4);padding:64px 48px 32px}
+.foot-grid{max-width:1300px;margin:0 auto 48px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.foot-brand-name{font-size:17px;font-weight:800;color:#fff;
+  display:block;margin-bottom:10px}
+.foot-brand p{font-size:.84rem;line-height:1.8;color:rgba(255,255,255,.35)}
+.foot-col h4{color:rgba(255,255,255,.55);font-size:.72rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.foot-col a{display:block;color:rgba(255,255,255,.35);text-decoration:none;
+  font-size:.84rem;margin-bottom:10px;transition:color .2s}
+.foot-col a:hover{color:#fff}
+.foot-bot{max-width:1300px;margin:0 auto;
+  border-top:1px solid rgba(255,255,255,.06);padding-top:24px;
+  text-align:center;font-size:.76rem}
+
+@media(max-width:960px){
+  .stats-grid,.div-grid{grid-template-columns:1fr 1fr}
+  .stat-card{border-radius:0!important;border-right:none!important;border-left:1px solid var(--mid)!important}
+  .tl-item{grid-template-columns:80px 1fr;gap:24px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .stats-grid,.div-grid{grid-template-columns:1fr}
+  .tl-item{grid-template-columns:1fr;gap:12px}
+  .tl-left{text-align:left;padding-right:0}
+  .tl-left::after{display:none}
+  .tl-spine{display:none}
+  .foot-grid{grid-template-columns:1fr}
+}
+</style>
+<meta name="description" content="Overview of ProMED's sales, service and rental divisions supporting diagnostic imaging equipment across Pakistan.">
+<meta name="theme-color" content="#031428">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://www.promedsol.com.pk/promed-command-center.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ProMED Solutions">
+<meta property="og:title" content="ProMED Clinical Expertise Department | Imaging Systems &amp; Clinical Engineering">
+<meta property="og:description" content="Overview of ProMED's sales, service and rental divisions supporting diagnostic imaging equipment across Pakistan.">
+<meta property="og:url" content="https://www.promedsol.com.pk/promed-command-center.html">
+<meta property="og:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ProMED Clinical Expertise Department | Imaging Systems &amp; Clinical Engineering">
+<meta name="twitter:description" content="Overview of ProMED's sales, service and rental divisions supporting diagnostic imaging equipment across Pakistan.">
+<meta name="twitter:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+
+<!-- NAV -->
+<script src="assets/nav.js"></script>
+
+<!-- HERO - WebGL Particle Drift -->
+<section class="hero" style="background:#031428 !important">
+  <canvas id="pdCanvas" aria-hidden="true" style="background:#031428 !important"></canvas>
+  <div class="hero-content">
+    <div class="hero-label">Imaging Systems &amp; Clinical Engineering</div>
+    <h1>Operational Excellence<br>&amp; Market Leadership</h1>
+    <p class="hero-sub">Delivering world-class diagnostic imaging equipment, clinical engineering support, and professional training across Pakistan.</p>
+  </div>
+</section>
+
+<!-- STAT CARDS -->
+<section class="stats-wrap">
+  <div class="stats-grid">
+    <div class="stat-card" data-target="200" data-suffix="+">
+      <div class="stat-rule"></div>
+      <span class="stat-num">200+</span>
+      <div class="stat-label">Digital Detectors Deployed</div>
+    </div>
+    <div class="stat-card" data-target="15" data-suffix="+">
+      <div class="stat-rule"></div>
+      <span class="stat-num">15+</span>
+      <div class="stat-label">Major Hospital Partners</div>
+    </div>
+    <div class="stat-card" data-target="98" data-suffix="%">
+      <div class="stat-rule"></div>
+      <span class="stat-num">98%</span>
+      <div class="stat-label">System Uptime Guarantee</div>
+    </div>
+    <div class="stat-card" data-target="24" data-suffix="/7">
+      <div class="stat-rule"></div>
+      <span class="stat-num">24/7</span>
+      <div class="stat-label">Emergency Support Hours</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVISION CARDS -->
+<section class="section" style="background:var(--light)">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="sec-eyebrow">Four Core Pillars</div>
+      <h2 class="sec-title">Imaging Systems &amp; Clinical Engineering</h2>
+      <p class="sec-sub">Comprehensive diagnostic imaging solutions through sales, service excellence, professional development, and flexible partnerships.</p>
+    </div>
+    <div class="div-grid">
+      <a href="central-operations-sales.html" class="div-card">
+        <div class="div-num">01</div>
+        <h3>Sales</h3>
+        <p>Market leadership with INFINITY GLOBAL, RAYENCE, X-RAY INFINITY, GE Healthcare - 200+ detectors deployed nationwide.</p>
+        <span class="div-cta">Explore Sales 🚀</span>
+      </a>
+      <a href="central-operations-services.html" class="div-card">
+        <div class="div-num">02</div>
+        <h3>Services</h3>
+        <p>24/7 multi-vendor maintenance, emergency breakdown support, preventive programs - 98% uptime guarantee.</p>
+        <span class="div-cta">Explore Services ⚙️</span>
+      </a>
+      <a href="operations-partnership.html" class="div-card">
+        <div class="div-num">03</div>
+        <h3>Equipment Rental &amp; Partnership</h3>
+        <p>Flexible equipment rental and partnership packages with comprehensive support and maintenance for hospitals.</p>
+        <span class="div-cta">Explore Rental &amp; Partnership 🤝</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TURNKEY EQUIPMENT DELIVERY -->
+<section style="background:#fff;padding:96px 48px">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="sec-eyebrow">Complete Lifecycle Support</div>
+      <h2 class="sec-title">Turnkey Equipment Delivery</h2>
+      <p class="sec-sub">End-to-end solutions from site preparation to commissioning and staff readiness.</p>
+    </div>
+    <div style="max-width:1300px;margin:0 auto;padding:44px 40px;background:linear-gradient(135deg,#f4f7fb,#fff);border:1.5px solid #dfe5eb;border-radius:26px;box-shadow:0 2px 0 rgba(15,23,42,.02)">
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+        <article style="min-height:230px;padding:32px;background:#fff;border:1px solid #e8eef6;border-radius:16px;display:flex;flex-direction:column;justify-content:center">
+          <h3 style="font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:10px">📐 Site Preparation</h3>
+          <p style="font-size:.95rem;color:var(--text);line-height:1.8">Complete site assessment, room preparation, and infrastructure planning for optimal equipment installation.</p>
+        </article>
+        <article style="min-height:230px;padding:32px;background:#fff;border:1px solid #e8eef6;border-radius:16px;display:flex;flex-direction:column;justify-content:center">
+          <h3 style="font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:10px">🚚 Equipment Delivery</h3>
+          <p style="font-size:.95rem;color:var(--text);line-height:1.8">Factory-fresh equipment delivery with proper handling, customs clearance, and logistics management.</p>
+        </article>
+        <article style="min-height:230px;padding:32px;background:#fff;border:1px solid #e8eef6;border-radius:16px;display:flex;flex-direction:column;justify-content:center">
+          <h3 style="font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:10px">🔧 Installation</h3>
+          <p style="font-size:.95rem;color:var(--text);line-height:1.8">Factory-certified installation by trained engineers ensuring proper setup and calibration.</p>
+        </article>
+        <article style="min-height:230px;padding:32px;background:#fff;border:1px solid #e8eef6;border-radius:16px;display:flex;flex-direction:column;justify-content:center">
+          <h3 style="font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:10px">✅ Commissioning</h3>
+          <p style="font-size:.95rem;color:var(--text);line-height:1.8">Complete system testing, quality assurance, and performance validation before handover.</p>
+        </article>
+        <article style="min-height:230px;padding:32px;background:#fff;border:1px solid #e8eef6;border-radius:16px;display:flex;flex-direction:column;justify-content:center">
+          <h3 style="font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:10px">🎓 Training</h3>
+          <p style="font-size:.95rem;color:var(--text);line-height:1.8">Comprehensive operator training for radiographers, technologists, and maintenance staff.</p>
+        </article>
+        <article style="min-height:230px;padding:32px;background:#fff;border:1px solid #e8eef6;border-radius:16px;display:flex;flex-direction:column;justify-content:center">
+          <h3 style="font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:10px">🛠️ Support</h3>
+          <p style="font-size:.95rem;color:var(--text);line-height:1.8">Ongoing technical support, spare parts supply, and preventive maintenance services.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT VIEWER -->
+<section class="equipment-viewer" aria-label="Imaging systems equipment view">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="sec-eyebrow">Field Engineering</div>
+      <h2 class="sec-title">Equipment in Action</h2>
+      <p class="sec-sub">Explore our field engineering work across diagnostic imaging systems and healthcare environments.</p>
+    </div>
+    <div class="equipment-stage idle" id="equipmentStage">
+      <span class="equipment-badge">Interactive Field View</span>
+      <video class="equipment-image" id="equipmentImage" loop muted playsinline preload="none" data-lazy poster="assets/video/warehouse-2022-poster.webp">
+  <source src="assets/video/warehouse-2022.webm" type="video/webm">
+  <source src="assets/video/warehouse-2022.mp4" type="video/mp4">
+</video>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <span class="foot-brand-name">ProMED Solutions</span>
+      <p>Pakistan's leading multi-vendor diagnostic imaging support company - delivering precision maintenance, parts supply, and equipment solutions nationwide.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Imaging Systems</h4>
+      <a href="central-operations-sales.html">Sales Division</a>
+      <a href="central-operations-services.html">Services Division</a>
+      <a href="operations-partnership.html">Equipment Rental</a>
+    </div>
+    <div class="foot-col">
+      <h4>Company</h4>
+      <a href="about-us.html">About Us</a>
+      <a href="team-expertise.html">Our Team</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <a href="mailto:info@promedsol.com.pk">info@promedsol.com.pk</a>
+      <a href="tel:+92512749013">+92 51 2749013</a>
+      <a href="contact-support.html">Support Request</a>
+    </div>
+  </div>
+  <div class="foot-bot">(c) 2024 ProMED Solutions. All rights reserved.</div>
+</footer>
+
+<script>
+/* WebGL Particle Drift - Navy (#031428) background, blue/white particles */
+(function(){
+  var cv=document.getElementById('pdCanvas');
+  if(!cv)return;
+  var gl=cv.getContext('webgl',{alpha:false,antialias:false,depth:false});
+  if(!gl)return;
+
+  var LV=['precision highp float;',
+    'attribute vec2 a_p0,a_p1,a_cn;attribute vec3 a_sh;uniform vec2 uSz;',
+    'varying float va,vm,vo,vh;',
+    'void main(){vec2 d=a_p1-a_p0;float l=max(length(d),1e-5);',
+    'vec2 n=vec2(-d.y,d.x)/l;float hf=max(a_sh.z*.5,.35);float ex=hf+.75;',
+    'vec2 p=mix(a_p0,a_p1,a_cn.x)+n*a_cn.y*ex;',
+    'va=a_sh.x;vm=a_sh.y;vo=a_cn.y*ex;vh=hf;',
+    'gl_Position=vec4(p.x/uSz.x*2.-1.,1.-p.y/uSz.y*2.,0.,1.);}'].join('');
+  var LF=['precision mediump float;',
+    'uniform vec3 uB,uA;varying float va,vm,vo,vh;',
+    'void main(){float c=clamp((vh-abs(vo))/.75+.5,0.,1.);float a=va*c;',
+    'gl_FragColor=vec4(mix(uB,uA,vm)*a,a);}'].join('');
+  var DV=['precision highp float;',
+    'attribute vec2 a_pos;attribute float a_lit;',
+    'uniform vec2 uSz;uniform float uDpr,uDt;varying float vl;',
+    'void main(){gl_PointSize=max(1.,uDt*uDpr);vl=a_lit;',
+    'gl_Position=vec4(a_pos.x/uSz.x*2.-1.,1.-a_pos.y/uSz.y*2.,0.,1.);}'].join('');
+  var DF=['precision mediump float;',
+    'uniform vec3 uB,uA;uniform float uRa;varying float vl;',
+    'void main(){float d=length(gl_PointCoord-.5)*2.;',
+    'float c=1.-smoothstep(.72,1.,d);vec3 col=mix(uB,uA,vl);',
+    'float a=c*mix(uRa,1.,vl);if(a<=.004)discard;',
+    'gl_FragColor=vec4(col*a,a);}'].join('');
+
+  function sh(t,s){var x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);return x;}
+  function pr(vs,fs){var p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));
+    gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);return p;}
+
+  var lp=pr(LV,LF), dp=pr(DV,DF);
+
+  /* navy bg, white/blue particles */
+  var BASE=[0.7,0.78,0.87], ACC=[0.098,0.337,0.608];
+  var BG=[0.012,0.078,0.157];
+
+  var seed=202608;
+  function rnd(){seed+=0x6d2b79f5;var t=seed;
+    t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);
+    return((t^(t>>>14))>>>0)/4294967296;}
+
+  var ML=5000,E=20;
+  var p0=new Float32Array(ML*12),p1=new Float32Array(ML*12);
+  var CN_D=new Float32Array([0,-1,1,-1,1,1,0,-1,1,1,0,1]);
+  var cn=new Float32Array(ML*12),sh2=new Float32Array(ML*18);
+  for(var i=0;i<ML;i++)for(var c=0;c<6;c++){cn[(i*6+c)*2]=CN_D[c*2];cn[(i*6+c)*2+1]=CN_D[c*2+1];}
+
+  var bp0=gl.createBuffer(),bp1=gl.createBuffer(),bcn=gl.createBuffer(),bsh=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,bp0);gl.bufferData(gl.ARRAY_BUFFER,p0.byteLength,gl.DYNAMIC_DRAW);
+  gl.bindBuffer(gl.ARRAY_BUFFER,bp1);gl.bufferData(gl.ARRAY_BUFFER,p1.byteLength,gl.DYNAMIC_DRAW);
+  gl.bindBuffer(gl.ARRAY_BUFFER,bcn);gl.bufferData(gl.ARRAY_BUFFER,cn,gl.STATIC_DRAW);
+  gl.bindBuffer(gl.ARRAY_BUFFER,bsh);gl.bufferData(gl.ARRAY_BUFFER,sh2.byteLength,gl.DYNAMIC_DRAW);
+
+  var N=280,nx=new Float32Array(N),ny=new Float32Array(N),sp=new Float32Array(N);
+  var gp=new Float32Array(N*2),gl2=new Float32Array(N);
+  var bgp=gl.createBuffer(),bgl2=gl.createBuffer();
+  var cw=cv.offsetWidth||1400,ch=cv.offsetHeight||620;
+  for(var i=0;i<N;i++){nx[i]=rnd()*cw;ny[i]=rnd()*ch;sp[i]=(rnd()*.4+.1)*60;}
+  gl.bindBuffer(gl.ARRAY_BUFFER,bgp);gl.bufferData(gl.ARRAY_BUFFER,gp.byteLength,gl.DYNAMIC_DRAW);
+  gl.bindBuffer(gl.ARRAY_BUFFER,bgl2);gl.bufferData(gl.ARRAY_BUFFER,gl2.byteLength,gl.DYNAMIC_DRAW);
+
+  var ptr={x:-1e4,y:-1e4};
+  cv.addEventListener('pointermove',function(e){
+    var r=cv.getBoundingClientRect();
+    ptr.x=(e.clientX-r.left)/r.width*cw;
+    ptr.y=(e.clientY-r.top)/r.height*ch;});
+  cv.addEventListener('pointerleave',function(){ptr.x=-1e4;ptr.y=-1e4;});
+
+  function resize(){
+    var dpr=Math.min(devicePixelRatio||1,2);
+    cw=cv.offsetWidth;ch=cv.offsetHeight;
+    cv.width=Math.round(cw*dpr);cv.height=Math.round(ch*dpr);
+    gl.viewport(0,0,cv.width,cv.height);}
+  window.addEventListener('resize',resize);resize();
+
+  function ub(prog,name,fn){fn(gl.getUniformLocation(prog,name));}
+  var last=performance.now();
+  function frame(now){
+    requestAnimationFrame(frame);
+    var dt=Math.min(.05,(now-last)/1000);last=now;
+    var dpr=Math.min(devicePixelRatio||1,2);
+    cv.width=Math.round(cw*dpr);cv.height=Math.round(ch*dpr);
+    gl.viewport(0,0,cv.width,cv.height);
+
+    var lines=0;
+    function pL(x0,y0,x1,y1,a0,a1,m,w){
+      if(lines>=ML)return;
+      for(var c=0;c<6;c++){
+        var k=(lines*6+c)*2,s=(lines*6+c)*3;
+        p0[k]=x0;p0[k+1]=y0;p1[k]=x1;p1[k+1]=y1;
+        sh2[s]=CN_D[c*2]===0?a0:a1;sh2[s+1]=m;sh2[s+2]=w;}lines++;}
+
+    for(var i=0;i<N;i++){
+      ny[i]+=sp[i]*dt;
+      if(ny[i]>ch+E){ny[i]=-E;nx[i]=rnd()*cw;}
+      if(nx[i]<-E){nx[i]=cw+E;ny[i]=rnd()*ch;}
+      if(nx[i]>cw+E){nx[i]=-E;ny[i]=rnd()*ch;}
+      var dx=ptr.x-nx[i],dy=ptr.y-ny[i],d=Math.sqrt(dx*dx+dy*dy);
+      var lit=d<180?1:0;
+      if(lit){var a=.45*(1-d/180);pL(nx[i],ny[i],ptr.x,ptr.y,a,a,1,1);}
+      gp[i*2]=nx[i];gp[i*2+1]=ny[i];gl2[i]=lit;}
+
+    var L2=220*220;
+    for(var i=0;i<N&&lines<ML;i++)
+      for(var j=i+1;j<N&&lines<ML;j++){
+        var dx=nx[i]-nx[j],dy=ny[i]-ny[j],dd=dx*dx+dy*dy;
+        if(dd>=L2)continue;
+        var a=.12*(1-Math.sqrt(dd)/220);
+        pL(nx[i],ny[i],nx[j],ny[j],a,a,0,1);}
+
+    gl.clearColor(BG[0],BG[1],BG[2],1);gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
+
+    if(lines>0){
+      var v=lines*6;
+      gl.useProgram(lp);
+      gl.bindBuffer(gl.ARRAY_BUFFER,bp0);gl.bufferSubData(gl.ARRAY_BUFFER,0,p0.subarray(0,v*2));
+      var aP0=gl.getAttribLocation(lp,'a_p0');gl.enableVertexAttribArray(aP0);gl.vertexAttribPointer(aP0,2,gl.FLOAT,false,0,0);
+      gl.bindBuffer(gl.ARRAY_BUFFER,bp1);gl.bufferSubData(gl.ARRAY_BUFFER,0,p1.subarray(0,v*2));
+      var aP1=gl.getAttribLocation(lp,'a_p1');gl.enableVertexAttribArray(aP1);gl.vertexAttribPointer(aP1,2,gl.FLOAT,false,0,0);
+      gl.bindBuffer(gl.ARRAY_BUFFER,bcn);
+      var aCn=gl.getAttribLocation(lp,'a_cn');gl.enableVertexAttribArray(aCn);gl.vertexAttribPointer(aCn,2,gl.FLOAT,false,0,0);
+      gl.bindBuffer(gl.ARRAY_BUFFER,bsh);gl.bufferSubData(gl.ARRAY_BUFFER,0,sh2.subarray(0,v*3));
+      var aSh=gl.getAttribLocation(lp,'a_sh');gl.enableVertexAttribArray(aSh);gl.vertexAttribPointer(aSh,3,gl.FLOAT,false,0,0);
+      ub(lp,'uSz',function(u){gl.uniform2f(u,cw,ch);});
+      ub(lp,'uB',function(u){gl.uniform3f(u,BASE[0],BASE[1],BASE[2]);});
+      ub(lp,'uA',function(u){gl.uniform3f(u,ACC[0],ACC[1],ACC[2]);});
+      gl.drawArrays(gl.TRIANGLES,0,v);
+      gl.disableVertexAttribArray(aP0);gl.disableVertexAttribArray(aP1);
+      gl.disableVertexAttribArray(aCn);gl.disableVertexAttribArray(aSh);}
+
+    gl.useProgram(dp);
+    gl.bindBuffer(gl.ARRAY_BUFFER,bgp);gl.bufferSubData(gl.ARRAY_BUFFER,0,gp);
+    var aPs=gl.getAttribLocation(dp,'a_pos');gl.enableVertexAttribArray(aPs);gl.vertexAttribPointer(aPs,2,gl.FLOAT,false,0,0);
+    gl.bindBuffer(gl.ARRAY_BUFFER,bgl2);gl.bufferSubData(gl.ARRAY_BUFFER,0,gl2);
+    var aLt=gl.getAttribLocation(dp,'a_lit');gl.enableVertexAttribArray(aLt);gl.vertexAttribPointer(aLt,1,gl.FLOAT,false,0,0);
+    ub(dp,'uSz',function(u){gl.uniform2f(u,cw,ch);});
+    ub(dp,'uDpr',function(u){gl.uniform1f(u,dpr);});
+    ub(dp,'uDt',function(u){gl.uniform1f(u,5);});
+    ub(dp,'uRa',function(u){gl.uniform1f(u,.4);});
+    ub(dp,'uB',function(u){gl.uniform3f(u,BASE[0],BASE[1],BASE[2]);});
+    ub(dp,'uA',function(u){gl.uniform3f(u,ACC[0],ACC[1],ACC[2]);});
+    gl.drawArrays(gl.POINTS,0,N);
+    gl.disableVertexAttribArray(aPs);gl.disableVertexAttribArray(aLt);}
+  requestAnimationFrame(frame);
+})();
+
+/* SCROLL REVEAL + COUNTER */
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting)return;
+    e.target.classList.add('vis');
+    /* counter */
+    if(e.target.classList.contains('stat-card')){
+      var tgt=+e.target.dataset.target;
+      var sfx=e.target.dataset.suffix||'';
+      var el=e.target.querySelector('.stat-num');
+      var cur=0,inc=tgt/60,timer=setInterval(function(){
+        cur+=inc;
+        if(cur>=tgt){el.textContent=tgt+sfx;clearInterval(timer);}
+        else el.textContent=Math.floor(cur)+(sfx==='%'?'%':'');
+      },20);}
+    io.unobserve(e.target);
+  });
+},{threshold:.25});
+
+document.querySelectorAll('.stat-card,.div-card,.tl-item').forEach(function(el){io.observe(el);});
+
+/* FLUID TEXT - Milestones heading */
+(function(){
+  var cv=document.getElementById('fluidCanvas');
+  var title=document.getElementById('fluidTitle');
+  if(!cv||!title)return;
+
+  /* size canvas to match heading */
+  function sizeCanvas(){
+    var r=title.getBoundingClientRect();
+    var dpr=Math.min(devicePixelRatio||1,2);
+    cv.width=Math.round(cv.offsetWidth*dpr);
+    cv.height=Math.round(cv.offsetHeight*dpr);
+  }
+
+  var ctx2=cv.getContext('2d');
+  if(!ctx2)return;
+
+  /* paint mask of the heading text */
+  function paintMask(){
+    var dpr=Math.min(devicePixelRatio||1,2);
+    sizeCanvas();
+    ctx2.clearRect(0,0,cv.width,cv.height);
+    var fs=Math.round(cv.offsetHeight*dpr*.55);
+    ctx2.font='900 '+fs+'px Inter,sans-serif';
+    ctx2.fillStyle='#fff';
+    ctx2.textBaseline='middle';
+    ctx2.textAlign='center';
+    ctx2.fillText('Milestones & Achievements',cv.width/2,cv.height/2);
+  }
+
+  /* fluid sim state */
+  var W=0,H=0,N=6000;
+  var vx=new Float32Array(N),vy=new Float32Array(N);
+  var dx=new Float32Array(N),dy=new Float32Array(N);
+  var px=new Float32Array(N),py=new Float32Array(N);
+  var alpha=new Float32Array(N);
+  /* colour palette: navy/blue/white tones */
+  var COLS=['#7ba7d4','#4a80c4','#adc8e8','#c8ddf0','#19569B','#ffffff'];
+  var pcol=new Array(N);
+
+  function seed(){
+    W=cv.width;H=cv.height;
+    for(var i=0;i<N;i++){
+      px[i]=Math.random()*W;py[i]=Math.random()*H;
+      var spd=.4+Math.random()*1.2;
+      var ang=Math.random()*Math.PI*2;
+      vx[i]=Math.cos(ang)*spd;vy[i]=Math.sin(ang)*spd;
+      alpha[i]=.3+Math.random()*.7;
+      pcol[i]=COLS[Math.floor(Math.random()*COLS.length)];
+    }
+  }
+
+  var ptr={x:-1e4,y:-1e4,active:false};
+
+  /* only animate when heading enters viewport */
+  var started=false;
+  var ioF=new IntersectionObserver(function(e){
+    if(e[0].isIntersecting&&!started){started=true;paintMask();seed();loop();}
+  },{threshold:.3});
+  ioF.observe(cv);
+
+  window.addEventListener('resize',function(){if(started){paintMask();seed();}});
+
+  cv.style.pointerEvents='auto';
+  cv.addEventListener('pointermove',function(e){
+    var r=cv.getBoundingClientRect();
+    var dpr=Math.min(devicePixelRatio||1,2);
+    ptr.x=(e.clientX-r.left)/r.width*cv.width;
+    ptr.y=(e.clientY-r.top)/r.height*cv.height;
+    ptr.active=true;
+  });
+  cv.addEventListener('pointerleave',function(){ptr.active=false;});
+
+  /* off-screen canvas for mask sampling */
+  var maskC=document.createElement('canvas');
+  var maskX=maskC.getContext('2d');
+
+  function loop(){
+    requestAnimationFrame(loop);
+    var dpr=Math.min(devicePixelRatio||1,2);
+    if(cv.width!==Math.round(cv.offsetWidth*dpr)||cv.height!==Math.round(cv.offsetHeight*dpr)){
+      paintMask();seed();return;}
+
+    /* copy fluid canvas to mask for sampling */
+    maskC.width=cv.width;maskC.height=cv.height;
+    maskX.drawImage(cv,0,0);
+
+    ctx2.clearRect(0,0,W,H);
+
+    /* curl noise approx */
+    for(var i=0;i<N;i++){
+      var cx=px[i],cy=py[i];
+
+      /* gentle curl */
+      var nx=cx/W*4,ny=cy/H*4;
+      var curl=(Math.sin(nx*1.3+ny*.9+performance.now()*.0004)*.5+
+                Math.cos(nx*.7-ny*1.1+performance.now()*.0003)*.5);
+      vx[i]+=(-vy[i]*curl*.06);
+      vy[i]+=(vx[i]*curl*.06);
+
+      /* pointer repulsion */
+      if(ptr.active){
+        var pdx=cx-ptr.x,pdy=cy-ptr.y;
+        var pd2=pdx*pdx+pdy*pdy;
+        if(pd2<8000){var pf=80/Math.max(pd2,.1);vx[i]+=pdx*pf;vy[i]+=pdy*pf;}
+      }
+
+      /* damping */
+      vx[i]*=.985;vy[i]*=.985;
+
+      /* move */
+      px[i]+=vx[i];py[i]+=vy[i];
+
+      /* wrap */
+      if(px[i]<0)px[i]+=W;if(px[i]>W)px[i]-=W;
+      if(py[i]<0)py[i]+=H;if(py[i]>H)py[i]-=H;
+
+      /* sample mask - only draw if inside letter shape */
+      var ix=Math.round(px[i]),iy=Math.round(py[i]);
+      if(ix<0||ix>=W||iy<0||iy>=H)continue;
+      var d=maskX.getImageData(ix,iy,1,1).data;
+      if(d[3]<60)continue;
+
+      ctx2.globalAlpha=alpha[i]*(d[3]/255);
+      ctx2.fillStyle=pcol[i];
+      ctx2.beginPath();
+      ctx2.arc(px[i],py[i],1.5*dpr,0,Math.PI*2);
+      ctx2.fill();
+    }
+    ctx2.globalAlpha=1;
+  }
+})();
+var fill=document.getElementById('tlFill');
+if(fill){
+  var track=fill.closest('.tl-track');
+  function updateFill(){
+    if(!track)return;
+    var r=track.getBoundingClientRect();
+    var vh=window.innerHeight;
+    var pct=Math.min(1,Math.max(0,(vh-r.top)/(r.height+vh)));
+    fill.style.height=(pct*100)+'%';}
+  window.addEventListener('scroll',updateFill,{passive:true});
+  updateFill();}
+
+</script>
+<script>
+document.querySelectorAll('.nav-item > .nav-link').forEach(function(link){
+  var menu=link.parentElement.querySelector('.drop');
+  if(!menu)return;
+});
+document.addEventListener('click',function(event){
+  if(!event.target.closest('.nav-item')){
+    document.querySelectorAll('.nav-item.open').forEach(function(item){
+      item.classList.remove('open');
+      var toggle=item.querySelector('[data-menu-toggle]');
+      if(toggle)toggle.setAttribute('aria-expanded','false');
+    });
+  }
+});
+</script>
+<script src="assets/lazy-video.js"></script>
+</body>
+<script src="assets/particle-drift.js"></script>
+<script>
+if(typeof initParticleDrift==='function'){
+  initParticleDrift('pdCanvas', {
+    background:'#031428',
+    baseColor:'#9CB4CD',
+    accentColor:'#19569B',
+    density:260,
+    dotSize:5,
+    speed:34,
+    direction:0,
+    hover:170,
+    linkDistance:210,
+    linkThickness:1
+  });
+}
+</script>
+<script src="assets/promed-cursor-ring.js"></script>
+<script>initProMEDCursorRing();</script>
+</html>
+

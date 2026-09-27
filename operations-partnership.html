@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipment Rental &amp; Partnership &mdash; ProMED Solutions</title>
+<link rel="stylesheet" href="assets/responsive.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#031428;--blue:#19569B;--cyan:#00E5FF;--slate:#B0BDCD;--white:#fff;--dark:#0B1B2E;--partnership:#19569B}
+html{scroll-behavior:smooth}
+body{font-family:'Urbanist',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden}
+
+/* scroll bar */
+.scroll-bar{position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--partnership),#144a8e);
+  width:0%;z-index:9999;transition:width .1s}
+
+/* â”€â”€ NAVBAR â”€â”€ */
+nav{position:sticky;top:0;z-index:900;
+  background:rgba(3,20,40,.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 40px;height:70px;
+  display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:46px;width:auto;object-fit:contain}
+.nav-brand{line-height:1.2}
+.nav-brand-name{font-size:17px;font-weight:800;color:var(--white);letter-spacing:-.4px}
+.nav-brand-tag{font-size:9.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--slate)}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-item{position:relative}
+.nav-link{color:var(--slate);font-weight:600;font-size:13px;text-decoration:none;
+  padding:24px 18px;display:block;transition:color .25s}
+.nav-link:hover{color:var(--cyan)}
+
+/* dropdown */
+.drop{position:absolute;top:100%;left:0;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(20px);
+  border:1px solid rgba(3,20,40,.12);border-radius:12px;
+  min-width:280px;padding:16px 0;
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 20px 60px rgba(3,20,40,.15);z-index:100}
+.nav-item:hover .drop{opacity:1;visibility:visible;transform:translateY(0)}
+.drop-item{padding:14px 22px;color:#5a6b7f;text-decoration:none;display:block;
+  transition:all .25s;border-left:3px solid transparent;font-size:13px;font-weight:500}
+.drop-item:hover{color:var(--partnership);border-left-color:var(--partnership);
+  background:rgba(25,86,155,.06)}
+.drop-label{font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--partnership);margin-bottom:2px}
+.drop-title{font-size:.9rem;font-weight:700;color:var(--navy)}
+.drop-desc{font-size:.75rem;color:#7a8a9a;margin-top:1px}
+
+.nav-cta{background:linear-gradient(135deg,var(--partnership),#144a8e);color:#fff;
+  padding:9px 22px;border-radius:6px;font-weight:700;font-size:13px;
+  text-decoration:none;transition:all .3s}
+
+/* â”€â”€ HERO â”€â”€ */
+.hero{background:radial-gradient(circle at center, rgba(19,58,120,.95) 0%, rgba(5,17,32,.96) 36%, rgba(2,8,17,1) 100%);
+  padding:140px 40px 100px;position:relative;overflow:hidden;isolation:isolate}
+#twinGalaxyCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none;opacity:.72}
+.hero-content{max-width:1200px;margin:0 auto;display:grid;
+  grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+.hero-text h1{font-size:3.5rem;font-weight:900;
+  color:#fff;margin-bottom:20px;line-height:1.1;letter-spacing:-0.02em}
+.hero-text .hero-num{display:inline-block;width:50px;height:50px;
+  border-radius:50%;background:rgba(255,255,255,.25);
+  color:#fff;font-size:20px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.hero-text p{font-size:1.125rem;color:rgba(255,255,255,.95);
+  line-height:1.75;margin-bottom:32px}
+.hero-btn{display:inline-block;background:#fff;color:var(--partnership);
+  padding:14px 36px;border-radius:8px;font-weight:700;
+  text-decoration:none;transition:all .3s;
+  box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.hero-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,0,0,.3)}
+.hero-img{position:relative;perspective:1200px}
+.hero-img-inner{position:relative;transform-style:preserve-3d;
+  transition:transform .6s;border-radius:20px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.hero-img-inner:hover{transform:rotateY(-8deg) rotateX(5deg)}
+.hero-img img{width:100%;height:auto;display:block}
+
+/* â”€â”€ OVERVIEW SECTION â”€â”€ */
+.overview{background:#fff;padding:100px 40px}
+.container{max-width:1300px;margin:0 auto}
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.overview-content h2{font-size:2.5rem;font-weight:900;color:var(--navy);
+  margin-bottom:24px;line-height:1.15;letter-spacing:-0.02em}
+.overview-content p{font-size:1rem;color:#4a5d74;line-height:1.75;margin-bottom:16px}
+.overview-stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+.stat-card{background:linear-gradient(135deg,rgba(25,86,155,.08),rgba(25,86,155,.03));
+  border:2px solid rgba(25,86,155,.2);border-radius:16px;padding:28px 24px;
+  text-align:center;transition:all .4s}
+.stat-card:hover{transform:translateY(-8px);border-color:var(--partnership);
+  box-shadow:0 15px 40px rgba(25,86,155,.15)}
+.stat-num{font-size:2.8rem;font-weight:900;color:var(--partnership);
+  display:block;margin-bottom:8px}
+.stat-label{font-size:.9rem;color:#5a6b7f;font-weight:600}
+
+/* â”€â”€ EQUIPMENT SECTION â”€â”€ */
+.equipment{background:linear-gradient(135deg,#f5f9fe,#fff);padding:100px 40px}
+.sec-hdr{text-align:center;margin-bottom:70px}
+.sec-eyebrow{display:inline-block;font-size:10px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--partnership);
+  border:1px solid rgba(25,86,155,.3);border-radius:50px;
+  padding:5px 16px;margin-bottom:14px}
+.sec-title{font-size:2.5rem;font-weight:900;color:var(--navy);
+  letter-spacing:-0.02em;margin-bottom:14px;line-height:1.15}
+.sec-sub{font-size:1.125rem;color:#5a6b7f;max-width:680px;margin:0 auto;line-height:1.75}
+.equip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}
+.equip-card{background:#fff;border-radius:20px;overflow:hidden;
+  border:2px solid #e0eaf6;transition:all .5s;position:relative}
+.equip-card::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--partnership),transparent);
+  opacity:0;transition:opacity .4s}
+.equip-card:hover::before{opacity:.08}
+.equip-card:hover{transform:translateY(-10px);border-color:var(--partnership);
+  box-shadow:0 20px 50px rgba(25,86,155,.2)}
+.equip-img{width:100%;height:260px;object-fit:cover;display:block;position:relative;z-index:1}
+.equip-content{padding:28px 24px;position:relative;z-index:2}
+.equip-content h3{font-size:1.25rem;font-weight:700;color:var(--navy);
+  margin-bottom:12px;line-height:1.3;letter-spacing:-0.01em}
+.equip-content p{font-size:1rem;color:#5a6b7f;line-height:1.75}
+
+/* â”€â”€ BENEFITS SECTION â”€â”€ */
+.benefits{background:var(--navy);color:#fff;padding:100px 40px}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:60px}
+.benefit-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:36px 28px;text-align:center;
+  transition:all .4s}
+.benefit-card:hover{background:rgba(25,86,155,.15);border-color:var(--partnership);
+  transform:translateY(-8px)}
+.benefit-icon{font-size:3rem;margin-bottom:20px}
+.benefit-card h3{font-size:1.25rem;font-weight:700;margin-bottom:12px;color:#fff;letter-spacing:-0.01em}
+.benefit-card p{font-size:1rem;color:rgba(255,255,255,.7);line-height:1.75}
+
+/* â”€â”€ FOOTER â”€â”€ */
+footer{background:#0a1825;color:rgba(255,255,255,.5);padding:60px 40px 30px}
+.footer-grid{max-width:1300px;margin:0 auto;display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.foot-brand h3{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:12px}
+.foot-brand p{font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.5)}
+.foot-col h4{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.6);
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:18px}
+.foot-col a{display:block;font-size:.9rem;color:rgba(255,255,255,.5);
+  text-decoration:none;margin-bottom:10px;transition:color .25s}
+.foot-col a:hover{color:var(--partnership)}
+.footer-bottom{max-width:1300px;margin:0 auto;padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.1);text-align:center;
+  font-size:.85rem;color:rgba(255,255,255,.4)}
+
+/* responsive */
+@media(max-width:1000px){
+  .hero-content,.overview-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .benefits-grid{grid-template-columns:1fr}
+  .equip-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .equip-grid{grid-template-columns:1fr}
+  .overview-stats{grid-template-columns:1fr}
+}
+</style>
+<meta name="description" content="Flexible imaging equipment rental and per-patient partnership options from ProMED Solutions.">
+<meta name="theme-color" content="#031428">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://www.promedsol.com.pk/operations-partnership.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ProMED Solutions">
+<meta property="og:title" content="Equipment Rental &amp; Partnership | ProMED Solutions">
+<meta property="og:description" content="Flexible imaging equipment rental and per-patient partnership options from ProMED Solutions.">
+<meta property="og:url" content="https://www.promedsol.com.pk/operations-partnership.html">
+<meta property="og:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Equipment Rental &amp; Partnership | ProMED Solutions">
+<meta name="twitter:description" content="Flexible imaging equipment rental and per-patient partnership options from ProMED Solutions.">
+<meta name="twitter:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+
+<!-- scroll bar -->
+<div class="scroll-bar"></div>
+
+<!-- NAV -->
+<script src="assets/nav.js"></script>
+
+<!-- HERO -->
+<section class="hero" style="position:relative;min-height:80vh;display:flex;align-items:center;justify-content:center">
+  <canvas id="twinGalaxyCanvas" aria-hidden="true"></canvas>
+  <div style="position:relative;z-index:2;text-align:center;max-width:1000px;padding:0 40px">
+    <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:6px 18px;margin-bottom:32px">CENTRAL OPERATIONS</div>
+    <h1 style="font-size:clamp(2.5rem,5vw,4.2rem);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.03em;margin-bottom:24px">Equipment Rental &amp; Partnership</h1>
+    <p style="font-size:1.15rem;color:rgba(255,255,255,.75);line-height:1.75;max-width:760px;margin:0 auto">ProMED provides flexible equipment rental and partnership solutions across diagnostic imaging modalities, with dependable technical support and maintenance included.</p>
+  </div>
+</section>
+
+<!-- EQUIPMENT SECTION -->
+<section class="equipment" id="equipment">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="sec-eyebrow">Available Equipment</div>
+      <h2 class="sec-title">Advanced Imaging, Flexible Partnership</h2>
+      <p class="sec-sub">Expand diagnostic capacity with trusted imaging systems and a partnership model aligned to your patient volume, operational needs, and budget.</p>
+    </div>
+
+    <div class="equip-grid">
+      <div class="equip-card">
+        <img src="assets/images/rental-xray-system.webp" alt="Digital X-ray system" class="equip-img">
+        <div class="equip-content">
+          <h3>Digital X-ray Systems</h3>
+          <p>Advanced digital radiography systems with dependable image quality, flexible rental terms, and technical support for hospitals and diagnostic centers.</p>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <img src="assets/images/rental-mri-system.webp" alt="MRI system installation and service" class="equip-img">
+        <div class="equip-content">
+          <h3>MRI Systems</h3>
+          <p>Access MRI systems with installation, maintenance, engineering support, and flexible partnership plans built around patient demand.</p>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <img src="assets/images/rental-ct-room.webp" alt="CT scanner room" class="equip-img" loading="lazy" decoding="async">
+        <div class="equip-content">
+          <h3>CT Scanners</h3>
+          <p>Flexible CT scanner rental and partnership options for hospitals seeking reliable diagnostic capacity without a large upfront investment.</p>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <img src="assets/images/rental-ultrasound-system.webp" alt="Ultrasound imaging system" class="equip-img" loading="lazy" decoding="async">
+        <div class="equip-content">
+          <h3>Ultrasound Systems</h3>
+          <p>Practical ultrasound solutions for clinical departments, supported by equipment guidance, service coverage, and flexible acquisition plans.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="sec-eyebrow" style="border-color:rgba(255,255,255,.2);color:#fff">Partnership Benefits</div>
+      <h2 class="sec-title" style="color:#fff">Why Choose Equipment Rental &amp; Partnership?</h2>
+      <p class="sec-sub" style="color:rgba(255,255,255,.7)">Financial flexibility, operational efficiency, and patient-focused care without the burden of capital investment.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x1F4B0;</div>
+        <h3>Zero Upfront Investment</h3>
+        <p>No capital expenditure required. Access premium equipment immediately and pay only based on actual patient usage.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x1F527;</div>
+        <h3>Complete Maintenance Included</h3>
+        <p>All maintenance, repairs, and technical support covered under the partnership agreement. No unexpected costs.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x1F4C8;</div>
+        <h3>Scalable & Flexible</h3>
+        <p>Scale your imaging services based on patient demand. Flexible terms that grow with your facility's needs.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x1F680;</div>
+        <h3>Latest Technology Access</h3>
+        <p>Always have access to cutting-edge imaging equipment. Technology upgrades included in partnership terms.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x1F468;&#x200D;&#x2695;&#xFE0F;</div>
+        <h3>24/7 Expert Support</h3>
+        <p>Round-the-clock technical support from our certified engineers. Minimize downtime and maximize patient care.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x2705;</div>
+        <h3>Risk-Free Solution</h3>
+        <p>Reduce financial risk with predictable per-patient costs. Focus on patient care, not equipment financing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="foot-brand">
+      <h3>ProMED Solutions</h3>
+      <p>Pakistan's premier medical imaging company, delivering cutting-edge diagnostic equipment, maintenance services, and innovative partnership models to healthcare facilities nationwide.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="about-us.html">About Us</a>
+      <a href="promed-command-center.html">Operations</a>
+      <a href="contact-support.html">Contact</a>
+    </div>
+    <div class="foot-col">
+      <h4>Operations</h4>
+      <a href="central-operations-sales.html">Sales</a>
+      <a href="central-operations-services.html">Services</a>
+      <a href="central-operations-services.html">Training</a>
+      <a href="operations-partnership.html">Equipment Rental</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <a href="mailto:info@promedsol.com.pk">info@promedsol.com.pk</a>
+      <a href="tel:+92512749013">+92 51 2749013</a>
+      <a href="contact-support.html">Support Request</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 ProMED Solutions. All rights reserved.
+  </div>
+</footer>
+
+</body>
+<script src="assets/twin-galaxy-rings.js"></script>
+<script>initTwinGalaxyRings('twinGalaxyCanvas');</script>
+<script src="assets/promed-cursor-ring.js"></script>
+</html>
+

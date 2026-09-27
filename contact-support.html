@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="assets/promed-cursor-ring.js"></script><script>initProMEDCursorRing();</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Support - ProMED Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/responsive.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #031428;
+            --white: #FFFFFF;
+            --accent-blue: #19569B;
+            --cyan: #5f8fca;
+            --dark-gray: #1a1a1a;
+            --light-gray: #f5f5f5;
+            --transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Urbanist', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: var(--white);
+            overflow-x: hidden;
+            perspective: 1600px;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--navy) 0%, rgba(3, 20, 40, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo img {
+            display: block;
+            width: auto;
+            height: 54px;
+            max-width: 220px;
+            object-fit: contain;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--cyan);
+            transition: width 0.6s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .nav-links a.active {
+            color: var(--cyan);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: radial-gradient(circle at 78% 28%, rgba(25, 86, 155, 0.28), transparent 42%), var(--navy);
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 760px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            min-height: 560px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--navy);
+            color: var(--white);
+            text-align: center;
+        }
+
+        #pdCanvasContact {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background: linear-gradient(90deg, rgba(3, 20, 40, 0.82), rgba(3, 20, 40, 0.3), rgba(3, 20, 40, 0.78));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            padding: 3rem 2rem;
+        }
+
+        .hero-eyebrow {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.7rem, 7vw, 5.5rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .particle-text {
+            font-weight: 900;
+            letter-spacing: -0.05em;
+        }
+
+        .promed-highlight { color: var(--white); }
+        .cyan { color: #8ab7e5; }
+
+        .hero-desc,
+        .hero-subdesc {
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .hero-desc { margin-top: 0.5rem; }
+        .hero-subdesc { margin-bottom: 2rem; }
+
+        .cta-row { display: flex; justify-content: center; }
+
+        .hero .btn {
+            border: 0;
+            cursor: pointer;
+            padding: 0.9rem 1.6rem;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .hero .btn-primary {
+            background: var(--accent-blue);
+            color: var(--white);
+        }
+
+        .page-header::before {
+            display: none;
+        }
+        
+        #pdCanvasContact {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background: linear-gradient(90deg, rgba(3, 20, 40, 0.84), rgba(3, 20, 40, 0.38), rgba(3, 20, 40, 0.72));
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        /* MAIN CONTENT */
+        .content-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 8%;
+            right: 8%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(25, 86, 155, 0.18), transparent);
+            transform: translateZ(-1px);
+        }
+
+        .motion-ready .motion-section {
+            opacity: 0;
+            transform: translateY(72px) rotateX(7deg) scale(0.985);
+            transform-origin: center top;
+            transition: opacity 0.85s ease, transform 0.95s cubic-bezier(0.2, 0.75, 0.25, 1);
+            will-change: opacity, transform;
+        }
+
+        .motion-ready .motion-section.is-visible {
+            opacity: 1;
+            transform: translateY(0) rotateX(0) scale(1);
+        }
+
+        .motion-ready .motion-card {
+            opacity: 0;
+            transform: translateY(34px) rotateY(-5deg);
+            transition: opacity 0.7s ease, transform 0.75s cubic-bezier(0.2, 0.75, 0.25, 1);
+            transition-delay: var(--motion-delay, 0ms);
+        }
+
+        .motion-ready .motion-card.is-visible {
+            opacity: 1;
+            transform: translateY(0) rotateY(0);
+        }
+
+        .motion-ready .contact-card,
+        .motion-ready .location-card {
+            animation: none;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+        }
+
+        /* CONTACT CARDS */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border-top: 8px solid var(--accent-blue);
+            animation: fadeInUp 0.8s ease-out backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .contact-card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .contact-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .contact-card:nth-child(4) {
+            animation-delay: 0.45s;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(25, 86, 155, 0.16) 0%, rgba(3, 20, 40, 0.04) 100%);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            background: var(--navy);
+            box-shadow: 0 18px 44px rgba(3, 20, 40, 0.18);
+        }
+
+        .contact-card:hover::before {
+            top: 0;
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--accent-blue) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .contact-card h3 {
+            font-size: 1.4rem;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-card:hover h3 { color: var(--white); }
+
+        .contact-card p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card:hover p { color: rgba(255, 255, 255, 0.68); }
+
+        .contact-link {
+            display: inline-block;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+        }
+
+        .contact-link:hover {
+            color: var(--white);
+        }
+
+        .contact-card:hover .contact-link { color: #8bb7e6; }
+
+        /* CONTACT FORM */
+        .form-section {
+            background: linear-gradient(135deg, #f4f7fb 0%, #ffffff 100%);
+            border: 1px solid #e1e9f2;
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 4rem 0;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .form-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input, textarea, select {
+            padding: 0.8rem;
+            border: 2px solid #d9e3ee;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(25, 86, 155, 0.12);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 1rem 2.5rem;
+            background: var(--navy);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 8px 30px rgba(3, 20, 40, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            background: var(--accent-blue);
+            box-shadow: 0 12px 40px rgba(25, 86, 155, 0.3);
+        }
+
+        /* OFFICE LOCATIONS */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .location-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-blue);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .location-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .location-card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .location-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .location-card:nth-child(4) {
+            animation-delay: 0.45s;
+        }
+
+        .location-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 34px rgba(3, 20, 40, 0.14);
+            border-left-color: var(--navy);
+        }
+
+        .location-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .location-info {
+            color: #666;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .location-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
+            justify-content: center;
+        }
+
+        .location-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.75rem 1.1rem;
+            border-radius: 6px;
+            background: var(--navy);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .location-action:hover {
+            background: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .office-map {
+            position: relative;
+            margin-top: 2.5rem;
+            padding: 10px;
+            border-radius: 18px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #d9e7f3, #f8fbfd 42%, #b9d0e2);
+            border: 1px solid rgba(3, 20, 40, 0.18);
+            box-shadow: 0 24px 50px rgba(3, 20, 40, 0.2), 0 8px 0 rgba(25, 86, 155, 0.12);
+            transform: perspective(1200px) rotateX(2.5deg) rotateY(-1deg);
+            transform-origin: center bottom;
+            isolation: isolate;
+        }
+
+        .office-map::before {
+            content: none;
+            position: absolute;
+            top: 24px;
+            left: 28px;
+            z-index: 2;
+            padding: 0.55rem 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 999px;
+            background: rgba(3, 20, 40, 0.82);
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            pointer-events: none;
+        }
+
+        .office-map::after {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            border-radius: 10px;
+            background: linear-gradient(125deg, rgba(255,255,255,.16), transparent 30%), repeating-linear-gradient(0deg, transparent 0 42px, rgba(0, 229, 255, .08) 43px 44px), repeating-linear-gradient(90deg, transparent 0 58px, rgba(0, 229, 255, .06) 59px 60px);
+            pointer-events: none;
+        }
+
+        .office-map iframe {
+            display: block;
+            width: 100%;
+            height: 360px;
+            border: 0;
+            border-radius: 10px;
+            filter: saturate(0.9) contrast(1.04);
+        }
+
+        /* SUPPORT HOURS */
+        .hours-box {
+            background: linear-gradient(135deg, #f4f7fb 0%, #ffffff 100%);
+            padding: 2rem;
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .hours-box h4 {
+            color: var(--navy);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hours-list {
+            color: #555;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-divider {
+            border-top: 1px solid rgba(0, 229, 255, 0.2);
+            margin: 2rem 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            body {
+                perspective: none;
+            }
+
+            .motion-ready .motion-section,
+            .motion-ready .motion-card {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 0.5rem;
+                font-size: 0.85rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .content-section {
+                padding: 3rem 1rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+<meta name="description" content="Contact ProMED Solutions for sales, service and emergency support. Call +92 51 6112202 or email info@promedsol.com.pk.">
+<meta name="theme-color" content="#031428">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://www.promedsol.com.pk/contact-support.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ProMED Solutions">
+<meta property="og:title" content="Contact &amp; Support | ProMED Solutions">
+<meta property="og:description" content="Contact ProMED Solutions for sales, service and emergency support. Call +92 51 6112202 or email info@promedsol.com.pk.">
+<meta property="og:url" content="https://www.promedsol.com.pk/contact-support.html">
+<meta property="og:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact &amp; Support | ProMED Solutions">
+<meta name="twitter:description" content="Contact ProMED Solutions for sales, service and emergency support. Call +92 51 6112202 or email info@promedsol.com.pk.">
+<meta name="twitter:image" content="https://www.promedsol.com.pk/assets/og-image.jpg">
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+    <script src="assets/nav.js"></script>
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <canvas id="pdCanvasContact" aria-hidden="true"></canvas>
+        <div class="page-header-content">
+            <h1>Contact & Support</h1>
+            <p>We're here to help. Reach out with questions, service requests, or partnership inquiries. 24/7 emergency support available.</p>
+        </div>
+    </section>
+
+    <!-- QUICK CONTACT -->
+    <section class="content-section">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">Multiple ways to connect with ProMED Solutions. Choose the contact method that works best for you.</p>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">☎️</div>
+                <h3>Phone Support</h3>
+                <p>Call our main line for inquiries, service requests, and emergency support. Our team is available to assist you.</p>
+                <a href="tel:+92516112202" class="contact-link">+92 51 6112202</a>
+                <p style="font-size: 0.85rem; color: #999; margin-top: 1rem;">Phone/Fax Line</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">✉️</div>
+                <h3>Email Us</h3>
+                <p>Send your inquiry, service request, or partnership proposal via email. We respond promptly to all messages.</p>
+                <a href="mailto:info@promedsol.com.pk" class="contact-link">info@promedsol.com.pk</a>
+                <p style="font-size: 0.85rem; color: #999; margin-top: 1rem;">General Inquiries</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">🌐</div>
+                <h3>Visit Online</h3>
+                <p>Visit our website for company information, service details, and additional resources about diagnostic imaging support.</p>
+                <a href="https://www.promedsol.com.pk" class="contact-link" target="_blank">www.promedsol.com.pk</a>
+                <p style="font-size: 0.85rem; color: #999; margin-top: 1rem;">Company Website</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">🚨</div>
+                <h3>Emergency Response</h3>
+                <p>For critical imaging system emergencies, call our emergency line. 24/7 on-call support available immediately.</p>
+                <a href="tel:+92516112202" class="contact-link">24/7 Emergency Line</a>
+                <p style="font-size: 0.85rem; color: #999; margin-top: 1rem;">Response &lt;4 Hours Guaranteed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUPPORT HOURS -->
+    <section class="content-section">
+        <h2 class="section-title">Support Availability</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div class="hours-box">
+                <h4>🕐 Regular Business Hours</h4>
+                <div class="hours-list">
+                    <p><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM</p>
+                    <p><strong>Saturday:</strong> 9:00 AM - 2:00 PM</p>
+                    <p><strong>Sunday:</strong> Closed</p>
+                    <p style="margin-top: 1rem;"><strong>Timezone:</strong> Pakistan Standard Time (PST)</p>
+                </div>
+            </div>
+
+            <div class="hours-box">
+                <h4>📞 Emergency Support</h4>
+                <div class="hours-list">
+                    <p><strong>Available:</strong> 24/7/365</p>
+                    <p><strong>Response Time:</strong> Under 4 hours guaranteed</p>
+                    <p><strong>Coverage:</strong> Islamabad, Lahore, Karachi regions</p>
+                    <p style="margin-top: 1rem;"><strong>Call:</strong> +92 51 6112202</p>
+                </div>
+            </div>
+
+            <div class="hours-box">
+                <h4>📧 Email Support</h4>
+                <div class="hours-list">
+                    <p><strong>Response Time:</strong> Within 24 hours</p>
+                    <p><strong>Email:</strong> info@promedsol.com.pk</p>
+                    <p><strong>For Urgent Issues:</strong> Include "URGENT" in subject line</p>
+                    <p style="margin-top: 1rem;"><strong>Escalation:</strong> Available for complex matters</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OFFICE LOCATIONS -->
+    <section class="content-section" style="background: var(--light-gray);">
+        <h2 class="section-title">Our Office Locations</h2>
+        <p class="section-subtitle">Visit any of our regional offices across Pakistan for direct support and consultation.</p>
+
+        <div class="locations-grid">
+            <div class="location-card">
+                <div class="location-title">🏢 Head Office - Islamabad</div>
+                <div class="location-info">
+                    <p><strong>Address:</strong><br>105 Street # 4<br>G-15/1, Islamabad, Pakistan</p>
+                    <p style="margin-top: 1rem;"><strong>Phone/Fax:</strong><br><a href="tel:+92516112202" style="color: var(--cyan); text-decoration: none;">+92 51 6112202</a></p>
+                    <p style="margin-top: 1rem;"><strong>Hours:</strong><br>Mon-Fri: 8 AM - 5 PM<br>Sat: 9 AM - 2 PM</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-title">🏪 Lahore Office</div>
+                <div class="location-info">
+                    <p><strong>Address:</strong><br>52 IB Street 2<br>Tulip Block Park View City<br>Lahore, Pakistan</p>
+                    <p style="margin-top: 1rem;"><strong>Regional Coverage:</strong><br>Punjab & Northern Regions</p>
+                    <p style="margin-top: 1rem;"><strong>Services:</strong><br>On-site Support & Emergency Response</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-title">🏬 Karachi Office</div>
+                <div class="location-info">
+                    <p><strong>Address:</strong><br>Office No 101, 1st Floor<br>Rehmab Tower<br>Main University Road<br>Block Gulistan E Johar, Karachi</p>
+                    <p style="margin-top: 1rem;"><strong>Regional Coverage:</strong><br>Sindh & Southern Regions</p>
+                    <p style="margin-top: 1rem;"><strong>Services:</strong><br>On-site Support & Emergency Response</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-title">🏭 Warehouse & Logistics</div>
+                <div class="location-info">
+                    <p><strong>Address:</strong><br>Warehouse No 24C<br>Small Industrial Estate<br>Jhang Bahtar Road<br>Punjab, Pakistan</p>
+                    <p style="margin-top: 1rem;"><strong>Functions:</strong><br>Parts Inventory & Storage<br>Equipment Logistics & Distribution</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="location-actions" aria-label="Official contact actions">
+            <a class="location-action" href="mailto:info@promedsol.com.pk">✉ Email Official Support</a>
+            <a class="location-action" href="tel:+92516112202">☎ Call +92 51 6112202</a>
+            <a class="location-action" href="https://wa.me/92516112202?text=Hello%20ProMED%20Solutions%2C%20I%20need%20support." target="_blank" rel="noopener">◉ WhatsApp Support</a>
+        </div>
+
+        <div class="office-map" aria-label="ProMED Solutions Islamabad office map">
+            <iframe
+                title="ProMED Solutions Head Office map"
+                src="https://www.google.com/maps?output=embed&amp;ll=33.6379,72.9269&amp;z=15"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <!-- EMERGENCY NOTE -->
+    <section class="content-section">
+        <div class="form-section">
+
+            <p style="margin-top: 2rem; font-size: 0.9rem; color: #666;">
+                    <strong>Note:</strong> For emergency support outside business hours, please call our 24/7 emergency line at +92 51 6112202 for immediate assistance.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Head Office</h3>
+                    <p>105 Street # 4</p>
+                    <p>G-15/1, Islamabad</p>
+                    <p>Pakistan</p>
+                    <p style="margin-top: 1rem;"><strong>Phone/Fax:</strong></p>
+                    <a href="tel:+92516112202">+92 51 6112202</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Lahore Office</h3>
+                    <p>52 IB Street 2</p>
+                    <p>Tulip Block Park View City</p>
+                    <p>Lahore, Pakistan</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Karachi Office</h3>
+                    <p>Office No 101, 1st Floor</p>
+                    <p>Rehmab Tower</p>
+                    <p>Main University Road</p>
+                    <p>Block Gulistan E Johar, Karachi</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Get In Touch</h3>
+                    <p><strong>Email:</strong></p>
+                    <a href="mailto:info@promedsol.com.pk">info@promedsol.com.pk</a>
+                    <p style="margin-top: 1.5rem;"><strong>Website:</strong></p>
+                    <a href="https://www.promedsol.com.pk">www.promedsol.com.pk</a>
+                    <p style="margin-top: 1.5rem;"><strong>Warehouse:</strong></p>
+                    <p>Warehouse No 24C</p>
+                    <p>Small Industrial Estate</p>
+                    <p>Jhang Bahtar Road, Punjab</p>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 ProMED Solutions. All rights reserved. | Diagnostic Imaging Support & Maintenance Excellence</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/particle-drift.js"></script>
+    <script>
+        initParticleDrift('pdCanvasContact', {
+    background:'#031428',
+    baseColor:'#9CB4CD',
+    accentColor:'#19569B',
+    density:260,
+    dotSize:5,
+    speed:34,
+    direction:0,
+    hover:170,
+    linkDistance:210,
+    linkThickness:1
+  });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const motionSections = document.querySelectorAll('.page-header, .content-section, footer');
+            const motionCards = document.querySelectorAll('.contact-card, .hours-box, .location-card, .form-section, .office-map');
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            document.body.classList.add('motion-ready');
+
+            motionCards.forEach(function(card, index) {
+                card.classList.add('motion-card');
+                card.style.setProperty('--motion-delay', `${Math.min(index % 4, 3) * 90}ms`);
+            });
+
+            if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+                motionSections.forEach(function(section) {
+                    section.classList.add('motion-section', 'is-visible');
+                });
+                motionCards.forEach(function(card) {
+                    card.classList.add('is-visible');
+                });
+            } else {
+                const revealObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+                motionSections.forEach(function(section) {
+                    section.classList.add('motion-section');
+                    revealObserver.observe(section);
+                });
+
+                motionCards.forEach(function(card) {
+                    revealObserver.observe(card);
+                });
+            }
+
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
