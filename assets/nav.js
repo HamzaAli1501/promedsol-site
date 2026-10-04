@@ -28,7 +28,7 @@
   function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
 
   var current = location.pathname.split('/').pop().toLowerCase();
-  var top = '<div class="pm-topbar-in"><div class="pm-tb-left"><span>&#128231; <a href="mailto:info@promedsol.com.pk">info@promedsol.com.pk</a></span><span>&#128222; <a href="tel:+92516112202">+92 51 6112202</a></span><span class="pm-tb-web">&#127760; <a href="https://www.promedsol.com.pk" target="_blank" rel="noopener">www.promedsol.com.pk</a></span></div><span class="pm-tb-cert">ISO 9001:2015 &nbsp;&middot;&nbsp; PNRA Certified &nbsp;&middot;&nbsp; OEM Authorized</span></div>';
+  var top = '<div class="pm-topbar-in"><div class="pm-tb-left"><span>&#128231; <a href="mailto:info@promedsol.com.pk">info@promedsol.com.pk</a></span><span>&#128222; <a href="tel:+923171175201">0317-1175201</a></span><span class="pm-tb-web">&#127760; <a href="https://www.promedsol.com.pk" target="_blank" rel="noopener">www.promedsol.com.pk</a></span></div><span class="pm-tb-cert">ISO 9001:2015 &nbsp;&middot;&nbsp; PNRA Certified &nbsp;&middot;&nbsp; OEM Authorized</span></div>';
   var html = '<div class="pm-bar">' +
     '<a href="index.html" class="pm-logo" aria-label="ProMED Solutions home">' +
     '<img src="assets/images/promed-logo-light.webp" alt="ProMED Solutions" width="54" height="54">' +
