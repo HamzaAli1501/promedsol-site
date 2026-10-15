@@ -778,6 +778,52 @@ body{font-family:'Urbanist','Segoe UI',system-ui,sans-serif;background:#f0f4f8;o
   .gslide.active img{height:100%}
 }
 
+/* PORTAL LOGIN BOX */
+.portal-login-section {
+  background: linear-gradient(135deg, rgba(25,86,155,.06) 0%, rgba(0,229,255,.04) 100%);
+  padding: 60px 48px;
+  margin: 60px 0;
+  border-radius: 16px;
+  border: 1.5px solid rgba(0,229,255,.15);
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.portal-login-section h3 {
+  font-size: 1.8rem;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.portal-login-section p {
+  color: #64748b;
+  font-size: 1rem;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.portal-login-btn {
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  color: white;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.portal-login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(25,86,155,.3);
+}
+
 /* STATS */
 .stats-strip{background:linear-gradient(135deg,var(--navy),#082044);
   padding:52px 48px;display:grid;grid-template-columns:repeat(4,1fr);
@@ -1068,6 +1114,13 @@ body{font-family:'Urbanist','Segoe UI',system-ui,sans-serif;background:#f0f4f8;o
 </section>
 
 
+<!-- CUSTOMER PORTAL LOGIN -->
+<section class="portal-login-section">
+  <h3>Customer Portal</h3>
+  <p>Track your MRI helium levels, submit maintenance requests, and monitor system performance in real-time.</p>
+  <a href="/portal/login" class="portal-login-btn">Access Portal</a>
+</section>
+
 <!-- STATS -->
 <div class="stats-strip" id="statsStrip">
   <div class="sitem">
@@ -1085,7 +1138,7 @@ body{font-family:'Urbanist','Segoe UI',system-ui,sans-serif;background:#f0f4f8;o
         <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="white"/>
       </svg>
     </span>
-    <span class="snum">99.4%</span>
+    <span class="snum">98%</span>
     <span class="slbl">System Uptime Guaranteed</span>
   </div>
   <div class="sitem">
