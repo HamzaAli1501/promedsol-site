@@ -9,3 +9,11 @@ about.html
 all-pages.html
 central-operations.html
 DEPLOYMENT_TODO.md
+
+# Backend — ignore venv, DB, cache
+backend/venv/
+backend/database.db
+backend/__pycache__/
+backend/static/
+*.pyc
+__pycache__/
