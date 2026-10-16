@@ -199,21 +199,6 @@ input::placeholder{color:rgba(176,189,205,.35)}
   }
 })();
 
-/* Smart form action:
-   - file:// (opened locally as HTML file) → localhost:5000
-   - localhost / 127.0.0.1                 → localhost:5000
-   - live domain (promedsol.com.pk)        → domain:5000
-*/
-(function(){
-  var form = document.getElementById('loginForm');
-  var host = location.hostname;
-  if(host === '' || host === 'localhost' || host === '127.0.0.1'){
-    form.action = 'http://localhost:5000/login';
-  } else {
-    form.action = location.protocol + '//' + host + ':5000/login';
-  }
-})();
-
 /* Loading spinner on submit */
 document.getElementById('loginForm').addEventListener('submit', function(){
   document.getElementById('loginBtn').classList.add('loading');
