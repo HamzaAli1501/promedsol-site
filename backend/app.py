@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+﻿from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH  = os.path.join(BASE_DIR, 'database.db')
 
 # ========== SINGLE AUTHORISED USER ==========
-# Only this one account can ever log in — no registration allowed
+# Only this one account can ever log in â€” no registration allowed
 SINGLE_USERNAME = 'ProMed-Solution'
 SINGLE_PASSWORD = '123456789'
 
@@ -41,7 +41,7 @@ def init_db():
         )
     ''')
 
-    # mri_logs — added humidity, removed quench_event
+    # mri_logs â€” added humidity, removed quench_event
     c.execute('''
         CREATE TABLE IF NOT EXISTS mri_logs (
             id               INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -112,7 +112,7 @@ def home():
         return redirect(url_for('dashboard'))
     return redirect(url_for('login'))
 
-# ---------- LOGIN (only route for auth — no register) ----------
+# ---------- LOGIN (only route for auth â€” no register) ----------
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -222,4 +222,5 @@ def api_latest():
     return jsonify({'error': 'No data'}), 404
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
