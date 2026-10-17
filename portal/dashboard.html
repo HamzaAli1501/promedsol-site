@@ -240,6 +240,10 @@ textarea{resize:vertical;min-height:76px;line-height:1.6}
     <div class="error-bar" id="errorBar"></div>
 
     <p class="section-label">Machine Details</p>
+    <div class="form-group">
+      <label>Facility / Site Location <span class="required">*</span></label>
+      <input type="text" id="f-facility" placeholder="e.g. IDC Multan, Aga Khan Hospital Karachi">
+    </div>
     <div class="form-grid-2">
       <div class="form-group">
         <label>Machine ID <span class="required">*</span></label>
@@ -340,12 +344,14 @@ window.updateStatus = function(){
 
 window.saveReading = async function(){
   var machineId = document.getElementById('f-machine-id').value.trim();
+  var facility = document.getElementById('f-facility').value.trim();
   var heliumLevel = parseFloat(document.getElementById('f-helium-level').value);
   var heliumPressure = parseFloat(document.getElementById('f-helium-pressure').value);
   var errorBar = document.getElementById('errorBar');
 
   errorBar.classList.remove('show');
 
+  if(!facility){ errorBar.textContent = 'Please enter the Facility / Site Location.'; errorBar.classList.add('show'); return; }
   if(!machineId){ errorBar.textContent = 'Please enter a Machine ID.'; errorBar.classList.add('show'); return; }
   if(isNaN(heliumLevel)){ errorBar.textContent = 'Please enter the Helium Level.'; errorBar.classList.add('show'); return; }
   if(isNaN(heliumPressure)){ errorBar.textContent = 'Please enter the Helium Pressure.'; errorBar.classList.add('show'); return; }
@@ -356,6 +362,8 @@ window.saveReading = async function(){
   try {
     var status = computeStatus(heliumLevel, heliumPressure);
     await addDoc(collection(db, 'mri_logs'), {
+      submittedBy: sessionStorage.getItem('promed_user') || 'unknown',
+      facility: facility,
       machineId,
       machineModel: document.getElementById('f-machine-model').value.trim() || null,
       heliumLevel,
@@ -384,7 +392,7 @@ window.saveReading = async function(){
 };
 
 window.resetForm = function(){
-  ['f-machine-id','f-machine-model','f-helium-level','f-helium-pressure',
+  ['f-facility','f-machine-id','f-machine-model','f-helium-level','f-helium-pressure',
    'f-humidity','f-magnet-temp','f-next-service','f-notes'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('statusHint').className = 'status-hint';
   document.getElementById('saveBtn').disabled = false;

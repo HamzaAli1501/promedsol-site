@@ -111,6 +111,18 @@ if(sessionStorage.getItem('promed_auth')==='true'){
   window.location.href='dashboard.html';
 }
 
+// ========== AUTHORISED USERS ==========
+// Add or remove users here — format: 'username': 'password'
+var USERS = {
+  'ProMed-Solution' : '123456789',
+  'IDC-Islamabad'   : 'IDC@2024',
+  'IDC-Lahore'      : 'IDC@2024',
+  'IDC-Multan'      : 'IDC@2024',
+  'IDC-Karachi'     : 'IDC@2024',
+  'IDC-Peshawar'    : 'IDC@2024',
+  'ProMED-Admin'    : 'Admin@ProMED2024'
+};
+
 function doLogin(){
   var user=document.getElementById('username').value.trim();
   var pass=document.getElementById('password').value.trim();
@@ -122,8 +134,9 @@ function doLogin(){
   err.classList.remove('visible');
 
   setTimeout(function(){
-    if(user==='ProMed-Solution' && pass==='123456789'){
+    if(USERS[user] && USERS[user]===pass){
       sessionStorage.setItem('promed_auth','true');
+      sessionStorage.setItem('promed_user', user);
       window.location.href='dashboard.html';
     } else {
       btn.classList.remove('loading');
