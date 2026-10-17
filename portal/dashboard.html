@@ -3,150 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MRI Dashboard — ProMED Solutions</title>
+<title>MRI Portal — ProMED Solutions</title>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#031428;--blue:#19569B;--cyan:#00E5FF;--slate:#B0BDCD;--bg:#f0f4f8;--card:#fff;--border:#dde8f5;--text:#1e3a52;--muted:#6b859e}
+:root{
+  --navy:#031428;--blue:#19569B;--cyan:#00E5FF;
+  --slate:#B0BDCD;--bg:#eef2f7;--card:#fff;
+  --border:#e2eaf4;--text:#1a3348;--muted:#7a93aa;
+}
 html,body{min-height:100%;font-family:'Urbanist',system-ui,sans-serif;background:var(--bg);color:var(--text)}
 
-.topbar{background:var(--navy);padding:0 40px;height:62px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(3,20,40,.18)}
-.tb-brand{font-size:17px;font-weight:900;background:linear-gradient(135deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.tb-right{display:flex;align-items:center;gap:16px}
-.tb-user{font-size:.82rem;font-weight:600;color:var(--slate)}
-.tb-logout{padding:7px 16px;border-radius:6px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.6);font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}
+/* ── TOPBAR ── */
+.topbar{
+  background:var(--navy);
+  padding:0 48px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 4px 24px rgba(3,20,40,.22);
+}
+.tb-left{display:flex;align-items:center;gap:14px}
+.tb-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.tb-brand{font-size:17px;font-weight:900;
+  background:linear-gradient(135deg,#fff,var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tb-right{display:flex;align-items:center;gap:20px}
+.tb-badge{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--cyan);background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.22);
+  padding:4px 12px;border-radius:50px}
+.tb-logout{
+  padding:7px 18px;border-radius:6px;
+  border:1px solid rgba(255,255,255,.14);
+  background:transparent;color:rgba(255,255,255,.55);
+  font-family:inherit;font-size:.8rem;font-weight:600;
+  cursor:pointer;text-decoration:none;transition:all .2s;
+}
 .tb-logout:hover{border-color:var(--cyan);color:var(--cyan)}
 
-.main{max-width:680px;margin:0 auto;padding:40px 24px}
+/* ── HERO STRIP ── */
+.hero-strip{
+  background:linear-gradient(135deg,var(--navy) 0%,#082044 100%);
+  padding:40px 48px 44px;position:relative;overflow:hidden;
+}
+.hero-strip::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+}
+.hero-strip::after{
+  content:'';position:absolute;right:-60px;top:-60px;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,255,.06),transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.hero-inner h1{font-size:1.65rem;font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:6px}
+.hero-inner p{font-size:.9rem;color:rgba(176,189,205,.7);line-height:1.6}
 
-.page-title{margin-bottom:32px}
-.page-title h1{font-size:1.55rem;font-weight:800;color:var(--navy);letter-spacing:-.02em}
-.page-title p{color:var(--muted);font-size:.9rem;margin-top:4px}
+/* ── MAIN ── */
+.main{max-width:680px;margin:0 auto;padding:36px 24px 60px}
 
-/* SUCCESS STATE */
-.success-screen{
+/* ── SUCCESS CARD ── */
+.success-card{
   display:none;
   background:var(--card);border:1.5px solid #bbf7d0;
-  border-radius:16px;padding:48px 32px;text-align:center;
-  box-shadow:0 2px 12px rgba(3,20,40,.06);
+  border-radius:20px;padding:56px 36px;text-align:center;
+  box-shadow:0 4px 24px rgba(34,197,94,.1);
+  animation:fadeUp .5s ease both;
 }
-.success-screen.show{display:block}
-.success-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#4ade80);
-  display:flex;align-items:center;justify-content:center;margin:0 auto 20px;
-  box-shadow:0 8px 24px rgba(34,197,94,.3);font-size:2rem}
-.success-screen h2{font-size:1.4rem;font-weight:800;color:#15803d;margin-bottom:8px}
-.success-screen p{color:#6b859e;font-size:.95rem;line-height:1.6;margin-bottom:24px}
-.btn-another{padding:11px 28px;border:none;border-radius:8px;cursor:pointer;
-  background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;
-  font-family:inherit;font-size:.9rem;font-weight:700;transition:transform .25s,box-shadow .25s}
-.btn-another:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(25,86,155,.25)}
-
-/* FORM CARD */
-.form-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:32px 28px;box-shadow:0 2px 12px rgba(3,20,40,.06)}
-.card-title{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:24px;padding-bottom:16px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:8px}
-.card-title-bar{width:4px;height:18px;border-radius:2px;background:linear-gradient(var(--blue),var(--cyan));flex-shrink:0}
-
-.section-tag{font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;margin-top:20px}
-.section-tag:first-of-type{margin-top:0}
-.divider{border:none;border-top:1.5px solid var(--border);margin:18px 0}
-.form-group{margin-bottom:15px}
-.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{display:block;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-input[type=text],input[type=number],input[type=date],textarea{
-  width:100%;padding:11px 13px;border-radius:8px;border:1.5px solid var(--border);
-  background:#f8fafc;color:var(--text);font-family:inherit;font-size:.92rem;outline:none;
-  transition:border-color .2s,box-shadow .2s}
-input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(25,86,155,.08);background:#fff}
-input::placeholder,textarea::placeholder{color:#b0bdcd}
-textarea{resize:vertical;min-height:72px}
-
-.required-note{font-size:.75rem;color:var(--muted);margin-bottom:20px}
-
-.btn-save{
-  width:100%;padding:13px;margin-top:6px;border:none;border-radius:9px;cursor:pointer;
+.success-card.show{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.success-ring{
+  width:84px;height:84px;border-radius:50%;margin:0 auto 22px;
+  background:linear-gradient(135deg,#22c55e,#4ade80);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 32px rgba(34,197,94,.3);
+  font-size:2.2rem;
+}
+.success-card h2{font-size:1.5rem;font-weight:900;color:#15803d;margin-bottom:10px}
+.success-card p{color:var(--muted);font-size:.95rem;line-height:1.7;max-width:400px;margin:0 auto 28px}
+.success-meta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#f0fdf4;border:1px solid #bbf7d0;
+  border-radius:50px;padding:6px 18px;
+  font-size:.78rem;font-weight:700;color:#16a34a;
+  margin-bottom:28px;
+}
+.success-meta::before{content:'';display:block;width:7px;height:7px;border-radius:50%;background:#22c55e}
+.btn-another{
+  padding:12px 32px;border:none;border-radius:50px;cursor:pointer;
   background:linear-gradient(135deg,var(--blue),var(--cyan));
-  color:#fff;font-family:inherit;font-size:1rem;font-weight:700;
-  letter-spacing:.03em;transition:transform .25s,box-shadow .25s,opacity .25s;
-  display:flex;align-items:center;justify-content:center;gap:10px;
+  color:#fff;font-family:inherit;font-size:.95rem;font-weight:700;
+  transition:transform .25s,box-shadow .25s;
 }
-.btn-save:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(25,86,155,.25)}
-.btn-save:disabled{opacity:.6;pointer-events:none}
-.btn-spinner{width:17px;height:17px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:none}
-@keyframes spin{to{transform:rotate(360deg)}}
-.btn-save.loading .btn-spinner{display:block}
-.btn-save.loading .btn-text{opacity:.7}
+.btn-another:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(25,86,155,.25)}
 
-.error-bar{display:none;background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #ef4444;
-  border-radius:8px;padding:10px 14px;color:#b91c1c;font-size:.85rem;font-weight:600;margin-bottom:16px}
+/* ── FORM CARD ── */
+.form-card{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:20px;padding:36px 32px;
+  box-shadow:0 4px 20px rgba(3,20,40,.07);
+  animation:fadeUp .4s ease both;
+}
+.form-header{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:28px;padding-bottom:20px;
+  border-bottom:1.5px solid var(--border);
+}
+.form-header-bar{width:4px;height:22px;border-radius:2px;background:linear-gradient(var(--blue),var(--cyan));flex-shrink:0}
+.form-header h2{font-size:1.05rem;font-weight:800;color:var(--text)}
+.form-header p{font-size:.8rem;color:var(--muted);margin-top:2px}
+
+.section-label{
+  font-size:.67rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:14px;margin-top:22px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-label:first-of-type{margin-top:0}
+
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:14px}
+.form-group:last-child{margin-bottom:0}
+label{
+  display:block;font-size:.73rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:5px;
+}
+.required{color:var(--cyan);margin-left:2px}
+
+input[type=text],input[type=number],input[type=date],textarea{
+  width:100%;padding:11px 14px;border-radius:9px;
+  border:1.5px solid var(--border);
+  background:#f7fafc;color:var(--text);
+  font-family:inherit;font-size:.92rem;outline:none;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+input:focus,textarea:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(25,86,155,.09);
+  background:#fff;
+}
+input::placeholder,textarea::placeholder{color:rgba(176,189,205,.5)}
+textarea{resize:vertical;min-height:76px;line-height:1.6}
+
+/* status hint below helium fields */
+.status-hint{
+  display:none;
+  font-size:.75rem;font-weight:600;
+  padding:6px 12px;border-radius:6px;margin-top:6px;
+}
+.status-hint.Normal{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;display:block}
+.status-hint.Warning{background:#fffbeb;color:#d97706;border:1px solid #fde68a;display:block}
+.status-hint.Critical{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;display:block}
+
+.error-bar{
+  display:none;background:#fef2f2;border:1px solid #fecaca;
+  border-left:4px solid #ef4444;border-radius:9px;
+  padding:11px 14px;color:#b91c1c;font-size:.85rem;font-weight:600;
+  margin-bottom:18px;
+}
 .error-bar.show{display:block}
 
+.btn-save{
+  width:100%;padding:14px;margin-top:20px;border:none;border-radius:10px;cursor:pointer;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  color:#fff;font-family:inherit;font-size:1rem;font-weight:700;
+  letter-spacing:.03em;
+  transition:transform .25s,box-shadow .25s,opacity .2s;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-save:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(25,86,155,.28)}
+.btn-save:disabled{opacity:.6;pointer-events:none}
+.spinner{width:17px;height:17px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .65s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-save.loading .spinner{display:block}
+.btn-save.loading .btn-text{opacity:.7}
+
+/* FOOTER NOTE */
+.footer-note{text-align:center;margin-top:24px;font-size:.78rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px}
+.footer-note::before{content:'🔒';font-size:.85rem}
+
 @media(max-width:600px){
-  .form-row-2{grid-template-columns:1fr}
   .topbar{padding:0 16px}
-  .main{padding:24px 16px}
+  .hero-strip{padding:28px 20px}
+  .main{padding:24px 14px}
+  .form-card{padding:24px 18px}
+  .form-grid-2{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <nav class="topbar">
-  <span class="tb-brand">ProMED Solutions</span>
+  <div class="tb-left">
+    <div class="tb-dot"></div>
+    <span class="tb-brand">ProMED Solutions</span>
+  </div>
   <div class="tb-right">
-    <span class="tb-user">MRI Portal</span>
+    <span class="tb-badge">MRI Portal</span>
     <a href="login.html" class="tb-logout" onclick="sessionStorage.removeItem('promed_auth')">Sign Out</a>
   </div>
 </nav>
 
-<main class="main">
-  <div class="page-title">
-    <h1>Submit MRI Reading</h1>
-    <p>Enter your equipment data — readings are securely saved to ProMED's system</p>
+<!-- HERO STRIP -->
+<div class="hero-strip">
+  <div class="hero-inner">
+    <h1>MRI System Reading</h1>
+    <p>Submit your equipment data securely — readings are monitored by ProMED's engineering team</p>
   </div>
+</div>
 
-  <!-- SUCCESS SCREEN -->
-  <div class="success-screen" id="successScreen">
-    <div class="success-icon">✓</div>
-    <h2>Reading Saved Successfully</h2>
-    <p>Your MRI system data has been securely submitted to ProMED Solutions. Our team will monitor the readings and contact you if any action is required.</p>
+<main class="main">
+
+  <!-- SUCCESS STATE -->
+  <div class="success-card" id="successCard">
+    <div class="success-ring">✓</div>
+    <h2>Reading Submitted</h2>
+    <div class="success-meta" id="successStatus">Normal — System OK</div>
+    <p>Your MRI system data has been securely submitted to ProMED Solutions. Our engineering team will review your readings and contact you if any action is required.</p>
     <button class="btn-another" onclick="resetForm()">Submit Another Reading</button>
   </div>
 
   <!-- FORM -->
   <div class="form-card" id="formCard">
-    <div class="card-title"><span class="card-title-bar"></span>New Reading</div>
+    <div class="form-header">
+      <div class="form-header-bar"></div>
+      <div>
+        <h2>New Reading Entry</h2>
+        <p>Fields marked <span style="color:var(--cyan);font-weight:700">*</span> are required</p>
+      </div>
+    </div>
 
     <div class="error-bar" id="errorBar"></div>
 
-    <p class="section-tag">Machine Details</p>
-    <div class="form-row-2">
-      <div class="form-group"><label>Machine ID *</label><input type="text" id="f-machine-id" placeholder="e.g. MRI-01"></div>
-      <div class="form-group"><label>Model</label><input type="text" id="f-machine-model" placeholder="e.g. GE SIGNA 1.5T"></div>
+    <p class="section-label">Machine Details</p>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Machine ID <span class="required">*</span></label>
+        <input type="text" id="f-machine-id" placeholder="e.g. MRI-01">
+      </div>
+      <div class="form-group">
+        <label>Machine Model</label>
+        <input type="text" id="f-machine-model" placeholder="e.g. GE SIGNA 1.5T">
+      </div>
     </div>
 
-    <hr class="divider">
-    <p class="section-tag">Helium Readings</p>
-    <div class="form-row-2">
-      <div class="form-group"><label>Helium Level (%) *</label><input type="number" id="f-helium-level" step="0.1" min="0" max="100" placeholder="e.g. 72.5"></div>
-      <div class="form-group"><label>Helium Pressure (bar) *</label><input type="number" id="f-helium-pressure" step="0.01" min="0" placeholder="e.g. 3.5"></div>
+    <p class="section-label">Helium Readings</p>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Helium Level (%) <span class="required">*</span></label>
+        <input type="number" id="f-helium-level" step="0.1" min="0" max="100" placeholder="e.g. 72.5" oninput="updateStatus()">
+      </div>
+      <div class="form-group">
+        <label>Helium Pressure (bar) <span class="required">*</span></label>
+        <input type="number" id="f-helium-pressure" step="0.01" min="0" placeholder="e.g. 3.5" oninput="updateStatus()">
+      </div>
+    </div>
+    <div class="status-hint" id="statusHint"></div>
+
+    <p class="section-label">Environmental Metrics</p>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Humidity (%)</label>
+        <input type="number" id="f-humidity" step="0.1" min="0" max="100" placeholder="e.g. 45.0">
+      </div>
+      <div class="form-group">
+        <label>Magnet Temperature (K)</label>
+        <input type="number" id="f-magnet-temp" step="0.01" placeholder="e.g. 4.22">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Next Service Date</label>
+      <input type="date" id="f-next-service">
     </div>
 
-    <hr class="divider">
-    <p class="section-tag">Environmental Metrics</p>
-    <div class="form-row-2">
-      <div class="form-group"><label>Humidity (%)</label><input type="number" id="f-humidity" step="0.1" min="0" max="100" placeholder="e.g. 45.0"></div>
-      <div class="form-group"><label>Magnet Temp (K)</label><input type="number" id="f-magnet-temp" step="0.01" placeholder="e.g. 4.22"></div>
+    <p class="section-label">Technician Notes</p>
+    <div class="form-group">
+      <textarea id="f-notes" placeholder="Any observations, anomalies, or actions taken during this reading…"></textarea>
     </div>
-    <div class="form-group"><label>Next Service Date</label><input type="date" id="f-next-service"></div>
-
-    <hr class="divider">
-    <p class="section-tag">Notes</p>
-    <div class="form-group"><label>Technician Notes</label><textarea id="f-notes" placeholder="Any observations, anomalies, or actions taken…"></textarea></div>
 
     <button class="btn-save" id="saveBtn" onclick="saveReading()">
-      <span class="btn-text">Save Reading</span>
-      <div class="btn-spinner"></div>
+      <span class="btn-text">Submit Reading</span>
+      <div class="spinner"></div>
     </button>
   </div>
+
+  <p class="footer-note">All readings are encrypted and stored securely on ProMED's private database</p>
+
 </main>
 
 <script type="module">
@@ -177,6 +323,21 @@ function computeStatus(level, pressure){
   return 'Normal';
 }
 
+window.updateStatus = function(){
+  var level = parseFloat(document.getElementById('f-helium-level').value);
+  var pressure = parseFloat(document.getElementById('f-helium-pressure').value);
+  var hint = document.getElementById('statusHint');
+  if(isNaN(level) || isNaN(pressure)){ hint.className = 'status-hint'; return; }
+  var s = computeStatus(level, pressure);
+  var msgs = {
+    Normal: '✓ Normal — Helium levels are within safe operating range',
+    Warning: '⚠ Warning — Helium levels are low, service recommended soon',
+    Critical: '✕ Critical — Immediate attention required, contact ProMED now'
+  };
+  hint.textContent = msgs[s];
+  hint.className = 'status-hint ' + s;
+};
+
 window.saveReading = async function(){
   var machineId = document.getElementById('f-machine-id').value.trim();
   var heliumLevel = parseFloat(document.getElementById('f-helium-level').value);
@@ -185,58 +346,50 @@ window.saveReading = async function(){
 
   errorBar.classList.remove('show');
 
-  if(!machineId){
-    errorBar.textContent = 'Please enter a Machine ID.';
-    errorBar.classList.add('show'); return;
-  }
-  if(isNaN(heliumLevel)){
-    errorBar.textContent = 'Please enter Helium Level.';
-    errorBar.classList.add('show'); return;
-  }
-  if(isNaN(heliumPressure)){
-    errorBar.textContent = 'Please enter Helium Pressure.';
-    errorBar.classList.add('show'); return;
-  }
+  if(!machineId){ errorBar.textContent = 'Please enter a Machine ID.'; errorBar.classList.add('show'); return; }
+  if(isNaN(heliumLevel)){ errorBar.textContent = 'Please enter the Helium Level.'; errorBar.classList.add('show'); return; }
+  if(isNaN(heliumPressure)){ errorBar.textContent = 'Please enter the Helium Pressure.'; errorBar.classList.add('show'); return; }
 
   var btn = document.getElementById('saveBtn');
-  btn.disabled = true;
-  btn.classList.add('loading');
+  btn.disabled = true; btn.classList.add('loading');
 
   try {
+    var status = computeStatus(heliumLevel, heliumPressure);
     await addDoc(collection(db, 'mri_logs'), {
-      machineId: machineId,
+      machineId,
       machineModel: document.getElementById('f-machine-model').value.trim() || null,
-      heliumLevel: heliumLevel,
-      heliumPressure: heliumPressure,
+      heliumLevel,
+      heliumPressure,
       humidity: parseFloat(document.getElementById('f-humidity').value) || null,
       magnetTemp: parseFloat(document.getElementById('f-magnet-temp').value) || null,
       nextService: document.getElementById('f-next-service').value || null,
       notes: document.getElementById('f-notes').value.trim() || null,
-      status: computeStatus(heliumLevel, heliumPressure),
+      status,
       timestamp: serverTimestamp()
     });
 
-    // Show success, hide form
+    var statusLabels = {Normal:'Normal — System OK', Warning:'Warning — Low Helium', Critical:'Critical — Immediate Action'};
+    document.getElementById('successStatus').textContent = statusLabels[status];
+    document.getElementById('successStatus').style.background = status==='Normal'?'#f0fdf4':status==='Warning'?'#fffbeb':'#fef2f2';
+    document.getElementById('successStatus').style.color = status==='Normal'?'#16a34a':status==='Warning'?'#d97706':'#dc2626';
+
     document.getElementById('formCard').style.display = 'none';
-    document.getElementById('successScreen').classList.add('show');
+    document.getElementById('successCard').classList.add('show');
 
   } catch(e){
-    errorBar.textContent = 'Error saving data: ' + e.message;
+    errorBar.textContent = 'Error saving: ' + e.message;
     errorBar.classList.add('show');
-    btn.disabled = false;
-    btn.classList.remove('loading');
+    btn.disabled = false; btn.classList.remove('loading');
   }
 };
 
 window.resetForm = function(){
   ['f-machine-id','f-machine-model','f-helium-level','f-helium-pressure',
-   'f-humidity','f-magnet-temp','f-next-service','f-notes'].forEach(function(id){
-    document.getElementById(id).value = '';
-  });
-  var btn = document.getElementById('saveBtn');
-  btn.disabled = false;
-  btn.classList.remove('loading');
-  document.getElementById('successScreen').classList.remove('show');
+   'f-humidity','f-magnet-temp','f-next-service','f-notes'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('statusHint').className = 'status-hint';
+  document.getElementById('saveBtn').disabled = false;
+  document.getElementById('saveBtn').classList.remove('loading');
+  document.getElementById('successCard').classList.remove('show');
   document.getElementById('formCard').style.display = 'block';
   document.getElementById('errorBar').classList.remove('show');
 };
