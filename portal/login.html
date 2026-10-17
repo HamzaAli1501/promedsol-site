@@ -112,11 +112,11 @@ if(sessionStorage.getItem('promed_auth')==='true'){
 }
 
 // ========== AUTHORISED USERS ==========
-// Add or remove users here — format: 'username': 'password'
 var USERS = {
-  'ProMed-Solution'  : '123456789',
-  'ProMed-Solution2' : '123456789',
-  'ProMed-Solution3' : '123456789'
+  'ProMed-Solution'  : 'PM@7491',
+  'ProMed-Solution2' : 'PM@3856',
+  'ProMed-Solution3' : 'PM@6273',
+  'emad-jadoon'      : 'siremadjadoon'
 };
 
 function doLogin(){
@@ -133,7 +133,12 @@ function doLogin(){
     if(USERS[user] && USERS[user]===pass){
       sessionStorage.setItem('promed_auth','true');
       sessionStorage.setItem('promed_user', user);
-      window.location.href='dashboard.html';
+      // Admin goes to admin panel, others go to dashboard
+      if(user==='emad-jadoon'){
+        window.location.href='admin.html';
+      } else {
+        window.location.href='dashboard.html';
+      }
     } else {
       btn.classList.remove('loading');
       err.classList.add('visible');

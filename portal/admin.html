@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — ProMED Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#031428;--blue:#19569B;--cyan:#00E5FF;--slate:#B0BDCD;--bg:#eef2f7;--card:#fff;--border:#e2eaf4;--text:#1a3348;--muted:#7a93aa}
+html,body{min-height:100%;font-family:'Urbanist',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+
+/* TOPBAR */
+.topbar{background:var(--navy);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 24px rgba(3,20,40,.22)}
+.tb-left{display:flex;align-items:center;gap:14px}
+.tb-brand{font-size:17px;font-weight:900;background:linear-gradient(135deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tb-admin-badge{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f87171;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.28);padding:4px 12px;border-radius:50px}
+.tb-logout{padding:7px 18px;border-radius:6px;border:1px solid rgba(255,255,255,.14);background:transparent;color:rgba(255,255,255,.55);font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}
+.tb-logout:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* HERO */
+.hero-strip{background:linear-gradient(135deg,var(--navy) 0%,#082044 100%);padding:36px 48px 40px;position:relative;overflow:hidden}
+.hero-strip::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.hero-inner h1{font-size:1.6rem;font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:4px}
+.hero-inner p{font-size:.88rem;color:rgba(176,189,205,.7)}
+.refresh-btn{padding:9px 20px;border-radius:8px;border:1px solid rgba(0,229,255,.3);background:rgba(0,229,255,.08);color:var(--cyan);font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:8px}
+.refresh-btn:hover{background:rgba(0,229,255,.15);border-color:var(--cyan)}
+
+/* MAIN */
+.main{max-width:1300px;margin:0 auto;padding:32px 24px 60px}
+
+/* STAT STRIP */
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.scard{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:20px 18px;box-shadow:0 2px 10px rgba(3,20,40,.05)}
+.scard-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.scard-value{font-size:1.9rem;font-weight:900;color:var(--navy);letter-spacing:-.03em}
+.scard-value.red{color:#dc2626}
+.scard-value.yellow{color:#d97706}
+.scard-value.green{color:#16a34a}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.filter-bar input,.filter-bar select{
+  padding:9px 13px;border-radius:8px;border:1.5px solid var(--border);
+  background:var(--card);color:var(--text);font-family:inherit;font-size:.875rem;outline:none;
+  transition:border-color .2s}
+.filter-bar input{min-width:240px}
+.filter-bar input:focus,.filter-bar select:focus{border-color:var(--blue)}
+.filter-bar input::placeholder{color:rgba(122,147,170,.5)}
+.export-btn{padding:9px 18px;border-radius:8px;border:1.5px solid var(--border);background:var(--card);color:var(--text);font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;margin-left:auto;transition:all .2s}
+.export-btn:hover{border-color:var(--blue);color:var(--blue)}
+
+/* TABLE */
+.table-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(3,20,40,.06)}
+.table-header{padding:18px 22px 16px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:10px}
+.table-header-bar{width:4px;height:18px;border-radius:2px;background:linear-gradient(var(--blue),var(--cyan));flex-shrink:0}
+.table-header h2{font-size:1rem;font-weight:800;color:var(--text)}
+.record-count{font-size:.75rem;font-weight:600;color:var(--muted);margin-left:auto}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+thead th{padding:10px 14px;text-align:left;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:#f7fafc;border-bottom:1.5px solid var(--border);white-space:nowrap}
+tbody tr{border-bottom:1px solid #f0f4f8;transition:background .15s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#f7fafc}
+td{padding:11px 14px;color:var(--text);vertical-align:middle}
+.td-muted{color:var(--muted);font-size:.8rem}
+.td-notes{color:var(--muted);font-size:.8rem;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.no-data{padding:56px;text-align:center;color:var(--muted)}
+.no-data p{font-size:.95rem;margin-top:8px}
+
+/* STATUS PILLS */
+.pill{display:inline-block;padding:3px 11px;border-radius:50px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.pill-Normal{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+.pill-Warning{background:#fffbeb;color:#d97706;border:1px solid #fde68a}
+.pill-Critical{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+
+/* USER PILL */
+.user-pill{display:inline-block;background:#f0f4f8;color:var(--muted);border:1px solid var(--border);border-radius:50px;padding:2px 9px;font-size:.72rem;font-weight:600}
+
+.loading-spinner{padding:56px;text-align:center;color:var(--muted)}
+.spinner-ring{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:900px){.stat-strip{grid-template-columns:1fr 1fr}.topbar,.hero-strip{padding-left:20px;padding-right:20px}.main{padding:20px 14px}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="tb-left">
+    <span class="tb-brand">ProMED Solutions</span>
+    <span class="tb-admin-badge">Admin Panel</span>
+  </div>
+  <a href="login.html" class="tb-logout" onclick="sessionStorage.clear()">Sign Out</a>
+</nav>
+
+<div class="hero-strip">
+  <div class="hero-inner">
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>All MRI readings submitted by ProMED customers — live from Firebase</p>
+    </div>
+    <button class="refresh-btn" onclick="loadLogs()">↻ Refresh</button>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- STAT CARDS -->
+  <div class="stat-strip">
+    <div class="scard"><div class="scard-label">Total Readings</div><div class="scard-value" id="st-total">—</div></div>
+    <div class="scard"><div class="scard-label">Critical Alerts</div><div class="scard-value red" id="st-critical">—</div></div>
+    <div class="scard"><div class="scard-label">Warnings</div><div class="scard-value yellow" id="st-warning">—</div></div>
+    <div class="scard"><div class="scard-label">Normal</div><div class="scard-value green" id="st-normal">—</div></div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <input type="text" id="searchInput" placeholder="Search facility, machine, user, notes…" oninput="filterTable()">
+    <select id="statusFilter" onchange="filterTable()">
+      <option value="">All Statuses</option>
+      <option value="Normal">Normal</option>
+      <option value="Warning">Warning</option>
+      <option value="Critical">Critical</option>
+    </select>
+    <select id="userFilter" onchange="filterTable()">
+      <option value="">All Users</option>
+      <option value="ProMed-Solution">ProMed-Solution</option>
+      <option value="ProMed-Solution2">ProMed-Solution2</option>
+      <option value="ProMed-Solution3">ProMed-Solution3</option>
+    </select>
+    <button class="export-btn" onclick="exportCSV()">⬇ Export CSV</button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-header-bar"></div>
+      <h2>All MRI Readings</h2>
+      <span class="record-count" id="recordCount"></span>
+    </div>
+    <div id="tableArea">
+      <div class="loading-spinner">
+        <div class="spinner-ring"></div>
+        Loading readings from Firebase…
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getFirestore, collection, getDocs, orderBy, query } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB758G1LoTHM6JYkJZ9kljKqlHOrtYfG5s",
+  authDomain: "promed-portal.firebaseapp.com",
+  projectId: "promed-portal",
+  storageBucket: "promed-portal.firebasestorage.app",
+  messagingSenderId: "331679836659",
+  appId: "1:331679836659:web:06c43f1cd39988a81eca86"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Admin auth guard
+if(sessionStorage.getItem('promed_auth') !== 'true' || sessionStorage.getItem('promed_user') !== 'emad-jadoon'){
+  window.location.href = 'login.html';
+}
+
+let allLogs = [];
+
+window.loadLogs = async function(){
+  document.getElementById('tableArea').innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div>Loading…</div>';
+  try {
+    const q = query(collection(db, 'mri_logs'), orderBy('timestamp', 'desc'));
+    const snap = await getDocs(q);
+    allLogs = [];
+    snap.forEach(doc => allLogs.push({id: doc.id, ...doc.data()}));
+    updateStats();
+    renderTable(allLogs);
+  } catch(e){
+    document.getElementById('tableArea').innerHTML = '<div class="no-data"><p>Error loading data: ' + e.message + '</p></div>';
+  }
+};
+
+function updateStats(){
+  document.getElementById('st-total').textContent = allLogs.length;
+  document.getElementById('st-critical').textContent = allLogs.filter(r=>r.status==='Critical').length;
+  document.getElementById('st-warning').textContent = allLogs.filter(r=>r.status==='Warning').length;
+  document.getElementById('st-normal').textContent = allLogs.filter(r=>r.status==='Normal').length;
+}
+
+function renderTable(logs){
+  document.getElementById('recordCount').textContent = logs.length + ' records';
+  if(!logs.length){
+    document.getElementById('tableArea').innerHTML = '<div class="no-data"><div style="font-size:2rem">📋</div><p>No readings found.</p></div>';
+    return;
+  }
+  var rows = logs.map(function(d){
+    var ts = d.timestamp ? new Date(d.timestamp.seconds*1000).toLocaleString('en-PK') : '—';
+    return '<tr>' +
+      '<td class="td-muted">' + ts + '</td>' +
+      '<td><span class="user-pill">' + (d.submittedBy||'—') + '</span></td>' +
+      '<td><strong>' + (d.facility||'—') + '</strong></td>' +
+      '<td>' + (d.machineId||'—') + (d.machineModel ? '<br><span class="td-muted">'+d.machineModel+'</span>' : '') + '</td>' +
+      '<td><strong>' + (d.heliumLevel||'—') + '%</strong></td>' +
+      '<td>' + (d.heliumPressure||'—') + ' bar</td>' +
+      '<td>' + (d.humidity ? d.humidity+'%' : '—') + '</td>' +
+      '<td class="td-muted">' + (d.magnetTemp||'—') + '</td>' +
+      '<td>' + (d.nextService||'—') + '</td>' +
+      '<td><span class="pill pill-' + d.status + '">' + (d.status||'—') + '</span></td>' +
+      '<td class="td-notes" title="'+(d.notes||'')+'">' + (d.notes||'—') + '</td>' +
+    '</tr>';
+  }).join('');
+
+  document.getElementById('tableArea').innerHTML =
+    '<div class="table-wrap"><table>' +
+    '<thead><tr><th>Date &amp; Time</th><th>User</th><th>Facility</th><th>Machine</th><th>He Level</th><th>He Pressure</th><th>Humidity</th><th>Temp (K)</th><th>Next Service</th><th>Status</th><th>Notes</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table></div>';
+}
+
+window.filterTable = function(){
+  var search = document.getElementById('searchInput').value.toLowerCase();
+  var status = document.getElementById('statusFilter').value;
+  var user = document.getElementById('userFilter').value;
+  var filtered = allLogs.filter(function(d){
+    var text = JSON.stringify(d).toLowerCase();
+    var matchSearch = !search || text.includes(search);
+    var matchStatus = !status || d.status === status;
+    var matchUser = !user || d.submittedBy === user;
+    return matchSearch && matchStatus && matchUser;
+  });
+  renderTable(filtered);
+};
+
+window.exportCSV = function(){
+  if(!allLogs.length) return;
+  var headers = ['Timestamp','User','Facility','MachineID','Model','HeliumLevel','HeliumPressure','Humidity','MagnetTemp','NextService','Status','Notes'];
+  var rows = allLogs.map(function(d){
+    var ts = d.timestamp ? new Date(d.timestamp.seconds*1000).toLocaleString('en-PK') : '';
+    return [ts, d.submittedBy||'', d.facility||'', d.machineId||'', d.machineModel||'',
+            d.heliumLevel||'', d.heliumPressure||'', d.humidity||'', d.magnetTemp||'',
+            d.nextService||'', d.status||'', (d.notes||'').replace(/,/g,' ')].join(',');
+  });
+  var csv = [headers.join(','), ...rows].join('\n');
+  var blob = new Blob([csv], {type:'text/csv'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ProMED_MRI_Logs_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+};
+
+// Load on start
+loadLogs();
+</script>
+</body>
+</html>
