@@ -1,0 +1,36 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ RENDER.COM DEPLOYMENT CHECKLIST FOR REPOSITORY OWNER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+□ 1. Go to render.com → Sign up with GitHub account
+
+□ 2. Click "New +" → "Web Service"
+
+□ 3. Connect repository: HamzaAli1501/promedsol-site
+
+□ 4. Configure these settings:
+     Name: promed-portal
+     Root Directory: backend
+     Runtime: Python 3
+     Build Command: pip install -r requirements.txt
+     Start Command: gunicorn app:app
+     Instance Type: Free
+
+□ 5. Click "Create Web Service" and wait 3-5 minutes
+
+□ 6. Copy the URL you get (example: https://promed-portal.onrender.com)
+
+□ 7. Update portal/login.html:
+     Find: action="https://YOUR-RENDER-APP-NAME.onrender.com/login"
+     Replace with: action="https://YOUR-ACTUAL-URL.onrender.com/login"
+
+□ 8. Commit and push the change to GitHub
+
+□ 9. Test at promedsol.com.pk → click "Access Portal"
+     Login: ProMed-Solution / 123456789
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DONE! Portal should now work for everyone visiting the website.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Need help? Read DEPLOYMENT-GUIDE.md for detailed instructions.
