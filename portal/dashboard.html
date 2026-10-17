@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRI Dashboard — ProMED Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#031428;--blue:#19569B;--cyan:#00E5FF;--slate:#B0BDCD;--white:#fff;--bg:#f0f4f8;--card:#fff;--border:#dde8f5;--text:#1e3a52;--muted:#6b859e}
+html,body{height:100%;font-family:'Urbanist',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.topbar{background:var(--navy);padding:0 40px;height:62px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(3,20,40,.18)}
+.tb-brand{font-size:17px;font-weight:900;background:linear-gradient(135deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tb-right{display:flex;align-items:center;gap:16px}
+.tb-user{font-size:.82rem;font-weight:600;color:var(--slate)}
+.tb-logout{padding:7px 16px;border-radius:6px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.6);font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}
+.tb-logout:hover{border-color:var(--cyan);color:var(--cyan)}
+.main{max-width:1160px;margin:0 auto;padding:36px 24px}
+.page-title{margin-bottom:28px}
+.page-title h1{font-size:1.55rem;font-weight:800;color:var(--navy);letter-spacing:-.02em}
+.page-title p{color:var(--muted);font-size:.9rem;margin-top:4px}
+.toast{position:fixed;top:20px;right:20px;z-index:999;padding:12px 20px;border-radius:10px;font-size:.875rem;font-weight:600;opacity:0;transform:translateY(-10px);transition:all .3s;pointer-events:none}
+.toast.success{background:#f0fdf4;border:1px solid #22c55e;color:#15803d;border-left:4px solid #22c55e}
+.toast.error{background:#fef2f2;border:1px solid #ef4444;color:#b91c1c;border-left:4px solid #ef4444}
+.toast.show{opacity:1;transform:translateY(0)}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:20px 18px;box-shadow:0 2px 10px rgba(3,20,40,.05);transition:transform .3s}
+.stat-card:hover{transform:translateY(-3px)}
+.stat-card.alert-Critical{border-left:4px solid #ef4444}
+.stat-card.alert-Warning{border-left:4px solid #f59e0b}
+.stat-card.alert-Normal{border-left:4px solid #22c55e}
+.stat-lbl{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stat-val{font-size:1.75rem;font-weight:900;color:var(--navy);letter-spacing:-.03em;line-height:1}
+.stat-unit{font-size:.75rem;color:var(--muted);margin-top:4px}
+.status-pill{display:inline-block;padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:8px}
+.pill-Normal{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+.pill-Warning{background:#fffbeb;color:#d97706;border:1px solid #fde68a}
+.pill-Critical{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+.layout{display:grid;grid-template-columns:380px 1fr;gap:22px;align-items:start}
+.form-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:28px 24px;box-shadow:0 2px 12px rgba(3,20,40,.06)}
+.card-title{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:22px;padding-bottom:14px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:8px}
+.card-title-bar{width:4px;height:18px;border-radius:2px;background:linear-gradient(var(--blue),var(--cyan));flex-shrink:0}
+.section-tag{font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;margin-top:18px}
+.section-tag:first-of-type{margin-top:0}
+.divider{border:none;border-top:1.5px solid var(--border);margin:16px 0}
+.form-group{margin-bottom:14px}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+input[type=text],input[type=number],input[type=date],select,textarea{width:100%;padding:10px 12px;border-radius:8px;border:1.5px solid var(--border);background:#f8fafc;color:var(--navy);font-family:inherit;font-size:.9rem;outline:none;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(25,86,155,.08);background:#fff}
+input::placeholder,textarea::placeholder{color:#b0bdcd}
+textarea{resize:vertical;min-height:68px}
+.btn-save{width:100%;padding:12px;margin-top:10px;border:none;border-radius:9px;cursor:pointer;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-family:inherit;font-size:.95rem;font-weight:700;letter-spacing:.03em;transition:transform .25s,box-shadow .25s}
+.btn-save:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(25,86,155,.25)}
+.btn-save:disabled{opacity:.6;pointer-events:none}
+.history-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(3,20,40,.06)}
+.history-header{padding:20px 22px 16px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:8px}
+.history-header h2{font-size:1rem;font-weight:800;color:var(--navy)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+thead th{padding:10px 14px;text-align:left;font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:#f8fafc;border-bottom:1.5px solid var(--border);white-space:nowrap}
+tbody tr{border-bottom:1px solid #f1f5f9;transition:background .15s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#f8fafc}
+td{padding:11px 14px;color:var(--text);vertical-align:top}
+.td-muted{color:var(--muted);font-size:.8rem}
+.td-notes{color:var(--muted);font-size:.8rem;max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.no-data{padding:48px;text-align:center;color:var(--muted);font-size:.9rem}
+.loading-row td{text-align:center;color:var(--muted);padding:32px}
+@media(max-width:960px){.stat-row{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}.topbar{padding:0 20px}.main{padding:24px 16px}}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<nav class="topbar">
+  <span class="tb-brand">ProMED Solutions</span>
+  <div class="tb-right">
+    <span class="tb-user">ProMED Portal</span>
+    <a href="login.html" class="tb-logout" onclick="logout()">Sign Out</a>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="page-title">
+    <h1>MRI System Dashboard</h1>
+    <p>Submit equipment readings and monitor system health — data saved to cloud</p>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-row" id="statRow">
+    <div class="stat-card"><div class="stat-lbl">Helium Level</div><div class="stat-val" id="s-he-level">—</div><div class="stat-unit">percent (%)</div></div>
+    <div class="stat-card"><div class="stat-lbl">Helium Pressure</div><div class="stat-val" id="s-he-press">—</div><div class="stat-unit">bar</div></div>
+    <div class="stat-card"><div class="stat-lbl">Humidity</div><div class="stat-val" id="s-humidity">—</div><div class="stat-unit">percent (%)</div></div>
+    <div class="stat-card" id="s-status-card"><div class="stat-lbl">System Status</div><div id="s-status"><span class="no-data-pill" style="background:#f1f5f9;color:#6b859e;border:1px solid #dde8f5;display:inline-block;padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:600;margin-top:8px">No readings yet</span></div></div>
+  </div>
+
+  <div class="layout">
+    <!-- FORM -->
+    <div class="form-card">
+      <div class="card-title"><span class="card-title-bar"></span>Submit New Reading</div>
+      <p class="section-tag">Machine Details</p>
+      <div class="form-row-2">
+        <div class="form-group"><label>Machine ID *</label><input type="text" id="f-machine-id" placeholder="e.g. MRI-01"></div>
+        <div class="form-group"><label>Model</label><input type="text" id="f-machine-model" placeholder="e.g. GE SIGNA 1.5T"></div>
+      </div>
+      <hr class="divider">
+      <p class="section-tag">Helium Readings</p>
+      <div class="form-row-2">
+        <div class="form-group"><label>Helium Level (%) *</label><input type="number" id="f-helium-level" step="0.1" min="0" max="100" placeholder="e.g. 72.5"></div>
+        <div class="form-group"><label>Helium Pressure (bar) *</label><input type="number" id="f-helium-pressure" step="0.01" min="0" placeholder="e.g. 3.5"></div>
+      </div>
+      <hr class="divider">
+      <p class="section-tag">Environmental Metrics</p>
+      <div class="form-row-2">
+        <div class="form-group"><label>Humidity (%)</label><input type="number" id="f-humidity" step="0.1" min="0" max="100" placeholder="e.g. 45.0"></div>
+        <div class="form-group"><label>Magnet Temp (K)</label><input type="number" id="f-magnet-temp" step="0.01" placeholder="e.g. 4.22"></div>
+      </div>
+      <div class="form-group"><label>Next Service Date</label><input type="date" id="f-next-service"></div>
+      <hr class="divider">
+      <p class="section-tag">Notes</p>
+      <div class="form-group"><label>Technician Notes</label><textarea id="f-notes" placeholder="Any observations, anomalies, or actions taken…"></textarea></div>
+      <button class="btn-save" id="saveBtn" onclick="saveReading()">Save Reading</button>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="history-card">
+      <div class="history-header"><span class="card-title-bar"></span><h2>Reading History</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date &amp; Time</th><th>Machine</th><th>He Level %</th><th>He Pressure</th><th>Humidity %</th><th>Temp (K)</th><th>Status</th><th>Notes</th></tr></thead>
+          <tbody id="historyBody"><tr class="loading-row"><td colspan="8">Loading readings…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+// ========== FIREBASE CONFIG ==========
+const firebaseConfig = {
+  apiKey: "AIzaSyB758G1LoTHM6JYkJZ9kljKqlHOrtYfG5s",
+  authDomain: "promed-portal.firebaseapp.com",
+  projectId: "promed-portal",
+  storageBucket: "promed-portal.firebasestorage.app",
+  messagingSenderId: "331679836659",
+  appId: "1:331679836659:web:06c43f1cd39988a81eca86",
+  measurementId: "G-7H1GVNM4MX"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Auth check
+if(sessionStorage.getItem('promed_auth') !== 'true'){
+  window.location.href = 'login.html';
+}
+
+function computeStatus(level, pressure){
+  if(level < 20 || pressure < 0.8) return 'Critical';
+  if(level < 50 || pressure < 2.0) return 'Warning';
+  return 'Normal';
+}
+
+function showToast(msg, type){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  setTimeout(function(){ t.className = 'toast'; }, 3500);
+}
+
+function updateStatCards(data){
+  document.getElementById('s-he-level').textContent = data.heliumLevel + '%';
+  document.getElementById('s-he-press').textContent = data.heliumPressure + ' bar';
+  document.getElementById('s-humidity').textContent = data.humidity ? data.humidity + '%' : '—';
+  var statusCard = document.getElementById('s-status-card');
+  statusCard.className = 'stat-card alert-' + data.status;
+  document.getElementById('s-status').innerHTML = '<span class="status-pill pill-' + data.status + '">' + data.status + '</span><div class="stat-unit" style="margin-top:8px">' + (data.timestamp ? new Date(data.timestamp.seconds*1000).toLocaleString() : '') + '</div>';
+}
+
+// Live listener — updates table in real time
+const q = query(collection(db, 'mri_logs'), orderBy('timestamp', 'desc'), limit(20));
+onSnapshot(q, function(snapshot){
+  var body = document.getElementById('historyBody');
+  if(snapshot.empty){
+    body.innerHTML = '<tr><td colspan="8" style="padding:48px;text-align:center;color:#6b859e">No readings yet. Submit your first reading.</td></tr>';
+    return;
+  }
+  var rows = '';
+  var first = true;
+  snapshot.forEach(function(doc){
+    var d = doc.data();
+    if(first){ updateStatCards(d); first = false; }
+    var ts = d.timestamp ? new Date(d.timestamp.seconds*1000).toLocaleString() : '—';
+    rows += '<tr>' +
+      '<td class="td-muted">' + ts + '</td>' +
+      '<td><strong>' + (d.machineId||'—') + '</strong>' + (d.machineModel ? '<br><span class="td-muted">'+d.machineModel+'</span>' : '') + '</td>' +
+      '<td>' + (d.heliumLevel||'—') + '%</td>' +
+      '<td>' + (d.heliumPressure||'—') + ' bar</td>' +
+      '<td>' + (d.humidity ? d.humidity+'%' : '—') + '</td>' +
+      '<td class="td-muted">' + (d.magnetTemp||'—') + '</td>' +
+      '<td><span class="status-pill pill-' + d.status + '">' + d.status + '</span></td>' +
+      '<td class="td-notes" title="' + (d.notes||'') + '">' + (d.notes||'—') + '</td>' +
+    '</tr>';
+  });
+  body.innerHTML = rows;
+});
+
+// Save reading
+window.saveReading = async function(){
+  var machineId = document.getElementById('f-machine-id').value.trim();
+  var heliumLevel = parseFloat(document.getElementById('f-helium-level').value);
+  var heliumPressure = parseFloat(document.getElementById('f-helium-pressure').value);
+
+  if(!machineId || isNaN(heliumLevel) || isNaN(heliumPressure)){
+    showToast('Please fill in Machine ID, Helium Level and Pressure.', 'error');
+    return;
+  }
+
+  var btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+
+  try {
+    await addDoc(collection(db, 'mri_logs'), {
+      machineId: machineId,
+      machineModel: document.getElementById('f-machine-model').value.trim() || null,
+      heliumLevel: heliumLevel,
+      heliumPressure: heliumPressure,
+      humidity: parseFloat(document.getElementById('f-humidity').value) || null,
+      magnetTemp: parseFloat(document.getElementById('f-magnet-temp').value) || null,
+      nextService: document.getElementById('f-next-service').value || null,
+      notes: document.getElementById('f-notes').value.trim() || null,
+      status: computeStatus(heliumLevel, heliumPressure),
+      timestamp: serverTimestamp()
+    });
+
+    showToast('Reading saved successfully!', 'success');
+    // Clear form
+    ['f-machine-id','f-machine-model','f-helium-level','f-helium-pressure','f-humidity','f-magnet-temp','f-next-service','f-notes'].forEach(function(id){
+      document.getElementById(id).value = '';
+    });
+  } catch(e){
+    showToast('Error saving: ' + e.message, 'error');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Save Reading';
+};
+
+window.logout = function(){
+  sessionStorage.removeItem('promed_auth');
+};
+</script>
+</body>
+</html>
