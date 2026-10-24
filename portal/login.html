@@ -95,6 +95,32 @@ input::placeholder{color:rgba(176,189,205,.35)}
   </div>
   <p class="back"><a href="../index.html">← Back to promedsol.com.pk</a></p>
 </div>
+
+<!-- Firebase SDK -->
+<script type="module">
+// Import Firebase modules
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+// Firebase configuration (promed-portal project)
+const firebaseConfig = {
+  apiKey: "AIzaSyBhHs8VqE8QKs6mSK3K6", // You'll need to replace with your actual key
+  authDomain: "promed-portal.firebaseapp.com",
+  projectId: "promed-portal",
+  storageBucket: "promed-portal.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcd"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Make db available globally
+window.firebaseDB = db;
+window.firebaseModules = { collection, addDoc, getDocs, query, orderBy, limit, where, serverTimestamp };
+</script>
+
 <script>
 (function(){
   var w=document.getElementById('ptcls');
@@ -113,11 +139,34 @@ if(sessionStorage.getItem('promed_auth')==='true'){
 
 // ========== AUTHORISED USERS ==========
 var USERS = {
-  'ProMed-Solution'  : 'PM@7491',
-  'ProMed-Solution2' : 'PM@3856',
-  'ProMed-Solution3' : 'PM@6273',
-  'emad-jadoon'      : 'siremadjadoon'
+  'ProMed-IMC-Islamabad'    : 'IMC@2024!Secure',
+  'ProMed-AKUH-Karachi'     : 'AKUH@2024!Premium',
+  'ProMed-Chughtai-Labs'    : 'Chughtai@2024!Elite',
+  'ProMed-ANTH-Islamabad'   : 'ANTH@2024!Medical',
+  'ProMed-Maroof-Islamabad' : 'Maroof@2024!Care',
+  'ProMed-RMI-Rawalpindi'   : 'RMI@2024!Institute',
+  'ProMed-PAF-Medical'      : 'PAF@2024!Defense',
+  'ProMed-Army-CMH'         : 'Army@2024!Forces',
+  'ProMed-Rawal-Hospital'   : 'Rawal@2024!General',
+  'ProMed-Admin-EmadJ'      : 'Admin@ProMED2024!'
 };
+
+// Facility mapping
+var FACILITIES = {
+  'ProMed-IMC-Islamabad'    : 'Islamabad Medical Complex',
+  'ProMed-AKUH-Karachi'     : 'Aga Khan University Hospital',
+  'ProMed-Chughtai-Labs'    : 'Chughtai Healthcare',
+  'ProMed-ANTH-Islamabad'   : 'Dr Akbar Niazi Teaching Hospital',
+  'ProMed-Maroof-Islamabad' : 'Maroof International Hospital',
+  'ProMed-RMI-Rawalpindi'   : 'Rawalpindi Medical Institute',
+  'ProMed-PAF-Medical'      : 'Pakistan Air Force Hospital',
+  'ProMed-Army-CMH'         : 'Combined Military Hospital',
+  'ProMed-Rawal-Hospital'   : 'Rawal General Hospital',
+  'ProMed-Admin-EmadJ'      : 'ProMED Solutions HQ'
+};
+
+// Admin users
+var ADMINS = ['ProMed-Admin-EmadJ'];
 
 function doLogin(){
   var user=document.getElementById('username').value.trim();
@@ -133,8 +182,11 @@ function doLogin(){
     if(USERS[user] && USERS[user]===pass){
       sessionStorage.setItem('promed_auth','true');
       sessionStorage.setItem('promed_user', user);
+      sessionStorage.setItem('promed_facility', FACILITIES[user] || 'ProMED Solutions');
+      sessionStorage.setItem('promed_isAdmin', ADMINS.includes(user) ? 'true' : 'false');
+      
       // Admin goes to admin panel, others go to dashboard
-      if(user==='emad-jadoon'){
+      if(ADMINS.includes(user)){
         window.location.href='admin.html';
       } else {
         window.location.href='dashboard.html';
