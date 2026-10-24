@@ -43,12 +43,12 @@ html,body{min-height:100%;font-family:'Urbanist',system-ui,sans-serif;background
 
 /* ── HERO STRIP ── */
 .hero-strip{
-  background:linear-gradient(135deg,var(--navy) 0%,#082044 100%);
+  background:linear-gradient(135deg,var(--navy) 0%,#0f3460 50%,#16213e 100%);
   padding:40px 48px 44px;position:relative;overflow:hidden;
 }
 .hero-strip::before{
   content:'';position:absolute;inset:0;
-  background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),
+  background-image:linear-gradient(rgba(0,229,255,.06) 1px,transparent 1px),
     linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);
   background-size:48px 48px;pointer-events:none;
 }
@@ -102,9 +102,10 @@ html,body{min-height:100%;font-family:'Urbanist',system-ui,sans-serif;background
 
 /* ── FORM CARD ── */
 .form-card{
-  background:var(--card);border:1.5px solid var(--border);
+  background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1.5px solid var(--border);
   border-radius:20px;padding:36px 32px;
-  box-shadow:0 4px 20px rgba(3,20,40,.07);
+  box-shadow:0 12px 40px rgba(3,20,40,.12);
+  transition:all .3s ease;
   animation:fadeUp .4s ease both;
 }
 .form-header{
@@ -120,6 +121,7 @@ html,body{min-height:100%;font-family:'Urbanist',system-ui,sans-serif;background
   font-size:.67rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   color:var(--blue);margin-bottom:14px;margin-top:22px;
   display:flex;align-items:center;gap:8px;
+  padding-bottom:12px;border-bottom:2px solid rgba(25,86,155,.2);
 }
 .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
 .section-label:first-of-type{margin-top:0}
@@ -135,7 +137,10 @@ label{
 
 input[type=text],input[type=number],input[type=date],textarea{
   width:100%;padding:11px 14px;border-radius:9px;
-  border:1.5px solid var(--border);
+  border:1.5px solid var(--border);background:var(--card);
+  color:var(--text);font-family:inherit;font-size:.9rem;
+  outline:none;transition:all .2s;box-shadow:0 1px 3px rgba(3,20,40,.05);
+}
   background:#f7fafc;color:var(--text);
   font-family:inherit;font-size:.92rem;outline:none;
   transition:border-color .2s,box-shadow .2s,background .2s;

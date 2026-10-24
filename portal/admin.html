@@ -159,7 +159,7 @@ td{padding:11px 14px;color:var(--text);vertical-align:middle}
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getFirestore, collection, getDocs, orderBy, query } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { getFirestore, collection, getDocs, orderBy, query, doc, updateDoc, deleteDoc, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB758G1LoTHM6JYkJZ9kljKqlHOrtYfG5s",
@@ -277,7 +277,6 @@ window.editRecord = async function(id){
   if(newNotes === null) return;
   
   try {
-    const { doc, updateDoc } = firebaseModules;
     await updateDoc(doc(db, 'mri_logs', id), {
       heliumLevel: parseFloat(newLevel),
       heliumPressure: parseFloat(newPressure),
@@ -302,7 +301,6 @@ window.deleteRecord = async function(id){
   if(!confirm(confirmMsg)) return;
   
   try {
-    const { doc, deleteDoc } = firebaseModules;
     await deleteDoc(doc(db, 'mri_logs', id));
     alert('✅ Record deleted successfully!');
     loadLogs();
