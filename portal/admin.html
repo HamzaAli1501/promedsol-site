@@ -174,7 +174,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Admin auth guard
-if(sessionStorage.getItem('promed_auth') !== 'true' || sessionStorage.getItem('promed_user') !== 'emad-jadoon'){
+if(sessionStorage.getItem('promed_auth') !== 'true' || sessionStorage.getItem('promed_isAdmin') !== 'true'){
   window.location.href = 'login.html';
 }
 
