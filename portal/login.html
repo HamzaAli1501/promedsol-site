@@ -137,8 +137,9 @@ if(sessionStorage.getItem('promed_auth')==='true'){
   window.location.href='dashboard.html';
 }
 
-// ========== AUTHORISED USERS ==========
+// ========== AUTHORISED USERS (16 CUSTOMER + 1 ADMIN) ==========
 var USERS = {
+  // 16 Customer Hospital Accounts
   'ProMed-IMC-Islamabad'    : 'IMC@2024!Secure',
   'ProMed-AKUH-Karachi'     : 'AKUH@2024!Premium',
   'ProMed-Chughtai-Labs'    : 'Chughtai@2024!Elite',
@@ -148,6 +149,14 @@ var USERS = {
   'ProMed-PAF-Medical'      : 'PAF@2024!Defense',
   'ProMed-Army-CMH'         : 'Army@2024!Forces',
   'ProMed-Rawal-Hospital'   : 'Rawal@2024!General',
+  'ProMed-IDC-Islamabad'    : 'IDC@2024!Diagnostic',
+  'ProMed-Kidney-Center'    : 'Kidney@2024!Health',
+  'ProMed-HMC-Peshawar'     : 'HMC@2024!Peshawar',
+  'ProMed-Evercare-Lahore'  : 'Evercare@2024!Punjab',
+  'ProMed-Tabba-Heart'      : 'Tabba@2024!Cardio',
+  'ProMed-Excel-Labs'       : 'Excel@2024!Diagnostic',
+  'ProMed-Friends-Hospital' : 'Friends@2024!Care',
+  // Admin Account
   'ProMed-Admin-EmadJ'      : 'Admin@ProMED2024!'
 };
 
@@ -162,6 +171,13 @@ var FACILITIES = {
   'ProMed-PAF-Medical'      : 'Pakistan Air Force Hospital',
   'ProMed-Army-CMH'         : 'Combined Military Hospital',
   'ProMed-Rawal-Hospital'   : 'Rawal General Hospital',
+  'ProMed-IDC-Islamabad'    : 'Islamabad Diagnostic Centre',
+  'ProMed-Kidney-Center'    : 'The Kidney Center',
+  'ProMed-HMC-Peshawar'     : 'Hayatabad Medical Complex',
+  'ProMed-Evercare-Lahore'  : 'Evercare Hospital Lahore',
+  'ProMed-Tabba-Heart'      : 'Tabba Heart Institute',
+  'ProMed-Excel-Labs'       : 'Excel Labs',
+  'ProMed-Friends-Hospital' : 'Friends Hospital',
   'ProMed-Admin-EmadJ'      : 'ProMED Solutions HQ'
 };
 
