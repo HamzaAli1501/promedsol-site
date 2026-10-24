@@ -83,6 +83,13 @@ td{padding:11px 14px;color:var(--text);vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media(max-width:900px){.stat-strip{grid-template-columns:1fr 1fr}.topbar,.hero-strip{padding-left:20px;padding-right:20px}.main{padding:20px 14px}}
+
+/* ACTION BUTTONS */
+.act-btn{padding:6px 12px;border-radius:6px;border:none;font-family:inherit;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;margin-right:6px}
+.edit-btn{background:rgba(59,130,246,.1);color:#2563eb;border:1px solid rgba(59,130,246,.3)}
+.edit-btn:hover{background:rgba(59,130,246,.2)}
+.del-btn{background:rgba(239,68,68,.1);color:#dc2626;border:1px solid rgba(239,68,68,.3)}
+.del-btn:hover{background:rgba(239,68,68,.2)}
 </style>
 </head>
 <body>
@@ -214,12 +221,13 @@ function renderTable(logs){
       '<td>' + (d.nextService||'—') + '</td>' +
       '<td><span class="pill pill-' + d.status + '">' + (d.status||'—') + '</span></td>' +
       '<td class="td-notes" title="'+(d.notes||'')+'">' + (d.notes||'—') + '</td>' +
+      '<td><button class="act-btn edit-btn" onclick="editRecord(\'' + d.id + '\')">✏️ Edit</button> <button class="act-btn del-btn" onclick="deleteRecord(\'' + d.id + '\')">🗑️ Delete</button></td>' +
     '</tr>';
   }).join('');
 
   document.getElementById('tableArea').innerHTML =
     '<div class="table-wrap"><table>' +
-    '<thead><tr><th>Date &amp; Time</th><th>User</th><th>Facility</th><th>Machine</th><th>He Level</th><th>He Pressure</th><th>Humidity</th><th>Temp (K)</th><th>Next Service</th><th>Status</th><th>Notes</th></tr></thead>' +
+    '<thead><tr><th>Date &amp; Time</th><th>User</th><th>Facility</th><th>Machine</th><th>He Level</th><th>He Pressure</th><th>Humidity</th><th>Temp (K)</th><th>Next Service</th><th>Status</th><th>Notes</th><th>Actions</th></tr></thead>' +
     '<tbody>' + rows + '</tbody></table></div>';
 }
 
@@ -252,6 +260,55 @@ window.exportCSV = function(){
   a.href = URL.createObjectURL(blob);
   a.download = 'ProMED_MRI_Logs_' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
+};
+
+// ========== EDIT RECORD ==========
+window.editRecord = async function(id){
+  const record = allLogs.find(r => r.id === id);
+  if(!record) return alert('Record not found');
+  
+  const newLevel = prompt('Helium Level (%):',  record.heliumLevel || '');
+  if(newLevel === null) return;
+  
+  const newPressure = prompt('Helium Pressure (bar):', record.heliumPressure || '');
+  if(newPressure === null) return;
+  
+  const newNotes = prompt('Notes:', record.notes || '');
+  if(newNotes === null) return;
+  
+  try {
+    const { doc, updateDoc } = firebaseModules;
+    await updateDoc(doc(db, 'mri_logs', id), {
+      heliumLevel: parseFloat(newLevel),
+      heliumPressure: parseFloat(newPressure),
+      notes: newNotes,
+      lastEditedBy: sessionStorage.getItem('promed_user'),
+      lastEditedAt: serverTimestamp()
+    });
+    alert('✅ Record updated successfully!');
+    loadLogs();
+  } catch(e){
+    alert('❌ Error updating record: ' + e.message);
+  }
+};
+
+// ========== DELETE RECORD ==========
+window.deleteRecord = async function(id){
+  const record = allLogs.find(r => r.id === id);
+  if(!record) return alert('Record not found');
+  
+  const confirmMsg = 'Delete this reading?\n\nFacility: ' + (record.facility || '?') + '\nMachine: ' + (record.machineId || '?') + '\nDate: ' + (record.timestamp ? new Date(record.timestamp.seconds*1000).toLocaleDateString() : '?');
+  
+  if(!confirm(confirmMsg)) return;
+  
+  try {
+    const { doc, deleteDoc } = firebaseModules;
+    await deleteDoc(doc(db, 'mri_logs', id));
+    alert('✅ Record deleted successfully!');
+    loadLogs();
+  } catch(e){
+    alert('❌ Error deleting record: ' + e.message);
+  }
 };
 
 // Load on start
