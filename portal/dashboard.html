@@ -321,6 +321,11 @@ if(sessionStorage.getItem('promed_auth') !== 'true'){
   window.location.href = 'login.html';
 }
 
+// Redirect admin to admin panel
+if(sessionStorage.getItem('promed_isAdmin') === 'true'){
+  window.location.href = 'admin.html';
+}
+
 function computeStatus(level, pressure){
   if(level < 20 || pressure < 0.8) return 'Critical';
   if(level < 50 || pressure < 2.0) return 'Warning';
